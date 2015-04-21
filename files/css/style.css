@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+@import "common/layout.css";
+
+/*-------------------------------------------------------------------------
+	Index
+/*-----------------------------------------------------------------------*/
+
+h1 {
+	text-align:center;
+}
+li {
+	margin-bottom:10px;
+}
+li:last-child {
+}
+
+.box {
+  width:300px;
+  margin:0 auto;
+  display:none;
+}
+h2 {
+  font-size:18px;
+  text-align:center;
+  margin-bottom:20px;
+}
+.active {
+  display:block;
+}
+#login {
+}
+  #login p {
+    text-align:right;
+  }
+    #login p a {
+      font-size:12px;
+      color:#666;
+    }
+    #login p a:hover {
+      color:#06C;
+    }
+
+input, textarea {
+  font-size:12px;
+}
+
+#regist {
+  position:relative;
+}
+  #dropzone {
+    font-size:50px;
+    width:100px;
+    height:100px;
+    color:#d7d9dc;
+    line-height:95px;
+    text-align:center;
+    margin:0 auto 20px;
+    border-radius:200px;
+    overflow:hidden;
+    border:1px solid #d7d9dc;
+  }
+  #all .submit {
+    text-align:center;
+    padding-top:5px;
+  }
+  #all #login .submit {
+    margin-bottom:15px;
+  }
+  #all .submit input {
+    display:inline;
+    width:auto;
+    border:none;
+    cursor:pointer;
+    background-color:#76d9af;
+    box-shadow:0 1px 0 #48ab81;
+    font-size:14px;
+    letter-spacing:3px;
+    color:#FFF;
+    padding:5px 50px;
+    text-shadow:1px 1px 0 #48ab81;
+  }
+  #all .submit input:hover {
+    background-color:#54c78d;
+		box-shadow:1px 1px 1px #48ab81 inset;
+  }
+    #dropzone img {
+      width:100px;
+      height:100px;
+      border-radius:500px;
+    }
+  #close {
+   position:absolute;
+   top:-10px;
+   right:-10px;
+   width:17px;
+   height:17px;
+   text-align:center;
+   line-height:17px;
+   border:1px solid #666;
+  }
+.form {
+  width:300px;
+}

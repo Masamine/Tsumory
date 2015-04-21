@@ -1,0 +1,185 @@
+@charset "UTF-8";
+
+@import "common/layout.css";
+
+/*-------------------------------------------------------------------------
+	page
+/*-----------------------------------------------------------------------*/
+.title {
+	position:relative;
+	padding:15px 30px;
+}
+#all .box {
+	padding:0;
+}
+#reg {
+	position:absolute;
+	top:18px;
+	left:160px;
+}
+
+#names {
+	padding:5px 0;
+	background-color:#a4aeb9;
+}
+  #names ul {
+		display:table;
+		width:100%;
+	}
+  #names li {
+		font-size:12px;
+		color:#FFF;
+		display:table-cell;
+		vertical-align:middle;
+		padding:7px 0;
+		text-align:center;
+	}
+	#all .client, .list h2 {
+		width:20%;
+		padding:0 2%;
+	}
+	#all .works, .list .works {
+		width:52%;
+		padding:0 2%;
+	}
+	#all .update, .list .update {
+		text-align:center;
+		padding:0 2%;
+	}
+
+.list {
+	cursor:pointer;
+	position:relative;
+	z-index:10;
+	width:100%;
+	overflow-x:hidden;
+}
+
+.list:hover {
+	box-shadow:0px 0px 5px #009ec6;
+	z-index:100;
+}
+.list.active {
+	cursor:auto;
+	box-shadow:none;
+}
+.list:last-child {
+}
+.list:nth-child(even) {
+	background-color:#f2fafe;
+}
+  .list .names {
+		display:table;
+		width:100%;
+	}
+	  .list h2, .list .works, .list .update {
+			display:table-cell;
+			padding:10px 0;
+		}
+		.list h2 {
+			padding-left:30px;
+		}
+		.list .update {
+			padding-right:30px;
+		}
+		.list.active h2, .list.active p.works, .list.active p.update {
+			color:#48ab81;
+		}
+
+.list .contents {
+	background-color:#fffff1;
+	padding:2px 0;
+	box-shadow:0px 0px 5px #999999 inset;
+	display:none;
+}
+.list.active .contents {
+	display:block;
+}
+  .list .contents .inner {
+		background-color:#fffff1;
+		padding:10px 30px 5px;
+	}
+	.list .contents .data {
+		border-bottom:1px dotted #CCCCCC;
+		display:table;
+		width:100%;
+	}
+	.list .contents .data table {
+		width:100%;
+	}
+	.list .contents .data td {
+		font-size:13px;
+		vertical-align:middle;
+		padding:15px 5px;
+	}
+	.list .contents .data:last-child {
+		margin-bottom:0;
+		padding-bottom:0;
+		border:none;
+	}
+	.list .contents .data .icon {
+		width:120px;
+	}
+	#all .list .contents .data .btns {
+		text-align:right;
+		width:135px;
+	}
+	#all .list .contents .data .update {
+		width:140px;
+	}
+		.list .contents .data .icon li {
+			float:left;
+			border:1px solid #999;
+			border-radius:4px;
+			margin:3px 5px 3px 0;
+		}
+		.list .contents .data .icon .web {
+			border-color:#6ac7f2;
+		}
+			.list .contents .data .icon .web span {
+				color:#6ac7f2;
+			}
+		.list .contents .data .icon .design {
+			border-color:#f2aa6a;
+		}
+			.list .contents .data .icon .design span {
+				color:#f2aa6a;
+			}
+		.list .contents .data .icon .edit {
+			border-color:#f791ae;
+		}
+			.list .contents .data .icon .edit span {
+				color:#f791ae;
+			}
+		.list .contents .data .icon .dtp {
+			border-color:#86d162;
+		}
+			.list .contents .data .icon .dtp span {
+				color:#86d162;
+			}
+			.list .contents .data .icon li span {
+				font-size:12px;
+				display:block;
+				padding:2px 7px;
+				background-color:#FFF;
+				border-radius:4px;
+			}
+		#all .list .contents .data .radbtn {
+			display:inline;
+		}
+		#all .list .contents .data .radbtn a {
+			font-size:12px;
+			width:60px;
+			padding:3px 0;
+			text-align:center;
+		}
+		#all .radbtn.delete a {
+			background-color:#e78d8d;
+			text-shadow:1px 1px 0px #b9534e;
+			box-shadow:0px 1px 0px #b9534e;
+		}
+		#all .radbtn.delete a:hover {
+			box-shadow:0px 1px 1px #9b2e29 inset;
+			text-shadow:1px 1px 0px #9b2e29;
+			background-color:#b9534e;
+		}
