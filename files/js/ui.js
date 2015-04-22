@@ -12,18 +12,74 @@ UI
 		
 	})();
 	
-	_this.openWin = openWin;
+	_this.accordion    = accordion;
+	_this.designSelect = designSelect;
 	
 	/* -------------------------
-	Open Window
+	Accordion
 	------------------------- */
-	function openWin(str) {
+	function accordion() {
 		
-		var html = "";
-		html += '<div id="modal">';
-		html += '<div id="modal">';
+		var $parent = $("#contents");
+
+		$parent.find("div.names").on("click", openList);
+	
+		function openList() {
+	
+			var $this  = $(this);
+			var target = $this.closest(".list");
+			var SPEED  = 300;
+	
+			if(!target.hasClass("active")) {
+				target.addClass("active").find(".contents").slideDown(SPEED);
+			} else {
+				target.find(".contents").slideUp(SPEED, function(){target.removeClass("active");});
+			}
+	
+			return false;
+		}
 		
-		alert(str);
+		return false;
+	}
+	
+	/* -------------------------
+	Design for Select
+	------------------------- */
+	function designSelect() {
+		
+		var parent = $(".select");
+		var btn    = parent.find("input");
+		var target = parent.find("li");
+		
+		btn.on("click", openSelect);
+		target.on("click", selectNames);
+		
+		function openSelect() {
+			
+			var $this  = $(this);
+			var parent = $this.closest(".select");
+			var SPEED  = 300;
+			
+			if(!parent.hasClass("active")) {
+				parent.addClass("active").find("ul").slideDown(SPEED);
+			} else {
+				parent.removeClass("active").find("ul").slideUp(SPEED);
+			}
+			
+			return false;
+		}
+
+		function selectNames() {
+			var $this = $(this);
+			var txt    = $this.text();
+
+			$this.closest(".active").find("li").removeClass("select");
+			$this.addClass("select");
+			$this.closest(".active").find("input").val(txt);
+			parent.removeClass("active").find("ul").slideUp(300);
+
+			return false;
+		}
 		
 		return false;
 	}

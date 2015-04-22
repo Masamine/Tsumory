@@ -32,6 +32,27 @@ if(!$_SESSION["username"] || !($_GET["user"] == $_SESSION["username"])) {
   </header>
   
   <div id="contents">
+    <div id="search">
+    	<div class="box">
+      <form action="search.php?user=<?php echo $_GET["user"]; ?>">
+      	<div class="select">
+        	<input type="text" name="sClient" placeholder="クライアント選択" value="" readonly="readonly">
+          <ul>
+            <li>Sample A</li>
+            <li>Sample B</li>
+            <li>Sample C</li>
+            <li>Sample D</li>
+            <li>Sample E</li>
+            <li>Sample F</li>
+            <li>Sample G</li>
+            <li>Sample H</li>
+            <li>Sample I</li>
+            <li>Sample J</li>
+          </ul>
+        </div>
+      </form>
+      </div>
+    </div>
     <div class="box">
       <div class="title">
         <h1>案件一覧</h1>
@@ -188,6 +209,6 @@ if(!$_SESSION["username"] || !($_GET["user"] == $_SESSION["username"])) {
   </footer>
 </div>
 <script type="text/javascript" src="files/js/jquery.js"></script>
-<script type="text/javascript" src="files/js/accordion.js"></script>
+<script type="text/javascript" src="files/js/jsSet.js"></script>
 </body>
 </html>

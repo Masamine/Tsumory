@@ -182,3 +182,33 @@
 			text-shadow:1px 1px 0px #9b2e29;
 			background-color:#b9534e;
 		}
+
+
+#search {
+	margin-bottom:20px;
+	position:relative;
+}
+	#search .box {
+		padding:20px 30px;
+	}
+	#search ul {
+		display: none;
+		border: 1px solid #ccc;
+		border-top: 1px dashed #ccc;
+		border-radius:0px 0px 4px 4px / 0px 0px 4px 4px;
+		position: relative;
+		top: -1px;
+		z-index: 100;
+		background-color: #f9f9f9;
+	}
+	  #search ul li {
+	  	border-bottom: 1px dotted #ccc;
+	  	padding: 5px 20px;
+	  }
+	  #search ul li:last-child {
+	  	border: none;
+	  }
+	  #search ul li.select {
+	  	color: #fff;
+	  	background-color: #76d9af;
+	  }
