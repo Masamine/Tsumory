@@ -14,6 +14,7 @@
 		Manager.init();
 		_ui.accordion();
 		_ui.designSelect();
+		_ui.showSearch();
 		
 		return false;
 		

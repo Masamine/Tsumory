@@ -4,24 +4,23 @@
 	----------------------------- */
 	class loadDB {
 		
-		public function getUser() {
+		public function getUser($id) {
 			
 			/* -----------------------------
 			値を取得
 			----------------------------- */
+			require_once('connectDB.php');
 			
 			// クエリ分を発行。
-			$query = "SELECT user_name, user_mail, user_thumb FROM tsury_user";
+			$query = "SELECT * FROM tsury_user WHERE user_user = ?";
 			
 			// ステートメントを準備
 			if ($stmt = $mysqli->prepare($query)) {
 				
-				$name = "hoge";
-				$value = "huga";
-				$thumb = "huga";
+				$userID    = "user_user";
 				
 				// 変数をバインド
-				$stmt->bind_param($name, $value, $thumb);
+				$stmt->bind_param('s', $userID);
 				
 				// 実行
 				$stmt->execute();
@@ -31,11 +30,11 @@
 				
 				// 変数をプリペアドステートメントにバインド
 				// ここではバインドするだけであり、実際に取得するのはfetch()
-				$stmt->bind_result($col1, $col2, $col3);
+				$stmt->bind_result($col1);
 				
 				// 値を取得
 				while ($stmt->fetch()) {
-					printf("%s %s %s", $col1, $col2, $col3);
+					printf("%s", $col1);
 				}
 				
 				// ステートメントを閉じる

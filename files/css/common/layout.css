@@ -48,7 +48,8 @@ input, textarea {
   box-sizing: border-box;
 }
 
-#all .radbtn a {
+#all .radbtn a,
+#all .radbtn input {
 	background-color:#76d9af;
 	box-shadow:0 1px 0 #48ab81;
 	border-radius:4px;
@@ -59,11 +60,17 @@ input, textarea {
 	text-shadow:1px 1px 0 #48ab81;
 	display:inline-block;
 }
-#all .radbtn a:hover {
+#all .radbtn a:hover,
+#all .radbtn input:hover {
 	background-color:#54c78d;
 	box-shadow:1px 1px 1px #48ab81 inset;
 }
-	
+
+#btnsearch {
+}
+#btnsearch.active {
+	background-color:#edfffa;
+}
 
 /*-------------------------------------------------------------------------
 	Header
@@ -172,5 +179,12 @@ header {
 		font-size:24px;
 	}
 
+/*-------------------------------------------------------------------------
+	Footer
+/*-----------------------------------------------------------------------*/
 footer {
+	display:none;
+	margin-left:255px;
+	margin-top:50px;
+	text-align:center;
 }
