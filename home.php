@@ -7,8 +7,7 @@ if(!$_SESSION["username"] || !($_GET["user"] == $_SESSION["username"])) {
 }
 
 $load = new loadDB();
-
-
+$user = $load->getUser($_GET["user"]);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
@@ -29,8 +28,8 @@ $load = new loadDB();
       <p><img src="/files/img/common/img_logo.png" alt="見積りライブラリー Tsury" /></p>
       <ul id="info">
         <li><a href="/logout.php">ログアウト</a></li>
-        <li id="btnsearch"><a href="#"><img src="/files/img/common/icon_search.png" alt="" /</a></li>
-        <li class="user"><a href="#"><img src="/files/uploads/yellow.png" alt="" /></a></li>
+        <li id="btnsearch"><a href="#"><img src="/files/img/common/icon_search.png" alt="" /></a></li>
+        <li class="user"><a href="#"><img src="/files/uploads/<?=$user["thumb"];?>" alt="" /></a></li>
       </ul>
     </div>
   </header>
@@ -43,6 +42,7 @@ $load = new loadDB();
         	<input type="text" name="sClient" placeholder="クライアント選択" value="" readonly="readonly" class="input">
           <span class="input">▼</span>
           <ul>
+            <li>Reset</li>
             <li>Sample_A</li>
             <li>Sample_B</li>
             <li>Sample_C</li>
@@ -77,7 +77,6 @@ $load = new loadDB();
         <h1>案件一覧</h1>
         <div class="radbtn" id="reg"><a href="reg_works.php">新規案件登録</a></div>
       </div>
-      <div><?php $load->getUser($_GET["user"]); ?></div>
       <div id="names">
         <ul>
           <li class="client">クライアント</li>
