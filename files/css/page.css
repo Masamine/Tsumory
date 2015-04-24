@@ -66,7 +66,7 @@
 .list:last-child {
 	border-radius:0px 0px 4px 4px / 0px 0px 4px 4px;
 }
-.list:nth-child(even) {
+.list:nth-child(odd) {
 	background-color:#f2fafe;
 }
   .list .names {
