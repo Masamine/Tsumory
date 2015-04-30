@@ -2,12 +2,12 @@
 session_start();
 define('ABSPATH', $_SERVER['DOCUMENT_ROOT'].'/');
 require_once(ABSPATH."files/conf/base.php");
-if(!$_SESSION["username"] || !($_GET["user"] == $_SESSION["username"])) {
+if(!$_SESSION["username"] || !($_COOKIE["user"] == $_SESSION["username"])) {
 	require_once(ABSPATH."files/library/logout.php");
 }
 
 $load = new loadDB();
-$user = $load->getUser($_GET["user"]);
+$user = $load->getUser($_SESSION["username"]);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
@@ -23,55 +23,10 @@ $user = $load->getUser($_GET["user"]);
 </head>
 <body id="page">
 <div id="all">
-  <header>
-    <div class="inner">
-      <p><img src="/files/img/common/img_logo.png" alt="見積りライブラリー Tsury" /></p>
-      <ul id="info">
-        <li><a href="/logout.php">ログアウト</a></li>
-        <li id="btnsearch"><a href="#"><img src="/files/img/common/icon_search.png" alt="" /></a></li>
-        <li class="user"><a href="#"><img src="/files/uploads/<?=$user["thumb"];?>" alt="" /></a></li>
-      </ul>
-    </div>
-  </header>
+  <?php require_once(ABSPATH."files/display/common/header.php"); ?>
   
   <div id="contents">
-    <div id="search">
-    	<div class="box">
-      <form action="search.php?user=<?php echo $_GET["user"]; ?>">
-      	<div class="select">
-        	<input type="text" name="sClient" placeholder="クライアント選択" value="" readonly="readonly" class="input">
-          <span class="input">▼</span>
-          <ul>
-            <li>Reset</li>
-            <li>Sample_A</li>
-            <li>Sample_B</li>
-            <li>Sample_C</li>
-            <li>Sample_D</li>
-            <li>Sample_E</li>
-            <li>Sample_F</li>
-            <li>Sample_G</li>
-            <li>Sample_H</li>
-            <li>Sample_I</li>
-            <li>Sample_J</li>
-          </ul>
-        </div>
-        <div class="select">
-        	<input type="text" name="sTeam" placeholder="チーム選択" value="" readonly="readonly" class="input">
-          <span class="input">▼</span>
-          <ul>
-            <li>Web</li>
-            <li>Design</li>
-            <li>Edit</li>
-            <li>DTP</li>
-          </ul>
-        </div>
-        <div class="select keyword">
-        	<input type="text" name="sKeyword" placeholder="キーワード" value="">
-        </div>
-        <div class="btnsearch radbtn"><input type="submit" value="検索"></div>
-      </form>
-      </div>
-    </div>
+    <?php require_once(ABSPATH."files/display/common/search.php"); ?>
     <div class="box">
       <div class="title">
         <h1>案件一覧</h1>
@@ -193,15 +148,8 @@ $user = $load->getUser($_GET["user"]);
     </div>
   </div>
   
-  <div id="side">
-    <div class="inner">
-      <ul>
-        <li><a href="/home.php" class="current">案件一覧</a></li>
-        <li><a href="#">単価設定</a></li>
-        <li><a href="#">クライアント設定</a></li>
-      </ul>
-    </div>
-  </div>
+  <?php require_once(ABSPATH."files/display/common/side.php"); ?>
+  
   <footer>
     <p><?php echo $_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']; ?></p>
   </footer>

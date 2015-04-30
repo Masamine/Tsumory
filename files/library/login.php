@@ -16,7 +16,7 @@
 		//セッションにセットされていたらログイン済み
 		if(isset($_SESSION["username"])) $status = "logged_in";
 		
-		else if(!empty($user) && !empty($user)){
+		else if(!empty($user) && !empty($pass)){
 
 		  //ユーザ名、パスワードが一致する行を探す
 		  $password = $func->passhash($pass);
@@ -30,7 +30,8 @@
 		  if($stmt->num_rows == 1){
 		    $status = "ok";
 		    $_SESSION["username"] = $user;
-		    header('location: home.php?user='.$user);
+				setcookie("user", $user);
+		    header('location: home.php');
 				exit();
 		  } else $status = "failed";
 		}

@@ -12,10 +12,13 @@
 #all .box {
 	padding:0;
 }
+h1 {
+	float:left;
+	margin-right:30px;
+}
 #reg {
-	position:absolute;
-	top:18px;
-	left:160px;
+	float:left;
+	margin-top:2px;
 }
 
 #names {
@@ -66,7 +69,7 @@
 .list:last-child {
 	border-radius:0px 0px 4px 4px / 0px 0px 4px 4px;
 }
-.list:nth-child(odd) {
+.list:nth-child(even) {
 	background-color:#f2fafe;
 }
   .list .names {
@@ -76,6 +79,7 @@
 	  .list h2, .list .works, .list .update {
 			display:table-cell;
 			padding:10px 0;
+			vertical-align:middle;
 		}
 		.list h2 {
 			padding-left:30px;
@@ -197,7 +201,7 @@
 		padding:30px 30px 20px;
 		border-color:#c4e3d6;
 	}
-	#search ul {
+	.accBox ul {
 		display: none;
 		border: 1px solid #ccc;
 		border-top: 1px dashed #ccc;
@@ -207,14 +211,14 @@
 		z-index: 100;
 		background-color: #f9f9f9;
 	}
-	  #search ul li {
+	  .accBox ul li {
 	  	border-bottom: 1px dotted #ccc;
 	  	padding: 5px 20px;
 	  }
-	  #search ul li:last-child {
+	  .accBox ul li:last-child {
 	  	border: none;
 	  }
-	  #search ul li.selc {
+	  .accBox ul li.selc {
 	  	color: #fff;
 	  	background-color: #76d9af;
 	  }
@@ -224,11 +228,14 @@
 		margin-right:1%;
 		position:relative;
 	}
+	.accBox .select {
+		position:relative;
+	}
 	#search .select.keyword {
 		width:48%;
 		margin-right:0;
 	}
-	  #search .select span {
+	  .accBox .select span {
 			font-size:8px;
 			position:absolute;
 			top:1px;
@@ -240,8 +247,8 @@
 			padding:0 8px;
 			border-radius:0px 4px 4px 0px / 0px 4px 4px 0px;
 		}
-		#search .select .input,
-		#search .select li {
+		.accBox .select .input,
+		.accBox .select li {
 			cursor:pointer;
 		}
 		#search .btnsearch {

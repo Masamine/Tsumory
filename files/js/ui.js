@@ -96,16 +96,16 @@ UI
 		function searchBox() {
 			
 			var $this  = $(this);
-			var target = $("#search");
+			var target = $(".accBox");
 			
 			if(!$this.hasClass("active")) {
 				$this.addClass("active");
 				parent.addClass("active");
-				target.stop().animate({"margin-top" : -33}, SPEED);
+				target.filter("#search").stop().animate({"margin-top" : -33}, SPEED);
 			} else {
 				$this.removeClass("active");
 				parent.removeClass("active");
-				target.stop().animate({"margin-top" : -110}, SPEED);
+				target.filter("#search").stop().animate({"margin-top" : -110}, SPEED);
 			}
 			
 			return false;

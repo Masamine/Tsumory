@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+/*-------------------------------------------------------------------------
+	page
+/*-----------------------------------------------------------------------*/
+#contents .inner {
+	padding:0 30px 30px;
+}
+#contents .inner .form {
+	margin-bottom:15px;
+}
+#contents .inner .form:last-child {
+	margin-bottom:0;
+}
+#contents .radbtn input {
+	border:none;
+}

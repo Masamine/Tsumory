@@ -26,9 +26,7 @@ if($_SESSION["username"]) {
       <h1><img src="files/img/common/img_logo.png" alt="見積りライブラリー Tsury" /></h1>
     </header>
     <?php showDisplay('index', 'form'); ?>
-    
   </div>
-  
 <script type="text/javascript" src="files/js/jquery.js"></script>
 <script type="text/javascript" src="files/js/script.js"></script>
 </body>
