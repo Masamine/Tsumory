@@ -15,6 +15,7 @@
 		_ui.accordion();
 		_ui.designSelect();
 		_ui.showSearch();
+		_ui.showModal();
 		
 		return false;
 		

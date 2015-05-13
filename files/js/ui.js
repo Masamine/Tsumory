@@ -10,16 +10,20 @@ UI
 		_.ui    = _this = {};
 		_window = $(window);
 		SPEED   = 240;
+		
 	})();
 	
 	_this.accordion    = accordion;
 	_this.designSelect = designSelect;
 	_this.showSearch   = showSearch;
+	_this.showModal    = showModal;
 	
 	/* ---------------------------------------
 	Accordion
 	--------------------------------------- */
 	function accordion() {
+		
+		if($("body").hasClass("noList")) return false;
 		
 		var $parent = $("#contents");
 
@@ -106,12 +110,44 @@ UI
 				$this.removeClass("active");
 				parent.removeClass("active");
 				target.filter("#search").stop().animate({"margin-top" : -110}, SPEED);
+				target.filter("#search").find(".select").removeClass("active").find("ul").slideUp(SPEED);
 			}
 			
 			return false;
 		}
 		
 		return false;
+	}
+	
+	/* ---------------------------------------
+	Show Modal
+	--------------------------------------- */
+	function showModal() {
+		
+		var $btn   = $(".radbtn").find("a");
+		var parent = $("#all");
+		var target = $("#modal");
+		
+		$btn.on('click', show);
+		
+		function show() {
+			if(!$(this).hasClass("modal")) return false;
+			target.addClass("active");
+			parent.addClass("modal");
+			
+			$btn.filter(".close").on('click', hide);
+			
+			return false;
+		}
+		
+		function hide() {
+			target.removeClass("active");
+			parent.removeClass("modal");
+			return false;
+		}
+		
+		return false;
+		
 	}
 	
 	return false;

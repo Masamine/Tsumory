@@ -13,30 +13,56 @@ $user = $load->getUser($_SESSION["username"]);
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>クライアント管理 | Tsury〈ツリー〉</title>
+<title>新規案件登録 | Tsury〈ツリー〉</title>
 <meta name="robots" content="all" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <link href="files/css/common/base.css" media="all" rel="stylesheet" />
 <link href="files/css/page.css" media="all" rel="stylesheet" />
-<link href="files/css/client.css" media="all" rel="stylesheet" />
+<link href="files/css/reg_works.css" media="all" rel="stylesheet" />
 <link href="files/css/common/exvalidation.css" media="all" rel="stylesheet" />
 </head>
-<body class="noList" id="page">
+<body id="page">
 <div id="all">
   <?php require_once(ABSPATH."files/display/common/header.php"); ?>
   <div id="contents">
     <?php require_once(ABSPATH."files/display/common/search.php"); ?>
     <div class="box">
       <div class="title">
-        <h1>クライアント管理</h1>
-        <div class="radbtn" id="reg"><a href="/reg_client.php" class="modal">新規登録</a></div>
+        <h1>新規案件登録</h1>
       </div>
-      <div class="list">
-        <div class="names">
-          <h2>ダミーコーポレーション</h2>
-          <p class="radbtn editbtn"><a href="/edit_client.php">編集</a></p>
-        </div>
+      <div class="inner">
+        <form action="" method="post" class="accBox">
+          <div class="form">
+          	<div class="select">
+              <input type="text" name="client" id="client" placeholder="クライアント名" value="" class="input">
+              <span class="input">▼</span>
+              <ul>
+                <li>Reset</li>
+                <li>Web</li>
+                <li>Design</li>
+                <li>Edit</li>
+                <li>DTP</li>
+              </ul>
+            </div>
+          </div>
+          <div class="form"><input type="text" value="" name="client_staff" id="client_staff" placeholder="先方担当者"></div>
+          <div class="form"><input type="text" value="" name="works" id="works" placeholder="案件名"></div>
+          <div class="form">
+            <div class="select">
+              <input type="text" name="team" id="team" placeholder="チーム選択" value="" readonly="readonly" class="input">
+              <span class="input">▼</span>
+              <ul>
+                <li>Reset</li>
+                <li>Web</li>
+                <li>Design</li>
+                <li>Edit</li>
+                <li>DTP</li>
+              </ul>
+            </div>
+          </div>
+          <div class="radbtn"><input type="submit" value="登録"></div>
+        </form>
       </div>
     </div>
   </div>
@@ -45,13 +71,6 @@ $user = $load->getUser($_SESSION["username"]);
   <footer>
     <p><?php echo $_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']; ?></p>
   </footer>
-</div>
-
-<div id="modal">
-  <div id="regBox">
-    <h3>新規登録</h3>
-    <p class="radbtn"><a href="#" class="modal close">×</a></p>
-  </div>
 </div>
 <script type="text/javascript" src="files/js/jquery.js"></script>
 <script type="text/javascript" src="files/js/jsSet.js"></script>

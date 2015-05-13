@@ -17,6 +17,10 @@ body {
 }
 #all {
 }
+#all.modal {
+	-webkit-filter: blur(5px);
+	filter: blur(5px);
+}
 .wrap {
 	margin:0 20px 20px;
 	border:1px solid #d7d9dc;
