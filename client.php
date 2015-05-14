@@ -8,6 +8,12 @@ if(!$_SESSION["username"] || !($_COOKIE["user"] == $_SESSION["username"])) {
 
 $load = new loadDB();
 $user = $load->getUser($_SESSION["username"]);
+
+if(isset($_POST["regClient"])) {
+  $postData = new postData();
+  $postData->regClient($_POST["regClient"]);
+  header('location: client.php');
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
@@ -40,7 +46,7 @@ $user = $load->getUser($_SESSION["username"]);
       </div>
     </div>
   </div>
-  
+
   <?php require_once(ABSPATH."files/display/common/side.php"); ?>
   <footer>
     <p><?php echo $_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']; ?></p>
@@ -49,10 +55,15 @@ $user = $load->getUser($_SESSION["username"]);
 
 <div id="modal">
   <div id="regBox">
-    <h3>新規登録</h3>
-    <p class="radbtn"><a href="#" class="modal close">×</a></p>
+    <h3>クライアント新規登録</h3>
+    <p class="radbtn" id="close"><a href="#" class="modal close">×</a></p>
+    <form method="post">
+    	<p><input type="text" value="" placeholder="クライアント名" name="regClient"></p>
+    	<div class="radbtn"><input type="submit" value="登録"></div>
+    </form>
   </div>
 </div>
+
 <script type="text/javascript" src="files/js/jquery.js"></script>
 <script type="text/javascript" src="files/js/jsSet.js"></script>
 </body>

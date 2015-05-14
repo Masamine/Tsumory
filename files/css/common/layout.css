@@ -19,6 +19,9 @@ body {
 }
 #all.modal {
 	-webkit-filter: blur(5px);
+	-moz-filter: blur(5px);
+	-ms-filter: blur(5px);
+	-o-filter: blur(5px);
 	filter: blur(5px);
 }
 .wrap {
@@ -53,9 +56,11 @@ input, textarea {
 }
 
 #all .radbtn a,
-#all .radbtn input {
+#all .radbtn input,
+#modal .radbtn input {
 	background-color:#76d9af;
 	box-shadow:0 1px 0 #48ab81;
+	border:none;
 	border-radius:4px;
 	font-size:14px;
 	letter-spacing:3px;
@@ -65,10 +70,12 @@ input, textarea {
 	display:inline-block;
 }
 #all .radbtn a:hover,
-#all .radbtn input:hover {
+#all .radbtn input:hover,
+#modal .radbtn input:hover {
 	background-color:#54c78d;
 	box-shadow:1px 1px 1px #48ab81 inset;
 }
+
 
 #btnsearch {
 }
@@ -85,7 +92,7 @@ header {
   background-color:#FFF;
   margin-bottom:50px;
   position:relative;
-  z-index:100;
+  z-index:200;
 }
 #page header {
 	position:fixed;

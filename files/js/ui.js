@@ -131,13 +131,14 @@ UI
 		$btn.on('click', show);
 		
 		function show() {
-			if(!$(this).hasClass("modal")) return false;
-			target.addClass("active");
-			parent.addClass("modal");
-			
-			$btn.filter(".close").on('click', hide);
-			
-			return false;
+			if($(this).hasClass("modal")) {
+				target.addClass("active");
+				parent.addClass("modal");
+				
+				$btn.filter(".close").on('click', hide);
+				
+				return false;
+			}
 		}
 		
 		function hide() {
