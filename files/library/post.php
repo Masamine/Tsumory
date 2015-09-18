@@ -12,8 +12,8 @@
       require_once('connectDB.php');
       $func = new func();
 
-      $sql   = "INSERT INTO tsury_user(user_user,user_pass,user_name,user_mail,user_thumb) VALUES (?,?,?,?,?)";
-      $stmt  = $mysqli->prepare($sql);
+      $sql   = "INSERT INTO tsury_user(user_user,user_pass,user_name,user_mail,user_thumb) VALUES (:user,:pass,:name,:mail,:thumb)";
+      $stmt  = $pdo->prepare($sql);
       $salt  = "mwefCMEP28DjwdW3lwdS239vVS";
       $thumb = $_FILES["thumb"];
       
@@ -30,23 +30,41 @@
       $user_mail  = $_POST["regmail"];
       $user_thumb = ($thumb["name"]) ? $thumb["name"] : "img_noimg.jpg";
       
-      // ここでパラメータに実際の値となる変数を入れる。
-      // 第1引数は、それぞれパラメータの型
-      $stmt->bind_param('sssss', $user_user, $user_pass, $user_name, $user_mail, $user_thumb);
+      $stmt->bindValue(':user', $user_user, PDO::PARAM_STR);
+      $stmt->bindValue(':pass', $user_pass, PDO::PARAM_STR);
+      $stmt->bindValue(':name', $user_name, PDO::PARAM_STR);
+      $stmt->bindValue(':mail', $user_mail, PDO::PARAM_STR);
+      $stmt->bindValue(':thumb', $user_thumb, PDO::PARAM_STR);
       
       // プリペアドステートメントを実行
       $stmt->execute();
       
-      // ステートメントと接続を閉じる
-      $stmt->close();
-      
-      // 接続を閉じる
-      $mysqli->close();
+      $pdo = null;
     }
     
     /* ★案件登録
     ----------------------------------------- */
     function regWorks() {
+
+      require_once('connectDB.php');
+      $func = new func();
+
+      $sql   = "INSERT INTO tsury_works(client_id,title,client_staff,regist_date,recent_date) VALUES (?,?,?,?,?)";
+      $stmt  = $mysqli->prepare($sql);
+      
+      $clientID    = $_POST["client"];
+      $title       = $_POST["works"];
+      $clientStaff = $_POST["client_staff"];
+      $registDate  = date("Y-m-d H:i:s");
+      $recentDate  = date("Y-m-d H:i:s");
+
+      $stmt->bind_param('sssss', $clientID, $title, $clientStaff, $registDate, $recentDate);
+
+      $stmt->execute();
+      $stmt->close();
+      $mysqli->close();
+
+      return false;
     }
 
     /* ★クライアント登録
@@ -60,7 +78,7 @@
       // 変数に値を代入
       $client = $_POST["regClient"];
       
-      $stmt->bind_param('s', $client);
+      $stmt->bind_param('s',$client);
       $stmt->execute();
       $stmt->close();
       $mysqli->close();

@@ -46,10 +46,10 @@ $status = $_GET['status'];
 
 ?>
 <div class="box active">
-<p>
-<?=$msg?>
-</p>
-<p><a href="/">ログイン画面へどうぞ</a></p>
+  <p>
+  <?=$msg?>
+  </p>
+  <p><a href="/">ログイン画面へどうぞ</a></p>
 </div>
     
   </div>

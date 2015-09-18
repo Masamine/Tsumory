@@ -2,7 +2,7 @@
 	
 	window.Manager = {};
 	var _ui;
-	var fileName = ["exvalidation", "exchecker-ja"];
+	var fileName = ["exvalidation", "exchecker-ja", "dropify"];
 	var src      = "files/js/";
 	
 	for(var i = 0; i < fileName.length; i++) {
@@ -15,9 +15,10 @@
 		validate();
 		
 		if($("body").attr("id") == "index") {
-			$("#regist").find(".submit").find("input").on("click", getThumb);
+			//$("#regist").find(".submit").find("input").on("click", getThumb);
 			//uploadImg();
 			changeMode();
+			$('.dropify').dropify();
 		}
 		
 		return false;
@@ -89,80 +90,6 @@
 		
 	}
 	
-	
-	function uploadImg() {
-		var URL_BLANK_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-		
-		var doc = document;
-		
-		var elDrop  = doc.getElementById('dropzone');
-		var elFiles = doc.getElementById('files');
-		
-		elDrop.addEventListener('dragover', function(event) {
-			event.preventDefault();
-			event.dataTransfer.dropEffect = 'copy';
-			showDropping();
-		});
-		
-		elDrop.addEventListener('dragleave', function(event) {
-			hideDropping();
-		});
-		
-		elDrop.addEventListener('drop', function(event) {
-			event.preventDefault();
-			hideDropping();
-		
-			var files = event.dataTransfer.files;
-			showFiles(files);
-		});
-		
-		function showDropping() {
-			elDrop.classList.add('dropover');
-		}
-		
-		function hideDropping() {
-			elDrop.classList.remove('dropover');
-		}
-		
-		function showFiles(files) {
-			elDrop.innerHTML = '';
-		
-			for (var i=0, l=files.length; i<l; i++) {
-				var file = files[i];
-				var elFile = buildElFile(file);
-				elDrop.appendChild(files);
-			}
-		}
-		
-		function buildElFile(file) {
-			if (file.type.indexOf('image/') === 0) {
-					var elImage = doc.createElement('img');
-					elImage.src = URL_BLANK_IMAGE;
-					elDrop.appendChild(elImage);
-		
-					attachImage(file, elImage);
-			}
-		
-			return elDrop;
-		}
-		
-		function attachImage(file, elImage) {
-				var reader = new FileReader();
-				reader.onload = function(event) {
-			var src = event.target.result;
-			elImage.src = src;
-			elImage.setAttribute('title', file.name);
-				};
-				reader.readAsDataURL(file);
-		}
-		
-		function escapeHtml(source) {
-				var el = doc.createElement('div');
-				el.appendChild(doc.createTextNode(source));
-				var destination = el.innerHTML;
-				return destination;
-		}
-	}
 	
 	
 	return false;

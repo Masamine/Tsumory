@@ -6,8 +6,14 @@ if(!$_SESSION["username"] || !($_COOKIE["user"] == $_SESSION["username"])) {
 	require_once(ABSPATH."files/library/logout.php");
 }
 
-$load = new loadDB();
-$user = $load->getUser($_SESSION["username"]);
+if(isset($_POST["client"])) {
+  $postData = new postData();
+  $postData->regWorks();
+  header('location: reg_works.php');
+} else {
+  $load = new loadDB();
+  $user = $load->getUser($_SESSION["username"]);
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
@@ -48,19 +54,6 @@ $user = $load->getUser($_SESSION["username"]);
           </div>
           <div class="form"><input type="text" value="" name="client_staff" id="client_staff" placeholder="先方担当者"></div>
           <div class="form"><input type="text" value="" name="works" id="works" placeholder="案件名"></div>
-          <div class="form">
-            <div class="select">
-              <input type="text" name="team" id="team" placeholder="チーム選択" value="" readonly="readonly" class="input">
-              <span class="input">▼</span>
-              <ul>
-                <li>Reset</li>
-                <li>Web</li>
-                <li>Design</li>
-                <li>Edit</li>
-                <li>DTP</li>
-              </ul>
-            </div>
-          </div>
           <div class="radbtn"><input type="submit" value="登録"></div>
         </form>
       </div>

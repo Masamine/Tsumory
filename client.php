@@ -6,13 +6,13 @@ if(!$_SESSION["username"] || !($_COOKIE["user"] == $_SESSION["username"])) {
 	require_once(ABSPATH."files/library/logout.php");
 }
 
-$load = new loadDB();
-$user = $load->getUser($_SESSION["username"]);
-
 if(isset($_POST["regClient"])) {
   $postData = new postData();
-  $postData->regClient($_POST["regClient"]);
+  $postData->regClient();
   header('location: client.php');
+} else {
+  $load = new loadDB();
+  $user = $load->getUser($_SESSION["username"]);
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -33,12 +33,16 @@ if(isset($_POST["regClient"])) {
   <?php require_once(ABSPATH."files/display/common/header.php"); ?>
   <div id="contents">
     <?php require_once(ABSPATH."files/display/common/search.php"); ?>
-    <div class="box">
-      <div class="title">
+    <div class="box"> 
+      <div class="title">s
         <h1>クライアント管理</h1>
         <div class="radbtn" id="reg"><a href="/reg_client.php" class="modal">新規登録</a></div>
       </div>
       <div class="list">
+        <?php
+          $load   = new loadDB();
+          $client = $load->getClient();
+        ?>
         <div class="names">
           <h2>ダミーコーポレーション</h2>
           <p class="radbtn editbtn"><a href="/edit_client.php">編集</a></p>
@@ -58,7 +62,7 @@ if(isset($_POST["regClient"])) {
     <h3>クライアント新規登録</h3>
     <p class="radbtn" id="close"><a href="#" class="modal close">×</a></p>
     <form method="post">
-    	<p><input type="text" value="" placeholder="クライアント名" name="regClient"></p>
+    	<p><input type="text" value="" placeholder="クライアント名" name="regClient" id="regClient" class="chkrequired"></p>
     	<div class="radbtn"><input type="submit" value="登録"></div>
     </form>
   </div>
@@ -66,5 +70,7 @@ if(isset($_POST["regClient"])) {
 
 <script type="text/javascript" src="files/js/jquery.js"></script>
 <script type="text/javascript" src="files/js/jsSet.js"></script>
+<script type="text/javascript" src="files/js/exvalidation.js"></script>
+<script type="text/javascript" src="files/js/exchecker-ja.js"></script>
 </body>
 </html>

@@ -27,10 +27,9 @@
   <div class="form" id="regist">
     <h2>新規ユーザー登録</h2>
     <form action="thanks.php" method="post" enctype="multipart/form-data">
-      <!--<div id="dropzone" effectAllowed="move">+</div>-->
       <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
       <ul>
-        <li><input id="dropimg" type="file" name="thumb" id="files" onchange="changeFiles()" accept="image/*" /></li>
+        <li><input type="file" id="input-file-now" name="thumb" class="dropify" data-default-file="" /></li>
         <li><input type="text" value="" name="reguser" id="reguser" class="chkrequired chknochar chkhankaku" placeholder="User"></li>
         <li><input type="password" value="" name="regpass" id="regpass" class="chkrequired" placeholder="Password"></li>
         <li><input type="text" value="" name="regname" class="chkrequired" id="regname" placeholder="Name"></li>

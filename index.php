@@ -18,6 +18,7 @@ if($_SESSION["username"]) {
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <link href="files/css/common/base.css" media="all" rel="stylesheet" />
 <link href="files/css/style.css" media="all" rel="stylesheet" />
+<link href="files/css/dropify.css" media="all" rel="stylesheet" />
 <link href="files/css/common/exvalidation.css" media="all" rel="stylesheet" />
 </head>
 <body id="index">
