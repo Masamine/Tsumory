@@ -5,7 +5,7 @@
   class loadDB {
     
     public function getUser($id) {
-      
+
       /* -----------------------------
       値を取得
       ----------------------------- */
@@ -47,40 +47,26 @@
     ----------------------------------- */
     public function getClient() {
 
-      require_once('connectDB.php');
+      require('connectDB.php');
       
       // クエリ分を発行。
-      $query = "SELECT id, client_name FROM tsury_client";
-      
-      // ステートメントを準備
-      if ($stmt = $mysqli->prepare($query)) {
-        
-        $ID     = "id";
-        $client = "client_name";
+      $query = "SELECT * FROM tsury_client";
+      $stmt = $pdo->prepare($query);
+      $stmt->execute();
 
-        $stmt->bind_param('s', $client);
-        $stmt->execute();
-        $stmt->store_result();
-        $stmt->bind_result($ID, $client);
-        
-        while ($stmt->fetch()) {
-          
-          $array = array(
-            "ID"     => $ID,
-            "client" => $client
-          );
-          
-          return $array;
-        }
-        
-        $stmt->close();
-      } else {
-        printf("NO DATA");
+      $array = array();
+
+      while($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
+        $array[] = array(
+          "id"   => $row['id'],
+          "name" => $row['name']
+        );
       }
 
-      $mysqli->close();
+      $pdo = null;
+      
 
-      return false;
+      return $array;
     }
     
   }

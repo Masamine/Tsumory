@@ -5,7 +5,6 @@ require_once(ABSPATH."files/conf/base.php");
 if(!$_SESSION["username"] || !($_COOKIE["user"] == $_SESSION["username"])) {
 	require_once(ABSPATH."files/library/logout.php");
 }
-
 if(isset($_POST["regClient"])) {
   $postData = new postData();
   $postData->regClient();
@@ -28,26 +27,29 @@ if(isset($_POST["regClient"])) {
 <link href="files/css/client.css" media="all" rel="stylesheet" />
 <link href="files/css/common/exvalidation.css" media="all" rel="stylesheet" />
 </head>
-<body class="noList" id="page">
+<body class="noList client" id="page">
 <div id="all">
   <?php require_once(ABSPATH."files/display/common/header.php"); ?>
   <div id="contents">
     <?php require_once(ABSPATH."files/display/common/search.php"); ?>
     <div class="box"> 
-      <div class="title">s
+      <div class="title">
         <h1>クライアント管理</h1>
         <div class="radbtn" id="reg"><a href="/reg_client.php" class="modal">新規登録</a></div>
       </div>
+      <?php
+        $load   = new loadDB();
+        $client = $load->getClient();
+        $num = count($client);
+        for($i = 0; $i < $num; $i++) {
+      ?>
       <div class="list">
-        <?php
-          $load   = new loadDB();
-          $client = $load->getClient();
-        ?>
         <div class="names">
-          <h2>ダミーコーポレーション</h2>
           <p class="radbtn editbtn"><a href="/edit_client.php">編集</a></p>
+          <h2><?=$client[$i]['name']?></h2>
         </div>
       </div>
+      <?php } ?>
     </div>
   </div>
 

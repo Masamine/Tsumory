@@ -150,8 +150,8 @@ header {
 /*-----------------------------------------------------------------------*/
 
 #side {
-  position:absolute;
-  top:0;
+  position:fixed;
+  top:0px;
   left:0;
   padding-left:100px;
 	padding-right:20px;

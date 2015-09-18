@@ -95,6 +95,13 @@ h1 {
 		.list h2 {
 			padding-left:30px;
 		}
+		.client .list p {
+			padding-left: 30px;
+			width: 120px;
+		}
+		.client .list h2 {
+			width: 85%;
+		}
 		.list .update {
 			padding-right:30px;
 		}

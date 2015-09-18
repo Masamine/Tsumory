@@ -26,19 +26,16 @@
       $stmt->bindValue(':pass', $password, PDO::PARAM_STR);
 
       $stmt->execute();
-      $count = $stmt->fetchColumn();
 
-      echo $count.'件';
+      $count = count($stmt->fetchAll());
 
       if($count == 1){
-        echo 31;
         $status = "ok";
         $_SESSION["username"] = $user;
         setcookie("user", $user);
         header('location: home.php');
         exit();
       } else {
-        echo 123456;
         $status = "failed";
       }
     }
