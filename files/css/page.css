@@ -3,361 +3,361 @@
 @import "common/layout.css";
 
 /*-------------------------------------------------------------------------
-	page
+  page
 /*-----------------------------------------------------------------------*/
 .title {
-	position:relative;
-	padding:15px 30px;
+  position:relative;
+  padding:15px 30px;
 }
 #all .box {
-	padding:0;
+  padding:0;
 }
 h1 {
-	float:left;
-	margin-right:30px;
+  float:left;
+  margin-right:30px;
 }
 #all {
-	padding-bottom: 20px;
+  padding-bottom: 20px;
 }
 #reg {
-	float:left;
-	margin-top:2px;
+  float:left;
+  margin-top:2px;
 }
 .msg {
-	margin:20px 30px;
+  margin:20px 30px;
 }
 #names {
-	padding:5px 0;
-	background-color:#a4aeb9;
+  padding:5px 0;
+  background-color:#a4aeb9;
 }
   #names ul {
-		display:table;
-		width:100%;
-	}
+    display:table;
+    width:100%;
+  }
   #names li {
-		font-size:12px;
-		color:#FFF;
-		display:table-cell;
-		vertical-align:middle;
-		padding:7px 0;
-		text-align:center;
-	}
-	#all .client, .list h2 {
-		width:20%;
-		padding:0 2%;
-	}
-	#all .works, .list .works {
-		width:52%;
-		padding:0 2%;
-	}
-	#all .update, .list .update {
-		text-align:center;
-		padding:0 2%;
-	}
+    font-size:12px;
+    color:#FFF;
+    display:table-cell;
+    vertical-align:middle;
+    padding:7px 0;
+    text-align:center;
+  }
+  #all .client, .list h2 {
+    width:20%;
+    padding:0 2%;
+  }
+  #all .works, .list .works {
+    width:52%;
+    padding:0 2%;
+  }
+  #all .update, .list .update {
+    text-align:center;
+    padding:0 2%;
+  }
 
 /* =========================================================
 リスト系
 ========================================================= */
 .list {
-	cursor:pointer;
-	position:relative;
-	z-index:10;
-	width:100%;
-	overflow-x:hidden;
+  cursor:pointer;
+  position:relative;
+  z-index:10;
+  width:100%;
+  overflow-x:hidden;
 }
 
 .list:hover {
-	box-shadow:0px 0px 5px #009ec6;
-	z-index:100;
+  box-shadow:0px 0px 5px #009ec6;
+  z-index:100;
 }
 .noList .list:hover {
-	box-shadow:none;
-	cursor:default;
+  box-shadow:none;
+  cursor:default;
 }
 .list.active {
-	cursor:auto;
-	box-shadow:none;
+  cursor:auto;
+  box-shadow:none;
 }
 .list:last-child {
-	border-radius:0px 0px 4px 4px / 0px 0px 4px 4px;
+  border-radius:0px 0px 4px 4px / 0px 0px 4px 4px;
 }
 .list:nth-child(even) {
-	background-color:#f2fafe;
+  background-color:#f2fafe;
 }
   .list .names {
-		display:table;
-		width:100%;
-	}
-	  .list h2, .list .works, .list .update {
-			display:table-cell;
-			padding:10px 0;
-			vertical-align:middle;
-		}
-		.list .editbtn {
-			display:table-cell;
-			vertical-align:middle;
-		}
-		.list h2 {
-			padding-left:30px;
-		}
-		.client .list p {
-			padding-left: 30px;
-			width: 120px;
-		}
-		.client .list h2 {
-			width: 85%;
-		}
-		.list .update {
-			padding-right:30px;
-		}
-		.list.active h2, .list.active p.works, .list.active p.update {
-			color:#F69;
-		}
-		
-		.noList .list h2 {
-			padding:15px 0 15px 30px;
-		}
+    display:table;
+    width:100%;
+  }
+    .list h2, .list .works, .list .update {
+      display:table-cell;
+      padding:10px 0;
+      vertical-align:middle;
+    }
+    .list .editbtn {
+      display:table-cell;
+      vertical-align:middle;
+    }
+    .list h2 {
+      padding-left:30px;
+    }
+    .client .list p {
+      padding-left: 30px;
+      width: 120px;
+    }
+    .client .list h2 {
+      width: 85%;
+    }
+    .list .update {
+      padding-right:30px;
+    }
+    .list.active h2, .list.active p.works, .list.active p.update {
+      color:#F69;
+    }
+    
+    .noList .list h2 {
+      padding:15px 0 15px 30px;
+    }
 
 .list .contents {
-	background-color:#fffff1;
-	padding:2px 0;
-	box-shadow:0px 0px 5px #999999 inset;
-	display:none;
+  background-color:#fffff1;
+  padding:2px 0;
+  box-shadow:0px 0px 5px #999999 inset;
+  display:none;
 }
   .list .contents .reg {
-		text-align:center;
-		margin-bottom:7px;
-	}
+    text-align:center;
+    margin-bottom:7px;
+  }
   .list .contents .inner {
-		background-color:#fffff1;
-		padding:10px 30px 5px;
-	}
-	.list .contents .data {
-		border-bottom:1px dotted #CCCCCC;
-		display:table;
-		width:100%;
-	}
-	.list .contents .data table {
-		width:100%;
-	}
-	.list .contents .data td {
-		font-size:13px;
-		vertical-align:middle;
-		padding:15px 5px;
-	}
-	.list .contents .data:last-child {
-		margin-bottom:0;
-		padding-bottom:0;
-		border:none;
-	}
-	.list .contents .data .icon {
-		width:120px;
-	}
-	#all .list .contents .data .btns {
-		text-align:right;
-		width:130px;
-	}
-	#all .list .contents .data .update {
-		width:140px;
-	}
-		.list .contents .data .icon li {
-			float:left;
-			border:1px solid #999;
-			border-radius:4px;
-			margin:3px 5px 3px 0;
-		}
-		.list .contents .data .icon .web {
-			border-color:#6ac7f2;
-		}
-			.list .contents .data .icon .web span {
-				color:#6ac7f2;
-			}
-		.list .contents .data .icon .design {
-			border-color:#f2aa6a;
-		}
-			.list .contents .data .icon .design span {
-				color:#f2aa6a;
-			}
-		.list .contents .data .icon .edit {
-			border-color:#f791ae;
-		}
-			.list .contents .data .icon .edit span {
-				color:#f791ae;
-			}
-		.list .contents .data .icon .dtp {
-			border-color:#86d162;
-		}
-			.list .contents .data .icon .dtp span {
-				color:#86d162;
-			}
-			.list .contents .data .icon li span {
-				font-size:12px;
-				display:block;
-				padding:2px 7px;
-				background-color:#FFF;
-				border-radius:4px;
-			}
-		#all .list .contents .data .radbtn {
-			float:left;
-			margin:3px 5px 3px 0;
-		}
-		#all .list .contents .data .radbtn a {
-			font-size:12px;
-			width:60px;
-			padding:3px 0;
-			text-align:center;
-		}
-		#all .radbtn.delete a {
-			background-color:#e78d8d;
-			text-shadow:1px 1px 0px #b9534e;
-			box-shadow:0px 1px 0px #b9534e;
-		}
-		#all .radbtn.delete a:hover {
-			box-shadow:0px 1px 1px #9b2e29 inset;
-			text-shadow:1px 1px 0px #9b2e29;
-			background-color:#b9534e;
-		}
+    background-color:#fffff1;
+    padding:10px 30px 5px;
+  }
+  .list .contents .data {
+    border-bottom:1px dotted #CCCCCC;
+    display:table;
+    width:100%;
+  }
+  .list .contents .data table {
+    width:100%;
+  }
+  .list .contents .data td {
+    font-size:13px;
+    vertical-align:middle;
+    padding:15px 5px;
+  }
+  .list .contents .data:last-child {
+    margin-bottom:0;
+    padding-bottom:0;
+    border:none;
+  }
+  .list .contents .data .icon {
+    width:120px;
+  }
+  #all .list .contents .data .btns {
+    text-align:right;
+    width:130px;
+  }
+  #all .list .contents .data .update {
+    width:140px;
+  }
+    .list .contents .data .icon li {
+      float:left;
+      border:1px solid #999;
+      border-radius:4px;
+      margin:3px 5px 3px 0;
+    }
+    .list .contents .data .icon .web {
+      border-color:#6ac7f2;
+    }
+      .list .contents .data .icon .web span {
+        color:#6ac7f2;
+      }
+    .list .contents .data .icon .design {
+      border-color:#f2aa6a;
+    }
+      .list .contents .data .icon .design span {
+        color:#f2aa6a;
+      }
+    .list .contents .data .icon .edit {
+      border-color:#f791ae;
+    }
+      .list .contents .data .icon .edit span {
+        color:#f791ae;
+      }
+    .list .contents .data .icon .dtp {
+      border-color:#86d162;
+    }
+      .list .contents .data .icon .dtp span {
+        color:#86d162;
+      }
+      .list .contents .data .icon li span {
+        font-size:12px;
+        display:block;
+        padding:2px 7px;
+        background-color:#FFF;
+        border-radius:4px;
+      }
+    #all .list .contents .data .radbtn {
+      float:left;
+      margin:3px 5px 3px 0;
+    }
+    #all .list .contents .data .radbtn a {
+      font-size:12px;
+      width:60px;
+      padding:3px 0;
+      text-align:center;
+    }
+    #all .radbtn.delete a {
+      background-color:#e78d8d;
+      text-shadow:1px 1px 0px #b9534e;
+      box-shadow:0px 1px 0px #b9534e;
+    }
+    #all .radbtn.delete a:hover {
+      box-shadow:0px 1px 1px #9b2e29 inset;
+      text-shadow:1px 1px 0px #9b2e29;
+      background-color:#b9534e;
+    }
 
 
 /* =========================================================
 検索ボックス
 ========================================================= */
 #search {
-	position:relative;
-	position: fixed;
-	top: -60px;
-	left: 235px;
-	width: 80%;
-	z-index: 150;
+  position:relative;
+  position: fixed;
+  top: -60px;
+  left: 235px;
+  width: 82%;
+  z-index: 150;
 }
-	#search .box {
-		padding:30px 30px 20px;
-		background-color: rgba(0,10,40,0.9);
-	}
-	.accBox ul {
-		display: none;
-		border: 1px solid #ccc;
-		border-top: 1px dashed #ccc;
-		border-radius:0px 0px 4px 4px / 0px 0px 4px 4px;
-		position: absolute;
-		top: 32px;
-		left: 0;
-		width: 100%;
-		box-sizing:border-box;
-		background-color: #fff;
-		max-height: 250px;
-		overflow-y:auto;
-	}
-	  .accBox ul li {
-	  	border-bottom: 1px dotted #ccc;
-	  	padding: 5px 20px;
-	  	font-size: 13px;
-	  }
-	  .accBox ul li:hover {
-	  	background-color: #d5f5e8;
-	  }
-	  .accBox ul li:last-child {
-	  	border: none;
-	  }
-	  .accBox ul li.selc {
-	  	color: #fff;
-	  	background-color: #76d9af;
-	  }
-	#search .select {
-		float:left;
-		width:20%;
-		margin-right:1%;
-		position:relative;
-	}
-	.accBox .select {
-		position:relative;
-	}
-	#search .select.keyword {
-		width:48%;
-		margin-right:0;
-	}
-	  .accBox .select span {
-			font-size:8px;
-			position:absolute;
-			top:1px;
-			right:1px;
-			background-color:#76d9af;
-			color:#FFF;
-			height:31px;
-			line-height:30px;
-			padding:0 8px;
-			border-radius:0px 4px 4px 0px / 0px 4px 4px 0px;
-		}
-		.accBox .select .input,
-		.accBox .select li {
-			cursor:pointer;
-		}
-		#search .btnsearch {
-			float:right;
-		}
-		  #search .btnsearch input {
-				padding:6px 15px 5px;
-				border:none;
-				cursor:pointer;
-			}
-			
+  #search .box {
+    padding:30px 30px 20px;
+    background-color: rgba(0,10,40,0.9);
+  }
+  .accBox ul {
+    display: none;
+    border: 1px solid #ccc;
+    border-top: 1px dashed #ccc;
+    border-radius:0px 0px 4px 4px / 0px 0px 4px 4px;
+    position: absolute;
+    top: 32px;
+    left: 0;
+    width: 100%;
+    box-sizing:border-box;
+    background-color: #fff;
+    max-height: 250px;
+    overflow-y:auto;
+  }
+    .accBox ul li {
+      border-bottom: 1px dotted #ccc;
+      padding: 5px 20px;
+      font-size: 13px;
+    }
+    .accBox ul li:hover {
+      background-color: #d5f5e8;
+    }
+    .accBox ul li:last-child {
+      border: none;
+    }
+    .accBox ul li.selc {
+      color: #fff;
+      background-color: #76d9af;
+    }
+  #search .select {
+    float:left;
+    width:20%;
+    margin-right:1%;
+    position:relative;
+  }
+  .accBox .select {
+    position:relative;
+  }
+  #search .select.keyword {
+    width:48%;
+    margin-right:0;
+  }
+    .accBox .select span {
+      font-size:8px;
+      position:absolute;
+      top:1px;
+      right:1px;
+      background-color:#76d9af;
+      color:#FFF;
+      height:31px;
+      line-height:30px;
+      padding:0 8px;
+      border-radius:0px 4px 4px 0px / 0px 4px 4px 0px;
+    }
+    .accBox .select .input,
+    .accBox .select li {
+      cursor:pointer;
+    }
+    #search .btnsearch {
+      float:right;
+    }
+      #search .btnsearch input {
+        padding:6px 15px 5px;
+        border:none;
+        cursor:pointer;
+      }
+      
 
 /* =========================================================
 モーダルウィンドウ
 ========================================================= */
 #modal {
-	position:fixed;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
-	z-index:100;
-	background-color:rgba(50,80,120,0.2);
-	display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:100;
+  background-color:rgba(50,80,120,0.2);
+  display:none;
 }
 #modal.active {
-	display:block;
+  display:block;
 }
-	#regBox {
-		width:740px;
-		margin:75px auto 0;
-		background-color:rgba(255,255,255,0.85);
-		border:1px solid #fafafa;
-		padding:25px;
-		box-shadow:0 0 6px #889;
-		position:relative;
-	}
-		#regBox h3 {
-			text-align:center;
-			font-size:20px;
-			margin-bottom:10px;
-		}
-		#regBox #close {
-			background-color:#000;
-			width:30px;
-			position:absolute;
-			top:5px;
-			right:5px;
-		}
-			#regBox #close a {
-				font-size:20px;
-				color:#FFF;
-				text-align:center;
-				height:30px;
-				line-height:27px;
-				display:block;
-				border:1px solid #000;
-			}
-			#regBox #close a:hover {
-				background-color:#FFF;
-				color:#000;
-			}
-		#regBox p {
-			margin-bottom:15px;
-		}
-		#regBox form .radbtn {
-			text-align:center;
-		}
-		#regBox input[type="submit"] {
-			width:50%;
-		}
+  #regBox {
+    width:740px;
+    margin:75px auto 0;
+    background-color:rgba(255,255,255,0.85);
+    border:1px solid #fafafa;
+    padding:25px;
+    box-shadow:0 0 6px #889;
+    position:relative;
+  }
+    #regBox h3 {
+      text-align:center;
+      font-size:20px;
+      margin-bottom:10px;
+    }
+    #regBox #close {
+      background-color:#000;
+      width:30px;
+      position:absolute;
+      top:5px;
+      right:5px;
+    }
+      #regBox #close a {
+        font-size:20px;
+        color:#FFF;
+        text-align:center;
+        height:30px;
+        line-height:27px;
+        display:block;
+        border:1px solid #000;
+      }
+      #regBox #close a:hover {
+        background-color:#FFF;
+        color:#000;
+      }
+    #regBox p {
+      margin-bottom:15px;
+    }
+    #regBox form .radbtn {
+      text-align:center;
+    }
+    #regBox input[type="submit"] {
+      width:50%;
+    }

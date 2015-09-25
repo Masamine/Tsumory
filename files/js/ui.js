@@ -10,6 +10,8 @@ UI
 		_.ui    = _this = {};
 		_window = $(window);
 		SPEED   = 240;
+
+		showUser();
 		
 	})();
 	
@@ -17,6 +19,25 @@ UI
 	_this.designSelect = designSelect;
 	_this.showSearch   = showSearch;
 	_this.showModal    = showModal;
+
+	/* ---------------------------------------
+	Show User Info
+	--------------------------------------- */
+	function showUser() {
+		var btn = $(".user").find('a');
+		var target = $('#menu');
+
+		btn.on('click', function(){
+			if(target.hasClass('active') && !target.is(':animated')) {
+				target.slideUp(180);
+			} else if(!target.hasClass('active') && !target.is(':animated')){
+				target.slideDown(180);
+			}
+			target.toggleClass('active');
+		});
+
+		return false;
+	}
 	
 	/* ---------------------------------------
 	Accordion
@@ -37,7 +58,7 @@ UI
 			if(!target.hasClass("active")) {
 				target.addClass("active").find(".contents").slideDown(SPEED);
 			} else {
-				target.find(".contents").slideUp(SPEED, function(){target.removeClass("active");});
+				target.find(".contents").slideUp(SPEED, function(){ target.removeClass("active"); });
 			}
 	
 			return false;

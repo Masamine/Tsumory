@@ -17,7 +17,7 @@
 		_ui.showSearch();
 		_ui.showModal();
 
-		validate();
+		if($('body').hasClass('isForm')) validate();
 		
 		return false;
 		
