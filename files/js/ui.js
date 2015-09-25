@@ -105,11 +105,11 @@ UI
 			if(!$this.hasClass("active")) {
 				$this.addClass("active");
 				parent.addClass("active");
-				target.filter("#search").stop().animate({"margin-top" : -33}, SPEED);
+				target.filter("#search").stop().animate({"top" : 45}, SPEED);
 			} else {
 				$this.removeClass("active");
 				parent.removeClass("active");
-				target.filter("#search").stop().animate({"margin-top" : -110}, SPEED);
+				target.filter("#search").stop().animate({"top" : -60}, SPEED);
 				target.filter("#search").find(".select").removeClass("active").find("ul").slideUp(SPEED);
 			}
 			

@@ -5,24 +5,23 @@
       <input type="text" name="sClient" placeholder="クライアント選択" value="" readonly="readonly" class="input">
       <span class="input">▼</span>
       <ul>
-        <li>Reset</li>
-        <li>Sample_A</li>
-        <li>Sample_B</li>
-        <li>Sample_C</li>
-        <li>Sample_D</li>
-        <li>Sample_E</li>
-        <li>Sample_F</li>
-        <li>Sample_G</li>
-        <li>Sample_H</li>
-        <li>Sample_I</li>
-        <li>Sample_J</li>
+      <?php if($msg): ?>
+      <p class="msg"><?=$msg?></p>
+      <?php endif; ?>
+      <?php
+        $load   = new loadDB();
+        $client = $load->getClient();
+        $num = count($client);
+        for($i = $num - 1; $i >= 0; $i--) {
+      ?>
+      <li><?=$client[$i]['name']?></li>
+      <?php } ?>
       </ul>
     </div>
     <div class="select">
       <input type="text" name="sTeam" placeholder="チーム選択" value="" readonly="readonly" class="input">
       <span class="input">▼</span>
       <ul>
-        <li>Reset</li>
         <li>Web</li>
         <li>Design</li>
         <li>Edit</li>

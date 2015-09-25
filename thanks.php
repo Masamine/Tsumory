@@ -26,9 +26,7 @@ $status = $_GET['status'];
 	$msg = "";
 	
 // セッションに保持されているキーと、POSTで飛んできたキーが同じかどうか判別
-	if ( isset($_SESSION["key"]) && 
-		 isset($_POST["key"]) && 
-		 $_SESSION["key"] == $_POST["key"]) {
+	if ( isset($_SESSION["key"]) && isset($_POST["key"]) && $_SESSION["key"] == $_POST["key"]) {
 
 // 合致しているので、送信処理を記述
 		$msg = "登録完了です。";
@@ -37,7 +35,6 @@ $status = $_GET['status'];
 	}
 	else {
 // 合致していないので、送信しない
-		echo $_SESSION["key"];
 		$msg = "2重送信はできません。";
 	}
 	

@@ -9,13 +9,15 @@
 		writeJS(fileName[i], src);
 	}
 	
-	$(document).ready(function(){
+	$(document).on('ready', function(){
 		
 		Manager.init();
 		_ui.accordion();
 		_ui.designSelect();
 		_ui.showSearch();
 		_ui.showModal();
+
+		validate();
 		
 		return false;
 		
@@ -35,6 +37,20 @@
 		document.write('<script src="' + src + fileName + '.js"></script>');
 		return false;
 		
+	}
+
+	/* =======================================================================
+	Validate
+	========================================================================== */
+	function validate() {
+		var validation = $("#regist").exValidation({
+			customBind : {
+			  object   : $("#send"),
+			  listener : 'click'
+			},
+			errTipPos: "right",
+			errTipCloseBtn:false
+		});
 	}
 	
 	return false;

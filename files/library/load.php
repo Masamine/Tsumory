@@ -9,9 +9,8 @@
       /* -----------------------------
       値を取得
       ----------------------------- */
-      require_once('connectDB.php');
+      require('connectDB.php');
       
-      // クエリ分を発行。
       $query = "SELECT user_id,user_user,user_name,user_thumb FROM tsury_user WHERE user_user = :user";
       $stmt = $pdo -> prepare($query);
 
@@ -45,13 +44,15 @@
 
     /*  クライアント取得
     ----------------------------------- */
-    public function getClient() {
+    public function getClient($name) {
 
       require('connectDB.php');
       
-      // クエリ分を発行。
-      $query = "SELECT * FROM tsury_client";
+      $query = ($name) ? "SELECT name FROM tsury_client WHERE name = :name" : "SELECT * FROM tsury_client";
       $stmt = $pdo->prepare($query);
+
+      if($name) $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+
       $stmt->execute();
 
       $array = array();
@@ -64,7 +65,6 @@
       }
 
       $pdo = null;
-      
 
       return $array;
     }

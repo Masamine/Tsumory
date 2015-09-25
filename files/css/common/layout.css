@@ -133,12 +133,39 @@ header {
 		padding:7px 15px;
 		vertical-align:middle;
 	}
+  #page .user {
+    position: relative;
+  }
+    #menu {
+      position: absolute;
+      top: 60px;
+      right: 0;
+      border-radius: 4px;
+      padding:10px;
+      width: 120px;
+      background-color: rgba(0,0,0,.85);
+    }
+      #page #menu li {
+        display: block;
+        border-right:none;
+        text-align: center;
+        padding: 0;
+        margin-bottom: 5px;
+      }
+      #page #menu li:last-child {
+        margin-bottom: 0;
+      }
+        #page #menu li a {
+          font-size: 12px;
+          color: #fff;
+        }
 	#page .user img {
 		height:40px;
 		width:auto;
 		border:1px solid #d7d9dc;
 		border-radius:100px;
 	}
+  
 	#info a:hover {
 		color:#009ec6;
 	}

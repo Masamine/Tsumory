@@ -16,11 +16,16 @@ h1 {
 	float:left;
 	margin-right:30px;
 }
+#all {
+	padding-bottom: 20px;
+}
 #reg {
 	float:left;
 	margin-top:2px;
 }
-
+.msg {
+	margin:20px 30px;
+}
 #names {
 	padding:5px 0;
 	background-color:#a4aeb9;
@@ -218,27 +223,38 @@ h1 {
 検索ボックス
 ========================================================= */
 #search {
-	margin-bottom:20px;
 	position:relative;
-	margin-top:-110px;
+	position: fixed;
+	top: -60px;
+	left: 235px;
+	width: 80%;
+	z-index: 150;
 }
 	#search .box {
 		padding:30px 30px 20px;
-		border-color:#c4e3d6;
+		background-color: rgba(0,10,40,0.9);
 	}
 	.accBox ul {
 		display: none;
 		border: 1px solid #ccc;
 		border-top: 1px dashed #ccc;
 		border-radius:0px 0px 4px 4px / 0px 0px 4px 4px;
-		position: relative;
-		top: -1px;
-		z-index: 100;
-		background-color: #f9f9f9;
+		position: absolute;
+		top: 32px;
+		left: 0;
+		width: 100%;
+		box-sizing:border-box;
+		background-color: #fff;
+		max-height: 250px;
+		overflow-y:auto;
 	}
 	  .accBox ul li {
 	  	border-bottom: 1px dotted #ccc;
 	  	padding: 5px 20px;
+	  	font-size: 13px;
+	  }
+	  .accBox ul li:hover {
+	  	background-color: #d5f5e8;
 	  }
 	  .accBox ul li:last-child {
 	  	border: none;

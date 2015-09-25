@@ -23,7 +23,6 @@
         }
       }
       
-      // 変数に値を代入
       $user_user  = $_POST["reguser"];
       $user_pass  = $func->passhash($_POST["regpass"]);
       $user_name  = $_POST["regname"];
@@ -36,7 +35,6 @@
       $stmt->bindValue(':mail', $user_mail, PDO::PARAM_STR);
       $stmt->bindValue(':thumb', $user_thumb, PDO::PARAM_STR);
       
-      // プリペアドステートメントを実行
       $stmt->execute();
       
       $pdo = null;
@@ -50,7 +48,7 @@
       $func = new func();
 
       $sql   = "INSERT INTO tsury_works(client_id,title,client_staff,regist_date,recent_date) VALUES (?,?,?,?,?)";
-      $stmt  = $mysqli->prepare($sql);
+      $stmt  = $pdo->prepare($sql);
       
       $clientID    = $_POST["client"];
       $title       = $_POST["works"];
@@ -70,18 +68,35 @@
     /* ★クライアント登録
     ----------------------------------------- */
     function regClient() {
-      require_once('connectDB.php');
+      require('connectDB.php');
       
-      $sql   = "INSERT INTO tsury_client(client_name) VALUES (?)";
-      $stmt  = $mysqli->prepare($sql);
-
-      // 変数に値を代入
+      $sql   = "INSERT INTO tsury_client(name) VALUES (:client)";
+      $stmt  = $pdo->prepare($sql);
       $client = $_POST["regClient"];
+
+      if($this->overlap($client)) {
+        $msg = '「'.$client.'」は重複してます。';
+      } else {
+        $stmt->bindValue(':client', $client, PDO::PARAM_STR);
+        $stmt->execute();
+        $msg = "登録が完了しました。";
+      }
       
-      $stmt->bind_param('s',$client);
-      $stmt->execute();
-      $stmt->close();
-      $mysqli->close();
+      $pdo = null;
+
+      return $msg;
+    }
+
+    /* ★クライアント登録　重複確認
+    ----------------------------------------- */
+    function overlap($a) {
+
+      $getData = new loadDB();
+      $data = $getData->getClient($a);
+
+      $judge = (count($data) > 0) ? true : false;
+
+      return $judge;
     }
   }
 ?>
