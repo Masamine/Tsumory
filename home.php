@@ -6,6 +6,20 @@ if(!$_SESSION["username"] || !($_COOKIE["user"] == $_SESSION["username"])) {
 	require_once(ABSPATH."files/library/logout.php");
 }
 
+$key = hash("SHA256",time()."as54654sdf54dffg3ad98sd2f");
+$msg = "";
+
+if($_POST["key"] == $_SESSION["key"]) {
+  $postData = new postData();
+  $postData->regWorks();
+  $msg = "案件名<span>「".$_POST["works"]."」</span>の登録が完了しました！";
+  unset($_SESSION['key']);
+}
+if(isset($_POST["key"]) && isset($_SESSION["key"]) && $_POST["key"] !== $_SESSION["key"] ) {
+  header('location: home.php');
+}
+
+$_SESSION["key"] = $key;
 $load = new loadDB();
 $user = $load->getUser($_SESSION["username"]);
 ?>
@@ -22,7 +36,8 @@ $user = $load->getUser($_SESSION["username"]);
 <link href="files/css/common/exvalidation.css" media="all" rel="stylesheet" />
 </head>
 
-<body id="page">
+<?php $id = $_GET["p"]; ?>
+<body class="isForm" id="page">
 <div id="all">
   <?php require_once(ABSPATH."files/display/common/header.php"); ?>
   
@@ -31,8 +46,36 @@ $user = $load->getUser($_SESSION["username"]);
     <div class="box">
       <div class="title">
         <h1>案件一覧</h1>
-        <div class="radbtn" id="reg"><a href="reg_works.php">新規案件登録</a></div>
+        <div class="radbtn trigger" id="reg"><a href="#">新規案件登録</a></div>
       </div>
+      <?php if($msg): ?>
+      <p class="msg"><?=$msg?></p>
+      <?php endif; ?>
+      <div class="formBox">
+        <form action="" method="post" class="accBox" id="regist">
+          <div class="form">
+            <div class="select">
+              <input type="text" name="client" id="client" placeholder="クライアント名" value="" class="input chkrequired">
+              <span class="input">▼</span>
+              <ul>
+              <?php
+                $load   = new loadDB();
+                $client = $load->getClient();
+                $num = count($client);
+                for($i = $num - 1; $i >= 0; $i--) {
+              ?>
+              <li><?=$client[$i]['name']?></li>
+              <?php } ?>
+              </ul>
+            </div>
+          </div>
+          <div class="form"><input type="text" value="" name="staff" id="client_staff" placeholder="先方担当者"></div>
+          <div class="form"><input type="text" value="" name="works" id="works" class="chkrequired" placeholder="案件名"></div>
+          <div class="radbtn"><input type="submit" class="submit" value="登録"></div>
+          <input type="hidden" name="key" value="<?php echo $key ?>">
+        </form>
+      </div>
+
       <div id="names">
         <ul>
           <li class="client">クライアント</li>
@@ -40,38 +83,23 @@ $user = $load->getUser($_SESSION["username"]);
           <li class="update">更新日時</li>
         </ul>
       </div>
-      
+      <?php
+        $load   = new loadDB();
+        $work  = $load->getWorks();
+        $num = count($work);
+        for($i = $num - 1; $i >= 0; $i--) {
+        $works = $work[$i];
+        $client = $load->getClient($works["client"] | 0);
+      ?>
       <div class="list">
         <div class="names">
-          <h2>ダミーコーポレーション</h2>
-          <p class="works">どっかのサイト制作</p>
-          <p class="update">2014/02/14 15:07</p>
+          <h2><?=$client[0]["name"]?></h2>
+          <p class="works"><?=$works["title"]?></p>
+          <p class="update"><?=$works["update"]?></p>
         </div>
         <div class="contents">
           <div class="inner">
             <div class="reg radbtn"><a href="reg_tsury.php">見積り登録</a></div>
-            <div class="data">
-              <table>
-                <tr>
-                  <td class="icon">
-                    <ul>
-                      <li class="web"><span>Web</span></li>
-                      <li class="design"><span>Design</span></li>
-                    </ul>
-                  </td>
-                  <td class="detail">レスポンシブ対応版</td>
-                  <td class="price">￥1,000,000</td>
-                  <td class="name">Doko</td>
-                  <td class="update">2014/02/14 15:07</td>
-                  <td class="btns">
-                    <ul>
-                      <li class="radbtn pdf"><a href="#">PDF</a></li>
-                      <li class="radbtn delete"><a href="#">削除</a></li>
-                    </ul>
-                  </td>
-                </tr>
-              </table>
-            </div>
             <div class="data">
               <table>
                 <tr>
@@ -99,53 +127,7 @@ $user = $load->getUser($_SESSION["username"]);
           </div>
         </div>
       </div>
-      <div class="list">
-        <div class="names">
-          <h2>ダミーコーポレーション</h2>
-          <p class="works">どっかのサイト制作</p>
-          <p class="update">2014/02/14 15:07</p>
-        </div>
-        <div class="contents">
-          <div class="inner">
-            <div class="reg radbtn"><a href="reg_tsury.php">見積り登録</a></div>
-            <div class="data">
-              <table>
-                <tr>
-                  <td class="icon">
-                    <ul>
-                      <li class="web"><span>Web</span></li>
-                      <li class="design"><span>Design</span></li>
-                    </ul>
-                  </td>
-                  <td class="detail">レスポンシブ対応版</td>
-                  <td class="price">￥1,000,000</td>
-                  <td class="name">Doko</td>
-                  <td class="update">2014/02/14 15:07</td>
-                  <td class="btns">
-                    <ul>
-                      <li class="radbtn pdf"><a href="#">PDF</a></li>
-                      <li class="radbtn delete"><a href="#">削除</a></li>
-                    </ul>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="list">
-        <div class="names">
-          <h2>ダミーコーポレーション</h2>
-          <p class="works">どっかのサイト制作</p>
-          <p class="update">2014/02/14 15:07</p>
-        </div>
-        <div class="contents">
-          <div class="inner">
-            <div class="reg radbtn"><a href="reg_tsury.php">見積り登録</a></div>
-          </div>
-        </div>
-      </div>
-      
+      <?php } ?>
     </div>
   </div>
   
@@ -157,5 +139,7 @@ $user = $load->getUser($_SESSION["username"]);
 </div>
 <script type="text/javascript" src="files/js/jquery.js"></script>
 <script type="text/javascript" src="files/js/jsSet.js"></script>
+<script type="text/javascript" src="files/js/exvalidation.js"></script>
+<script type="text/javascript" src="files/js/exchecker-ja.js"></script>
 </body>
 </html>

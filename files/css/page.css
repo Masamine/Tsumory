@@ -24,8 +24,12 @@ h1 {
   margin-top:2px;
 }
 .msg {
-  margin:20px 30px;
+  margin:15px 30px 20px;
 }
+  .msg span {
+    font-weight: bold;
+    color: #76d9af;
+  }
 #names {
   padding:5px 0;
   background-color:#a4aeb9;
@@ -87,6 +91,9 @@ h1 {
   .list .names {
     display:table;
     width:100%;
+		position:relative;
+		opacity:0;
+		left:40px;
   }
     .list h2, .list .works, .list .update {
       display:table-cell;
@@ -247,6 +254,7 @@ h1 {
     background-color: #fff;
     max-height: 250px;
     overflow-y:auto;
+    z-index: 200;
   }
     .accBox ul li {
       border-bottom: 1px dotted #ccc;
@@ -300,7 +308,26 @@ h1 {
         border:none;
         cursor:pointer;
       }
-      
+
+.isForm #contents .formBox {
+  display: none;
+  background-color: #faffe2;
+  border-top: 1px solid #ddeb9a;
+}
+.isForm #contents .formBox .form {
+  margin-bottom:15px;
+}
+.isForm #contents .formBox .accBox {
+  padding:20px 30px;
+}
+.isForm #contents .formBox .form:last-child {
+  margin-bottom:0;
+}
+.isForm #contents .formBox .submit {
+  width: 150px;
+  margin: 0 auto;
+  display: block;
+}
 
 /* =========================================================
 モーダルウィンドウ

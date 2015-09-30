@@ -2,7 +2,7 @@
 	
 	window.Manager = {};
 	var _ui;
-	var fileName = ["ui"];
+	var fileName = ["easing", "ui"];
 	var src      = "files/js/";
 	
 	for(var i = 0; i < fileName.length; i++) {

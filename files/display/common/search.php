@@ -22,10 +22,14 @@
       <input type="text" name="sTeam" placeholder="チーム選択" value="" readonly="readonly" class="input">
       <span class="input">▼</span>
       <ul>
-        <li>Web</li>
-        <li>Design</li>
-        <li>Edit</li>
-        <li>DTP</li>
+      <?php
+        $load   = new loadDB();
+        $team = $load->getTeam();
+        $num = count($team);
+        for($i = 0; $i < $num; $i++) {
+      ?>
+        <li id="team-<?php echo $team[$i]["name"]; ?>"><?php echo $team[$i]["name"]; ?></li>
+      <?php } ?>
       </ul>
     </div>
     <div class="select keyword">

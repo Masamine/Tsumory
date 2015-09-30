@@ -4,6 +4,12 @@
   ----------------------------- */
   
   class postData {
+
+    /* ★初期設定
+    ----------------------------------------- */
+    function __construct() {
+      date_default_timezone_set('Asia/Tokyo');
+    }
     
     /* ★ユーザー登録
     ----------------------------------------- */
@@ -47,32 +53,44 @@
       require_once('connectDB.php');
       $func = new func();
 
-      $sql   = "INSERT INTO tsury_works(client_id,title,client_staff,regist_date,recent_date) VALUES (?,?,?,?,?)";
+      $sql   = "INSERT INTO tsury_works(client,title,staff,regist,updates) VALUES (:client, :title, :staff, :reg, :rec)";
       $stmt  = $pdo->prepare($sql);
       
-      $clientID    = $_POST["client"];
-      $title       = $_POST["works"];
-      $clientStaff = $_POST["client_staff"];
-      $registDate  = date("Y-m-d H:i:s");
-      $recentDate  = date("Y-m-d H:i:s");
+      $client     = $_POST["client"];
+      $title      = $_POST["works"];
+      $staff      = $_POST["staff"];
+      $registDate = date("Y-m-d H:i:s");
+      $recentDate = date("Y-m-d H:i:s");
 
-      $stmt->bind_param('sssss', $clientID, $title, $clientStaff, $registDate, $recentDate);
+      if(!$this->overlap($client)) {
+        $this->regClient($client);
+      }
+
+      $load = new loadDB();
+      $clientData = $load->getClient($client);
+      $id = $clientData[0]["id"];
+
+      $stmt->bindValue(':client', $id, PDO::PARAM_INT);
+      $stmt->bindValue(':title', $title, PDO::PARAM_STR);
+      $stmt->bindValue(':staff', $staff, PDO::PARAM_STR);
+      $stmt->bindValue(':reg', $registDate, PDO::PARAM_STR);
+      $stmt->bindValue(':rec', $recentDate, PDO::PARAM_STR);
 
       $stmt->execute();
-      $stmt->close();
-      $mysqli->close();
+      $pdo = null;
 
       return false;
+
     }
 
     /* ★クライアント登録
     ----------------------------------------- */
-    function regClient() {
+    function regClient($data) {
       require('connectDB.php');
       
       $sql   = "INSERT INTO tsury_client(name) VALUES (:client)";
       $stmt  = $pdo->prepare($sql);
-      $client = $_POST["regClient"];
+      $client = (isset($data)) ? $data : $_POST["regClient"];
 
       if($this->overlap($client)) {
         $msg = '「'.$client.'」は重複してます。';
@@ -82,7 +100,7 @@
         $msg = "登録が完了しました。";
       }
       
-      $pdo = null;
+      //$pdo = null;
 
       return $msg;
     }
