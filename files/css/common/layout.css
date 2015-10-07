@@ -68,6 +68,7 @@ input, textarea {
 	padding:5px 35px;
 	text-shadow:1px 1px 0 #48ab81;
 	display:inline-block;
+  position: relative;
 }
 #all .radbtn a:hover,
 #all .radbtn input:hover,
@@ -80,7 +81,6 @@ input, textarea {
   text-shadow:1px 1px 0 #b1284f;
   box-shadow:1px 1px 1px #b1284f inset;
 }
-
 
 #btnsearch {
 }
@@ -106,7 +106,7 @@ header {
 	width:100%;
 }
 #page header .inner {
-	padding:0 0 0 100px;
+	padding:0 0 0 50px;
 }
   #page header p {
 		padding-top:7px;
@@ -165,6 +165,9 @@ header {
           font-size: 12px;
           color: #fff;
         }
+        #page #menu li a:hover {
+          color: #0dcfff;
+        }
 	#page .user img {
 		height:40px;
 		width:auto;
@@ -186,7 +189,7 @@ header {
   position:fixed;
   top:0px;
   left:0;
-  padding-left:100px;
+  padding-left:50px;
 	padding-right:20px;
   background-color:#191d29;
   height:100%;
@@ -215,7 +218,7 @@ header {
 	Contents
 /*-----------------------------------------------------------------------*/
 #contents {
-	margin-left:235px;
+	margin-left:190px;
 	margin-top:80px;
 	position:relative;
 }

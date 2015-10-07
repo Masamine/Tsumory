@@ -2,6 +2,8 @@
 
 @import "common/layout.css";
 
+
+
 /*-------------------------------------------------------------------------
   page
 /*-----------------------------------------------------------------------*/
@@ -34,6 +36,7 @@ h1 {
   padding:5px 0;
   background-color:#a4aeb9;
 }
+
   #names ul {
     display:table;
     width:100%;
@@ -58,6 +61,9 @@ h1 {
     text-align:center;
     padding:0 2%;
   }
+  #names.listname li {
+    width: 16.5%;
+  }
 
 /* =========================================================
 リスト系
@@ -68,19 +74,25 @@ h1 {
   z-index:10;
   width:100%;
   overflow-x:hidden;
+  border-top: 1px solid transparent;
 }
 
 .list:hover {
-  box-shadow:0px 0px 5px #009ec6;
+  box-shadow:0px 0px 5px #76d9af;
   z-index:100;
+}
+.noList .list {
+  cursor:inherit;
 }
 .noList .list:hover {
   box-shadow:none;
-  cursor:default;
 }
 .list.active {
-  cursor:auto;
   box-shadow:none;
+  cursor:auto;
+  border-top: 1px solid #ddeb9a;
+  background-color: #f7ffd3 !important;
+  border-bottom: 1px solid #ddeb9a;
 }
 .list:last-child {
   border-radius:0px 0px 4px 4px / 0px 0px 4px 4px;
@@ -94,6 +106,9 @@ h1 {
 		position:relative;
 		opacity:0;
 		left:40px;
+  }
+  .list.active .names {
+    border-bottom: 1px solid #ddeb9a;
   }
     .list h2, .list .works, .list .update {
       display:table-cell;
@@ -118,7 +133,6 @@ h1 {
       padding-right:30px;
     }
     .list.active h2, .list.active p.works, .list.active p.update {
-      color:#F69;
     }
     
     .noList .list h2 {
@@ -128,7 +142,6 @@ h1 {
 .list .contents {
   background-color:#fffff1;
   padding:2px 0;
-  box-shadow:0px 0px 5px #999999 inset;
   display:none;
 }
   .list .contents .reg {
@@ -225,6 +238,31 @@ h1 {
       background-color:#b9534e;
     }
 
+/* =========================================================
+ユーザー情報ページ
+========================================================= */
+.user {
+}
+  .user #contents .inner {
+    padding: 0 30px 30px;
+    width: 400px;
+    margin: 0 auto;
+  }
+    .user #contents .inner li {
+      width: 100%;
+      display: table;
+      margin-bottom: 15px;
+    }
+      .user #contents .inner li span.name {
+        display: table-cell;
+        width: 130px;
+        vertical-align: middle;
+      }
+      .user #contents .inner li input {
+        display: table-cell;
+        width: 100%;
+        vertical-align: middle;
+      }
 
 /* =========================================================
 検索ボックス
@@ -233,8 +271,8 @@ h1 {
   position:relative;
   position: fixed;
   top: -60px;
-  left: 235px;
-  width: 82%;
+  left: 190px;
+  right: 0px;
   z-index: 150;
 }
   #search .box {
@@ -328,6 +366,25 @@ h1 {
   margin: 0 auto;
   display: block;
 }
+
+  .regWorks .form,
+  .regUnit .form {
+    width: 15%;
+    float: left;
+    padding-right: 1%;
+  }
+  .regWorks .form {
+    width: 32%;
+  }
+  .regWorks .form:last-child,
+  .regUnit .form:last-child {
+    margin-right: 0;
+  }
+  .regWorks .radbtn ,
+  .regUnit .radbtn {
+    clear: both;
+    padding-top: 15px;
+  }
 
 /* =========================================================
 モーダルウィンドウ

@@ -13,12 +13,28 @@
     
     /* ★ユーザー登録
     ----------------------------------------- */
-    function regUser() {
+    function regUser($update) {
       
       require_once('connectDB.php');
       $func = new func();
 
-      $sql   = "INSERT INTO tsury_user(user_user,user_pass,user_name,user_mail,user_thumb) VALUES (:user,:pass,:name,:mail,:thumb)";
+      $id_name  = ($update) ? $_COOKIE["user"] : $_POST["reguser"];
+
+      if(!$update) {
+        $stmt = $pdo->prepare("SELECT * FROM tsury_user WHERE id_name = :user");
+        $stmt->bindValue(':user', $id_name, PDO::PARAM_STR);
+        $stmt->execute();
+        $count = count($stmt->fetchAll());
+        if($count > 1){
+          return '重複しています。';
+        }
+      }
+
+      if($update) {
+        $sql = "UPDATE tsury_user SET pass = :pass, name = :name, mail = :mail, thumb = :thumb WHERE id_name = :user";
+      } else {
+        $sql = "INSERT INTO tsury_user(id_name,pass,name,mail,thumb) VALUES (:user,:pass,:name,:mail,:thumb)";
+      }
       $stmt  = $pdo->prepare($sql);
       $salt  = "mwefCMEP28DjwdW3lwdS239vVS";
       $thumb = $_FILES["thumb"];
@@ -28,22 +44,23 @@
           chmod("files/uploads/" . $thumb["name"], 0644);
         }
       }
+
+      $pass  = $func->passhash($_POST["regpass"]);
+      $name  = $_POST["regname"];
+      $mail  = $_POST["regmail"];
+      $thumb = ($thumb["name"]) ? $thumb["name"] : "img_noimg.jpg";
       
-      $user_user  = $_POST["reguser"];
-      $user_pass  = $func->passhash($_POST["regpass"]);
-      $user_name  = $_POST["regname"];
-      $user_mail  = $_POST["regmail"];
-      $user_thumb = ($thumb["name"]) ? $thumb["name"] : "img_noimg.jpg";
-      
-      $stmt->bindValue(':user', $user_user, PDO::PARAM_STR);
-      $stmt->bindValue(':pass', $user_pass, PDO::PARAM_STR);
-      $stmt->bindValue(':name', $user_name, PDO::PARAM_STR);
-      $stmt->bindValue(':mail', $user_mail, PDO::PARAM_STR);
-      $stmt->bindValue(':thumb', $user_thumb, PDO::PARAM_STR);
+      $stmt->bindValue(':user', $id_name, PDO::PARAM_STR);
+      $stmt->bindValue(':pass', $pass, PDO::PARAM_STR);
+      $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+      $stmt->bindValue(':mail', $mail, PDO::PARAM_STR);
+      $stmt->bindValue(':thumb', $thumb, PDO::PARAM_STR);
       
       $stmt->execute();
       
       $pdo = null;
+
+      return false;
     }
     
     /* ★案件登録

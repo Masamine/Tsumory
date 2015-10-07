@@ -46,12 +46,12 @@ $user = $load->getUser($_SESSION["username"]);
     <div class="box">
       <div class="title">
         <h1>案件一覧</h1>
-        <div class="radbtn trigger" id="reg"><a href="#">新規案件登録</a></div>
+        <div class="radbtn trigger" id="reg"><a href="#">新規登録</a></div>
       </div>
       <?php if($msg): ?>
       <p class="msg"><?=$msg?></p>
       <?php endif; ?>
-      <div class="formBox">
+      <div class="formBox regWorks">
         <form action="" method="post" class="accBox" id="regist">
           <div class="form">
             <div class="select">
@@ -99,7 +99,7 @@ $user = $load->getUser($_SESSION["username"]);
         </div>
         <div class="contents">
           <div class="inner">
-            <div class="reg radbtn"><a href="reg_tsury.php">見積り登録</a></div>
+            <div class="reg radbtn"><a href="reg_detail.php?pid=<?=$works["id"]?>">見積り登録</a></div>
             <div class="data">
               <table>
                 <tr>
@@ -139,7 +139,5 @@ $user = $load->getUser($_SESSION["username"]);
 </div>
 <script type="text/javascript" src="files/js/jquery.js"></script>
 <script type="text/javascript" src="files/js/jsSet.js"></script>
-<script type="text/javascript" src="files/js/exvalidation.js"></script>
-<script type="text/javascript" src="files/js/exchecker-ja.js"></script>
 </body>
 </html>

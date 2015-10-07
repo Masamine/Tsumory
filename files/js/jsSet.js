@@ -2,8 +2,9 @@
 	
 	window.Manager = {};
 	var _ui;
-	var fileName = ["easing", "ui"];
+	var fileName = ["plugin/easing", "ui", "plugin/exvalidation", "plugin/exchecker-ja"];
 	var src      = "files/js/";
+	var isForm   = $('body').hasClass('isForm');
 	
 	for(var i = 0; i < fileName.length; i++) {
 		writeJS(fileName[i], src);
@@ -17,7 +18,8 @@
 		_ui.showSearch();
 		_ui.showModal();
 
-		if($('body').hasClass('isForm')) validate();
+		if(isForm) validate();
+		if($('body').hasClass('user')) $('.dropify').dropify();
 		
 		return false;
 		

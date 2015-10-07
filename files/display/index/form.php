@@ -26,7 +26,7 @@
 <div class="box registbtn">
   <div class="form" id="regist">
     <h2>新規ユーザー登録</h2>
-    <form action="thanks.php" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data">
       <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
       <ul>
         <li><input type="file" id="input-file-now" name="thumb" class="dropify" data-default-file="" /></li>

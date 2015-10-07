@@ -31,7 +31,7 @@ UI
     
     btn.on('click', function(){
       if(target.hasClass('active') && !target.is(':animated')) {
-        btn.removeClass('active').text("新規案件登録");
+        btn.removeClass('active').text("新規登録");
         target.slideUp(SPEED, 'easeOutExpo');
         target.find(".form").find("input").val("");
       } else if(!target.hasClass('active') && !target.is(':animated')){
@@ -50,7 +50,7 @@ UI
   Show User Info
   --------------------------------------- */
   function showUser() {
-    var btn = $(".user").find('a');
+    var btn = $("#avatar");
     var target = $('#menu');
 
     btn.on('click', function(){
@@ -102,7 +102,7 @@ UI
       if(!target.hasClass("active")) {
         target.addClass("active").find(".contents").slideDown(SPEED, "easeOutExpo");
       } else {
-        target.find(".contents").slideUp(SPEED, "easeOutExpo", function(){ target.removeClass("active"); });
+        target.removeClass("active").find(".contents").slideUp(SPEED, "easeOutExpo");
       }
   
       return false;

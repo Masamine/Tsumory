@@ -3,7 +3,7 @@
 	window.Manager = {};
 	var _ui;
 	var fileName = ["exvalidation", "exchecker-ja", "dropify"];
-	var src      = "files/js/";
+	var src      = "files/js/plugin/";
 	
 	for(var i = 0; i < fileName.length; i++) {
 		writeJS(fileName[i], src);
@@ -15,8 +15,6 @@
 		validate();
 		
 		if($("body").attr("id") == "index") {
-			//$("#regist").find(".submit").find("input").on("click", getThumb);
-			//uploadImg();
 			changeMode();
 			$('.dropify').dropify();
 		}

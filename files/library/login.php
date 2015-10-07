@@ -20,7 +20,7 @@
 
       //ユーザ名、パスワードが一致する行を探す
       $password = $func->passhash($pass);
-      $stmt = $pdo->prepare("SELECT * FROM tsury_user WHERE user_user = :user AND user_pass = :pass");
+      $stmt = $pdo->prepare("SELECT * FROM tsury_user WHERE id_name = :user AND pass = :pass");
 
       $stmt->bindValue(':user', $user, PDO::PARAM_STR);
       $stmt->bindValue(':pass', $password, PDO::PARAM_STR);

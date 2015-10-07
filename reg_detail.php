@@ -29,7 +29,7 @@ $user = $load->getUser($_SESSION["username"]);
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>ユーザー情報 | Tsury〈ツリー〉</title>
+<title>見積作成 | Tsury〈ツリー〉</title>
 <meta name="robots" content="all" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
@@ -38,24 +38,22 @@ $user = $load->getUser($_SESSION["username"]);
 <link href="files/css/dropify.css" media="all" rel="stylesheet" />
 <link href="files/css/common/exvalidation.css" media="all" rel="stylesheet" />
 </head>
-<body class="user isForm" id="page">
+<body class="isForm" id="page">
 <div id="all">
   <?php require_once(ABSPATH."files/display/common/header.php"); ?>
   <div id="contents">
     <?php require_once(ABSPATH."files/display/common/search.php"); ?>
     <div class="box"> 
       <div class="title">
-        <h1>ユーザー情報</h1>
+        <h1>見積り登録</h1>
       </div>
       <div class="inner">
         <form action="" method="post" enctype="multipart/form-data" id="regist">
-          <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
-          <ul>
-            <li><input type="file" id="input-file-now" name="thumb" class="dropify" data-default-file="files/uploads/<?=$user['thumb']?>" /></li>
-            <li><span class="name">ユーザーID</span><span><?=$user['author']?></span></li>
-            <li><span class="name">パスワード</span><input type="password" value="" name="regpass" id="regpass" class="chkrequired" placeholder="Password"></li>
-            <li><span class="name">ニックネーム</span><input type="text" value="<?=$user['name']?>" name="regname" class="chkrequired" id="regname" placeholder="Name"></li>
-            <li><span class="name">メールアドレス</span><input type="text" value="<?=$user['mail']?>" name="regmail" class="chkrequired chkemail" id="regmail" placeholder="Mail"></li>
+          <ul class="line">
+            <li class="title"><input type="text" value="" placeholder="作業名" /></li>
+            <li class=""></li>
+            <li></li>
+            <li></li>
           </ul>
           <p class="submit radbtn"><input type="submit" value="登録"></p>
           <input type="hidden" name="key" value="<?php echo $key ?>">
@@ -72,6 +70,5 @@ $user = $load->getUser($_SESSION["username"]);
 
 <script type="text/javascript" src="files/js/jquery.js"></script>
 <script type="text/javascript" src="files/js/jsSet.js"></script>
-<script type="text/javascript" src="files/js/plugin/dropify.js"></script>
 </body>
 </html>

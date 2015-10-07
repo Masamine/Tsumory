@@ -22,7 +22,7 @@ function echo_current( $uri = "" ) {
   <div class="inner">
     <ul>
       <li><a href="/home.php" class="<?php echo_current("home") ?>">案件一覧</a></li>
-      <li><a href="#" class="<?php echo_current("unit") ?>">単価設定</a></li>
+      <li><a href="/cost.php" class="<?php echo_current("cost") ?>">単価設定</a></li>
       <li><a href="/client.php" class="<?php echo_current("client") ?>">クライアント設定</a></li>
     </ul>
   </div>

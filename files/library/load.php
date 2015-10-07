@@ -11,25 +11,27 @@
       ----------------------------- */
       require('connectDB.php');
       
-      $query = "SELECT user_id,user_user,user_name,user_thumb FROM tsury_user WHERE user_user = :user";
+      $query = "SELECT user_id,id_name,name,mail,thumb FROM tsury_user WHERE id_name = :user";
       $stmt = $pdo -> prepare($query);
 
       $userID = "user_id";
       $author = $id;
-      $name   = "user_name";
-      $thumb  = "user_thumb";
+      $name   = "name";
+      $mail   = "mail";
+      $thumb  = "thumb";
 
       $stmt->bindValue(':user', $author, PDO::PARAM_STR);
       
       // 実行
       $stmt->execute();
       
-      // 値を取得
+      // 値を取得s
       while($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
         
         $array = array(
           "id"     => $row[$userID],
-          "author" => $row[$author],
+          "author" => $row["id_name"],
+          "mail"   => $row[$mail],
           "name"   => $row[$name],
           "thumb"  => $row[$thumb]
         );
@@ -39,7 +41,7 @@
 
       $pdo = null;
 
-      return false;
+      return $array;
     }
 
     /*  案件一覧取得

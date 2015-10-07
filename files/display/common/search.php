@@ -5,9 +5,6 @@
       <input type="text" name="sClient" placeholder="クライアント選択" value="" readonly="readonly" class="input">
       <span class="input">▼</span>
       <ul>
-      <?php if($msg): ?>
-      <p class="msg"><?=$msg?></p>
-      <?php endif; ?>
       <?php
         $load   = new loadDB();
         $client = $load->getClient();
