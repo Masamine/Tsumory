@@ -33,7 +33,7 @@ UI
       if(target.hasClass('active') && !target.is(':animated')) {
         btn.removeClass('active').text("新規登録");
         target.slideUp(SPEED, 'easeOutExpo');
-        target.find(".form").find("input").val("");
+        target.find(".form").find('input[name]').val("");
       } else if(!target.hasClass('active') && !target.is(':animated')){
         btn.addClass('active').text("登録キャンセル");
         target.slideDown(SPEED, 'easeOutExpo');

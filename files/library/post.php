@@ -21,7 +21,7 @@
       $id_name  = ($update) ? $_COOKIE["user"] : $_POST["reguser"];
 
       if(!$update) {
-        $stmt = $pdo->prepare("SELECT * FROM tsury_user WHERE id_name = :user");
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE id_name = :user");
         $stmt->bindValue(':user', $id_name, PDO::PARAM_STR);
         $stmt->execute();
         $count = count($stmt->fetchAll());
@@ -31,9 +31,9 @@
       }
 
       if($update) {
-        $sql = "UPDATE tsury_user SET pass = :pass, name = :name, mail = :mail, thumb = :thumb WHERE id_name = :user";
+        $sql = "UPDATE users SET pass = :pass, name = :name, mail = :mail, thumb = :thumb WHERE id_name = :user";
       } else {
-        $sql = "INSERT INTO tsury_user(id_name,pass,name,mail,thumb) VALUES (:user,:pass,:name,:mail,:thumb)";
+        $sql = "INSERT INTO users(id_name,pass,name,mail,thumb) VALUES (:user,:pass,:name,:mail,:thumb)";
       }
       $stmt  = $pdo->prepare($sql);
       $salt  = "mwefCMEP28DjwdW3lwdS239vVS";
@@ -70,7 +70,7 @@
       require_once('connectDB.php');
       $func = new func();
 
-      $sql   = "INSERT INTO tsury_works(client,title,staff,regist,updates) VALUES (:client, :title, :staff, :reg, :rec)";
+      $sql   = "INSERT INTO works(client,title,staff,regist,updates) VALUES (:client, :title, :staff, :reg, :rec)";
       $stmt  = $pdo->prepare($sql);
       
       $client     = $_POST["client"];
@@ -105,7 +105,7 @@
     function regClient($data) {
       require('connectDB.php');
       
-      $sql   = "INSERT INTO tsury_client(name) VALUES (:client)";
+      $sql   = "INSERT INTO client(name) VALUES (:client)";
       $stmt  = $pdo->prepare($sql);
       $client = (isset($data)) ? $data : $_POST["regClient"];
 

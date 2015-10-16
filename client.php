@@ -33,7 +33,6 @@ $user = $load->getUser($_SESSION["username"]);
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <link href="files/css/common/base.css" media="all" rel="stylesheet" />
 <link href="files/css/page.css" media="all" rel="stylesheet" />
-<link href="files/css/client.css" media="all" rel="stylesheet" />
 <link href="files/css/common/exvalidation.css" media="all" rel="stylesheet" />
 </head>
 <body class="noList isForm client" id="page">
@@ -44,11 +43,22 @@ $user = $load->getUser($_SESSION["username"]);
     <div class="box"> 
       <div class="title">
         <h1>クライアント管理</h1>
-        <div class="radbtn" id="reg"><a href="/reg_client.php" class="modal">新規登録</a></div>
+        <div class="radbtn trigger" id="reg"><a href="#">新規登録</a></div>
       </div>
       <?php if($msg): ?>
       <p class="msg"><?=$msg?></p>
       <?php endif; ?>
+      <div class="formBox">
+        <form action="" method="post" class="accBox" id="regist">
+          <div class="form">
+            <input type="text" name="regClient" id="client" placeholder="クライアント名" value="" class="input chkrequired">
+          </div>
+          <div class="form">
+            <div class="radbtn"><input type="submit" class="submit" value="登録"></div>
+          </div>
+          <input type="hidden" name="key" value="<?php echo $key ?>">
+        </form>
+      </div>
       <?php
         $load   = new loadDB();
         $client = $load->getClient();
@@ -69,18 +79,6 @@ $user = $load->getUser($_SESSION["username"]);
   <footer>
     <p><?php echo $_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']; ?></p>
   </footer>
-</div>
-
-<div id="modal">
-  <div id="regBox">
-    <h3>クライアント新規登録</h3>
-    <p class="radbtn" id="close"><a href="#" class="modal close">×</a></p>
-    <form method="post" id="regist">
-    	<p><input type="text" value="" placeholder="クライアント名" name="regClient" id="regClient" class="chkrequired"></p>
-    	<div class="radbtn"><input type="submit" value="登録"></div>
-      <input type="hidden" name="key" value="<?php echo $key ?>">
-    </form>
-  </div>
 </div>
 
 <script type="text/javascript" src="files/js/jquery.js"></script>

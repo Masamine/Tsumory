@@ -351,6 +351,7 @@ h1 {
   display: none;
   background-color: #faffe2;
   border-top: 1px solid #ddeb9a;
+  border-bottom: 1px solid #ddeb9a;
 }
 .isForm #contents .formBox .form {
   margin-bottom:15px;
@@ -380,7 +381,6 @@ h1 {
   .regUnit .form:last-child {
     margin-right: 0;
   }
-  .regWorks .radbtn ,
   .regUnit .radbtn {
     clear: both;
     padding-top: 15px;

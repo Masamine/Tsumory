@@ -11,9 +11,9 @@
       ----------------------------- */
       require('connectDB.php');
       
-      $query = "SELECT user_id,id_name,name,mail,thumb FROM tsury_user WHERE id_name = :user";
+      $query = "SELECT user_id,id_name,name,mail,thumb FROM users WHERE id_name = :user";
       $stmt = $pdo -> prepare($query);
-
+			
       $userID = "user_id";
       $author = $id;
       $name   = "name";
@@ -49,7 +49,7 @@
     public function getWorks() {
       require('connectDB.php');
       
-      $query = "SELECT * FROM tsury_works";
+      $query = "SELECT * FROM works";
       $stmt = $pdo->prepare($query);
       $stmt->execute();
 
@@ -77,9 +77,9 @@
       require('connectDB.php');
 
       if(isset($name)) {
-        $query = (is_string($name)) ? "SELECT * FROM tsury_client WHERE name = :name" : "SELECT * FROM tsury_client WHERE id = :name";
+        $query = (is_string($name)) ? "SELECT * FROM client WHERE name = :name" : "SELECT * FROM client WHERE id = :name";
       } else {
-        $query = "SELECT * FROM tsury_client";
+        $query = "SELECT * FROM client";
       }
       
       $stmt = $pdo->prepare($query);
