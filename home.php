@@ -124,6 +124,30 @@ $user = $load->getUser($_SESSION["username"]);
                 </tr>
               </table>
             </div>
+            <div class="data">
+              <table>
+                <tr>
+                  <td class="icon">
+                    <ul>
+                      <li class="web"><span>Web</span></li>
+                      <li class="design"><span>Design</span></li>
+                      <li class="edit"><span>Edit</span></li>
+                      <li class="dtp"><span>DTP</span></li>
+                    </ul>
+                  </td>
+                  <td class="detail">レスポンシブ対応版</td>
+                  <td class="price">￥1,000,000</td>
+                  <td class="name">Doko</td>
+                  <td class="update">2014/02/14 15:07</td>
+                  <td class="btns">
+                    <ul>
+                      <li class="radbtn pdf"><a href="#">PDF</a></li>
+                      <li class="radbtn delete"><a href="#">削除</a></li>
+                    </ul>
+                  </td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
       </div>

@@ -33,7 +33,6 @@ h1 {
     color: #76d9af;
   }
 #names {
-  padding:5px 0;
   background-color:#a4aeb9;
 }
 
@@ -46,12 +45,11 @@ h1 {
     color:#FFF;
     display:table-cell;
     vertical-align:middle;
-    padding:7px 0;
     text-align:center;
   }
   #all .client, .list h2 {
     width:20%;
-    padding:0 2%;
+    padding:5px 2%;
   }
   #all .works, .list .works {
     width:52%;
@@ -63,6 +61,14 @@ h1 {
   }
   #names.listname li {
     width: 16.5%;
+  }
+  .isCost #names.listname li {
+    width: 20%;
+  }
+  .isCost #names.listname li.edit {
+    width: 120px;
+    padding-left: 2%;
+    padding-right: 2%;
   }
 
 /* =========================================================
@@ -110,14 +116,23 @@ h1 {
   .list.active .names {
     border-bottom: 1px solid #ddeb9a;
   }
-    .list h2, .list .works, .list .update {
+    .list h2, .list .names p {
       display:table-cell;
       padding:10px 0;
       vertical-align:middle;
     }
-    .list .editbtn {
-      display:table-cell;
+    .isCost #all .list .names p {
+      text-align: center;
+      padding:10px 2%;
+      width: 20%;
+    }
+    .isCost #all .list .names p.content {
+      text-align: left;
+    }
+    .isCost #all .list .names .editbtn {
       vertical-align:middle;
+      padding-left: 2%;
+      width: 120px;
     }
     .list h2 {
       padding-left:30px;
@@ -370,7 +385,7 @@ h1 {
 
   .regWorks .form,
   .regUnit .form {
-    width: 15%;
+    width: 24%;
     float: left;
     padding-right: 1%;
   }

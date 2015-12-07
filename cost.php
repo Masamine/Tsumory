@@ -11,8 +11,8 @@ $msg = "";
 
 if($_POST["key"] == $_SESSION["key"]) {
   $postData = new postData();
-  $postData->regWorks();
-  $msg = "<span>「".$_POST["works"]."」</span>の単価登録が完了しました！やったね！";
+  $postData->regUnit();
+  $msg = "<span>「".$_POST["code"]." ".$_POST["content"]."」</span>の単価登録が完了しました！";
   unset($_SESSION['key']);
 }
 if(isset($_POST["key"]) && isset($_SESSION["key"]) && $_POST["key"] !== $_SESSION["key"] ) {
@@ -53,12 +53,10 @@ $user = $load->getUser($_SESSION["username"]);
       <?php endif; ?>
       <div class="formBox regUnit">
         <form action="" method="post" class="accBox" id="regist">
-          <div class="form"><input type="text" value="" name="code" id="code" placeholder="単価コード"></div>
-          <div class="form"><input type="text" value="" name="code" id="code" placeholder="作業名"></div>
-          <div class="form"><input type="text" value="" name="unit" id="unit" placeholder="単位"></div>
-          <div class="form"><input type="text" value="" name="cost" id="cost" placeholder="原価"></div>
-          <div class="form"><input type="text" value="" name="sales" id="sales" placeholder="売価"></div>
-          <div class="form"><input type="text" value="" name="profitability" id="profitability" placeholder="利益率"></div>
+          <div class="form"><input type="text" value="" name="code" class="chkrequired" id="code" placeholder="単価コード"></div>
+          <div class="form"><input type="text" value="" name="content" class="chkrequired" id="content" placeholder="作業名"></div>
+          <div class="form"><input type="number" value="" name="cost" class="chkrequired" id="cost" placeholder="原価"></div>
+          <div class="form"><input type="number" value="" name="sales" class="chkrequired" id="sales" placeholder="売価"></div>
           <div class="radbtn"><input type="submit" class="submit" value="登録"></div>
           <input type="hidden" name="key" value="<?php echo $key ?>">
         </form>
@@ -66,24 +64,26 @@ $user = $load->getUser($_SESSION["username"]);
 
       <div class="listname" id="names">
         <ul>
+          <li class="edit"></li>
           <li class="client">単価コード</li>
           <li class="works">作業名</li>
-          <li class="update">単位</li>
           <li class="cost">原価</li>
           <li class="sales">売価</li>
-          <li class="profitability">利益率</li>
         </ul>
       </div>
       <?php
         $load   = new loadDB();
-        $client = $load->getClient();
-        $num = count($client);
+        // $client = $load->getClient();
+        $num = 10;
         for($i = $num - 1; $i >= 0; $i--) {
       ?>
       <div class="list">
         <div class="names">
           <p class="radbtn editbtn"><a href="/edit_client.php">編集</a></p>
-          <h2><?=$client[$i]['name']?></h2>
+          <p class="client">C-A</p>
+          <p class="content">コーディングLV.A</p>
+          <p class="cost">22,500</p>
+          <p class="sales">30,000</p>
         </div>
       </div>
       <?php } ?>

@@ -100,6 +100,35 @@
 
     }
 
+    /* ★単価登録
+    ----------------------------------------- */
+    function regUnit() {
+
+      require_once('connectDB.php');
+      $func = new func();
+
+      $sql   = "INSERT INTO unit(code,content,cost,sales) VALUES (:code, :content, :cost, :sales)";
+      $stmt  = $pdo->prepare($sql);
+      
+      $code    = $_POST["code"];
+      $content = $_POST["content"];
+      $cost    = $_POST["cost"];
+      $sales   = $_POST["sales"];
+
+      $load = new loadDB();
+
+      $stmt->bindValue(':code', $code, PDO::PARAM_STR);
+      $stmt->bindValue(':content', $content, PDO::PARAM_STR);
+      $stmt->bindValue(':cost', $cost, PDO::PARAM_INT);
+      $stmt->bindValue(':sales', $sales, PDO::PARAM_INT);
+
+      $stmt->execute();
+      $pdo = null;
+
+      return false;
+
+    }
+
     /* ★クライアント登録
     ----------------------------------------- */
     function regClient($data) {
