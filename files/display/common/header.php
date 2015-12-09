@@ -1,6 +1,6 @@
 <header>
   <div class="inner">
-    <p><a href="/home.php"><img src="/files/img/common/img_logo.png" alt="見積りライブラリー Tsury" /></a></p>
+    <p><a href="/home.php"><img src="/files/img/common/img_logo.png" alt="見積りライブラリー Tsumory" /></a></p>
     <ul id="info">
       <li id="btnsearch"><a href="#"><img src="/files/img/common/icon_search.png" alt="" /></a></li>
       <li class="user">

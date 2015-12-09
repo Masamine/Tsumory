@@ -6,17 +6,17 @@ if(!$_SESSION["username"] || !($_COOKIE["user"] == $_SESSION["username"])) {
 	require_once(ABSPATH."files/library/logout.php");
 }
 
-$key = hash("SHA256",time()."5s4fg6h4fdkgs634tfh5g5d2g");
+$key = hash("SHA256",time()."as54654sdf54dffg3ad98sd2f");
 $msg = "";
 
 if($_POST["key"] == $_SESSION["key"]) {
   $postData = new postData();
-  $postData->regWorks();
-  $msg = "案件名「".$_POST["works"]."」の登録が完了しました！";
+  $postData->regUnit();
+  $msg = "<span>「".$_POST["code"]." ".$_POST["content"]."」</span>の登録が完了しました！";
   unset($_SESSION['key']);
 }
 if(isset($_POST["key"]) && isset($_SESSION["key"]) && $_POST["key"] !== $_SESSION["key"] ) {
-  header('location: reg_works.php');
+  header('location: cost.php');
 }
 
 $_SESSION["key"] = $key;
@@ -27,62 +27,68 @@ $user = $load->getUser($_SESSION["username"]);
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>新規案件登録 | Tsury〈ツリー〉</title>
+<title>見積作成 | 見積りライブラリー</title>
 <meta name="robots" content="all" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <link href="files/css/common/base.css" media="all" rel="stylesheet" />
 <link href="files/css/page.css" media="all" rel="stylesheet" />
-<link href="files/css/reg_works.css" media="all" rel="stylesheet" />
+<link href="files/css/estimate.css" media="all" rel="stylesheet" />
 <link href="files/css/common/exvalidation.css" media="all" rel="stylesheet" />
 </head>
+
+<?php $id = $_GET["p"]; ?>
 <body class="isForm" id="page">
 <div id="all">
   <?php require_once(ABSPATH."files/display/common/header.php"); ?>
+  
   <div id="contents">
     <?php require_once(ABSPATH."files/display/common/search.php"); ?>
     <div class="box">
       <div class="title">
-        <h1>新規案件登録</h1>
+        <h1>見積作成</h1>
       </div>
       <?php if($msg): ?>
       <p class="msg"><?=$msg?></p>
       <?php endif; ?>
-      <div class="inner">
-        <form action="" method="post" class="accBox" id="regist">
-          <div class="form">
-          	<div class="select">
-              <input type="text" name="client" id="client" placeholder="クライアント名" value="" class="input chkrequired">
-              <span class="input">▼</span>
-              <ul>
-              <?php
-                $load   = new loadDB();
-                $client = $load->getClient();
-                $num = count($client);
-                for($i = $num - 1; $i >= 0; $i--) {
-              ?>
-              <li><?=$client[$i]['name']?></li>
-              <?php } ?>
-              </ul>
-            </div>
+      <div class="name table">
+        <p class="code">作業コード</p>
+        <p class="content">内容</p>
+        <p class="count num">数量</p>
+        <p class="unit num">単位</p>
+        <p class="org num">原単価</p>
+        <p class="sales num">売単価</p>
+        <p class="profit num">利益率</p>
+        <p class="selling num">売価金額</p>
+      </div>
+      <div id="data">
+
+        <form action="" method="post" id="regist">
+          <div class="data">
+            <ul class="table">
+              <li class="code"><input type="text" /></li>
+              <li class="content"><input type="text" /></li>
+              <li class="count num"><input type="text" /></li>
+              <li class="unit num"><input type="text" /></li>
+              <li class="org num"><input type="text" /></li>
+              <li class="sales num"><input type="text" /></li>
+              <li class="profit num"><input type="text" /></li>
+              <li class="selling num"><input type="text" /></li>
+            </ul>
           </div>
-          <div class="form"><input type="text" value="" name="staff" id="client_staff" placeholder="先方担当者"></div>
-          <div class="form"><input type="text" value="" name="works" id="works" class="chkrequired" placeholder="案件名"></div>
-          <div class="radbtn"><input type="submit" value="登録"></div>
-          <input type="hidden" name="key" value="<?php echo $key ?>">
         </form>
+
       </div>
     </div>
   </div>
   
   <?php require_once(ABSPATH."files/display/common/side.php"); ?>
+  
   <footer>
     <p><?php echo $_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']; ?></p>
   </footer>
 </div>
 <script type="text/javascript" src="files/js/jquery.js"></script>
 <script type="text/javascript" src="files/js/jsSet.js"></script>
-<script type="text/javascript" src="files/js/exvalidation.js"></script>
-<script type="text/javascript" src="files/js/exchecker-ja.js"></script>
 </body>
 </html>

@@ -115,8 +115,6 @@
       $cost    = $_POST["cost"];
       $sales   = $_POST["sales"];
 
-      $load = new loadDB();
-
       $stmt->bindValue(':code', $code, PDO::PARAM_STR);
       $stmt->bindValue(':content', $content, PDO::PARAM_STR);
       $stmt->bindValue(':cost', $cost, PDO::PARAM_INT);

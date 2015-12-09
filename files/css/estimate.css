@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+.table {
+  display: table;
+  width: 100%;
+  background-color: #a4aeb9;
+  padding: 5px 0;
+}
+.name {
+  margin-bottom: 15px;
+}
+  .name p {
+    display: table-cell;
+    width: 12.5%;
+    text-align: center;
+    color: #fff;
+  }
+
+#data {
+  padding: 0 0 10px;
+}
+  #data ul {
+    padding: 0 5px 0 3px;
+    background:none;
+    margin-bottom: 10px;
+  }
+    #data ul li {
+      display: table-cell;
+      width: 12.5%;
+      padding:0 5px;
+      text-align: center;
+    }
+
+p.content, li.content {
+  width: 39.5% !important;
+}
+.num {
+  width: 8% !important;
+}
+
+#data input {
+  padding: 0px 0 3px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-radius: 0;
+}

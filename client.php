@@ -27,7 +27,7 @@ $user = $load->getUser($_SESSION["username"]);
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>クライアント管理 | Tsury〈ツリー〉</title>
+<title>クライアント管理 | Tsumory〈見積りライブラリ〉</title>
 <meta name="robots" content="all" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta http-equiv="Content-Style-Type" content="text/css" />

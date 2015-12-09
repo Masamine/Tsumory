@@ -53,7 +53,7 @@ $user = $load->getUser($_SESSION["username"]);
       <?php endif; ?>
       <div class="formBox regUnit">
         <form action="" method="post" class="accBox" id="regist">
-          <div class="form"><input type="text" value="" name="code" class="chkrequired" id="code" placeholder="単価コード"></div>
+          <div class="form"><input type="text" value="" name="code" class="chkrequired" id="code" placeholder="作業コード"></div>
           <div class="form"><input type="text" value="" name="content" class="chkrequired" id="content" placeholder="作業名"></div>
           <div class="form"><input type="number" value="" name="cost" class="chkrequired" id="cost" placeholder="原価"></div>
           <div class="form"><input type="number" value="" name="sales" class="chkrequired" id="sales" placeholder="売価"></div>
@@ -65,25 +65,25 @@ $user = $load->getUser($_SESSION["username"]);
       <div class="listname" id="names">
         <ul>
           <li class="edit"></li>
-          <li class="client">単価コード</li>
-          <li class="works">作業名</li>
+          <li class="code">作業コード</li>
+          <li class="content">作業名</li>
           <li class="cost">原価</li>
           <li class="sales">売価</li>
         </ul>
       </div>
       <?php
         $load   = new loadDB();
-        // $client = $load->getClient();
-        $num = 10;
+        $cost = $load->getUnit();
+        $num = count($cost);
         for($i = $num - 1; $i >= 0; $i--) {
       ?>
       <div class="list">
         <div class="names">
           <p class="radbtn editbtn"><a href="/edit_client.php">編集</a></p>
-          <p class="client">C-A</p>
-          <p class="content">コーディングLV.A</p>
-          <p class="cost">22,500</p>
-          <p class="sales">30,000</p>
+          <p class="code"><?=$cost[$i]['code']?></p>
+          <p class="content"><?=$cost[$i]['content']?></p>
+          <p class="cost"><?=$cost[$i]['cost']?></p>
+          <p class="sales"><?=$cost[$i]['sales']?></p>
         </div>
       </div>
       <?php } ?>

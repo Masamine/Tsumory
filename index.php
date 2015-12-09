@@ -12,7 +12,7 @@ if($_SESSION["username"]) {
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Tsury〈ツリー〉 | 見積りライブラリー</title>
+<title>Tsumory〈見積りライブラリ〉 | 見積りライブラリー</title>
 <meta name="robots" content="all" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
@@ -24,7 +24,7 @@ if($_SESSION["username"]) {
 <body id="index">
   <div id="all">
     <header>
-      <h1><img src="files/img/common/img_logo.png" alt="見積りライブラリー Tsury" /></h1>
+      <h1><img src="files/img/common/img_logo.png" alt="見積りライブラリー Tsumory" /></h1>
     </header>
     <?php showDisplay('index', 'form'); ?>
   </div>

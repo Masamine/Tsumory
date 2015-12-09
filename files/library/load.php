@@ -70,6 +70,31 @@
       return $array;
     }
 
+    /*  単価一覧取得
+    ----------------------------------- */
+    public function getUnit() {
+      require('connectDB.php');
+      
+      $query = "SELECT * FROM unit";
+      $stmt = $pdo->prepare($query);
+      $stmt->execute();
+
+      $array = array();
+
+      while($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
+        $array[] = array(
+          "id"     => $row['id'],
+          "code" => $row['code'],
+          "content"  => $row['content'],
+          "cost"  => $row['cost'],
+          "sales" => $row['sales']
+        );
+      }
+      $pdo = null;
+
+      return $array;
+    }
+
     /*  クライアント取得
     ----------------------------------- */
     public function getClient($name) {
