@@ -9,15 +9,15 @@ if(!$_SESSION["username"] || !($_COOKIE["user"] == $_SESSION["username"])) {
 $key = hash("SHA256",time()."as54654sdf54dffg3ad98sd2f");
 $msg = "";
 
-if($_POST["key"] == $_SESSION["key"]) {
-  $postData = new postData();
-  $postData->regUnit();
-  $msg = "<span>「".$_POST["code"]." ".$_POST["content"]."」</span>の登録が完了しました！";
-  unset($_SESSION['key']);
-}
-if(isset($_POST["key"]) && isset($_SESSION["key"]) && $_POST["key"] !== $_SESSION["key"] ) {
-  header('location: cost.php');
-}
+// if($_POST["key"] == $_SESSION["key"]) {
+//   $postData = new postData();
+//   $postData->regUnit();
+//   $msg = "<span>「".$_POST["code"]." ".$_POST["content"]."」</span>の登録が完了しました！";
+//   unset($_SESSION['key']);
+// }
+// if(isset($_POST["key"]) && isset($_SESSION["key"]) && $_POST["key"] !== $_SESSION["key"] ) {
+//   header('location: cost.php');
+// }
 
 $_SESSION["key"] = $key;
 $load = new loadDB();
@@ -38,7 +38,7 @@ $user = $load->getUser($_SESSION["username"]);
 </head>
 
 <?php $id = $_GET["p"]; ?>
-<body class="isForm" id="page">
+<body class="noAcc isForm" id="page">
 <div id="all">
   <?php require_once(ABSPATH."files/display/common/header.php"); ?>
   
@@ -61,23 +61,25 @@ $user = $load->getUser($_SESSION["username"]);
         <p class="profit num">利益率</p>
         <p class="selling num">売価金額</p>
       </div>
-      <div id="data">
 
+      <div id="data">
         <form action="" method="post" id="regist">
-          <div class="data">
+          <?php for($i = 0; $i < 10; $i++){ ?>
+          <div class="data list">
             <ul class="table">
               <li class="code"><input type="text" /></li>
               <li class="content"><input type="text" /></li>
               <li class="count num"><input type="text" /></li>
-              <li class="unit num"><input type="text" /></li>
+              <li class="unit num"><input type="text" value="人日" /></li>
               <li class="org num"><input type="text" /></li>
               <li class="sales num"><input type="text" /></li>
               <li class="profit num"><input type="text" /></li>
               <li class="selling num"><input type="text" /></li>
             </ul>
           </div>
+          <?php } ?>
+          <div class="btn"><input type="button" class="submit" value="登録"></div>
         </form>
-
       </div>
     </div>
   </div>
@@ -90,5 +92,6 @@ $user = $load->getUser($_SESSION["username"]);
 </div>
 <script type="text/javascript" src="files/js/jquery.js"></script>
 <script type="text/javascript" src="files/js/jsSet.js"></script>
+<script type="text/javascript" src="files/js/estimate.js"></script>
 </body>
 </html>

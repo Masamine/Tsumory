@@ -16,7 +16,6 @@
 		_ui.accordion();
 		_ui.designSelect();
 		_ui.showSearch();
-		_ui.showModal();
 
 		if(isForm) validate();
 		if($('body').hasClass('user')) $('.dropify').dropify();

@@ -25,7 +25,7 @@
       // 実行
       $stmt->execute();
       
-      // 値を取得s
+      // 値を取得
       while($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
         
         $array = array(

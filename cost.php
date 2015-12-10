@@ -37,7 +37,7 @@ $user = $load->getUser($_SESSION["username"]);
 </head>
 
 <?php $id = $_GET["p"]; ?>
-<body class="noList isForm isCost" id="page">
+<body class="noAcc noList isForm isCost" id="page">
 <div id="all">
   <?php require_once(ABSPATH."files/display/common/header.php"); ?>
   

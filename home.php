@@ -99,7 +99,7 @@ $user = $load->getUser($_SESSION["username"]);
         </div>
         <div class="contents">
           <div class="inner">
-            <div class="reg radbtn"><a href="estimate.php?pid=<?=$works["id"]?>">見積り登録</a></div>
+            <div class="reg radbtn"><a href="estimate.php?mode=regist&pid=<?=$works["id"]?>">見積り登録</a></div>
             <!-- <div class="data">
               <table>
                 <tr>

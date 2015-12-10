@@ -35,7 +35,7 @@ $user = $load->getUser($_SESSION["username"]);
 <link href="files/css/page.css" media="all" rel="stylesheet" />
 <link href="files/css/common/exvalidation.css" media="all" rel="stylesheet" />
 </head>
-<body class="noList isForm client" id="page">
+<body class="noAcc noList isForm client" id="page">
 <div id="all">
   <?php require_once(ABSPATH."files/display/common/header.php"); ?>
   <div id="contents">

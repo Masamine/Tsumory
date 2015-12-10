@@ -14,13 +14,13 @@ UI
     showUser();
     showList();
     showForm();
+    changeFocus();
     
   })();
   
   _this.accordion    = accordion;
   _this.designSelect = designSelect;
   _this.showSearch   = showSearch;
-  _this.showModal    = showModal;
 
   /* ---------------------------------------
   Show Form Area
@@ -88,7 +88,7 @@ UI
   --------------------------------------- */
   function accordion() {
     
-    if($("body").hasClass("noList")) return false;
+    if($("body").hasClass("noAcc")) return false;
     
     var $parent = $("#contents");
 
@@ -183,37 +183,20 @@ UI
     
     return false;
   }
-  
-  /* ---------------------------------------
-  Show Modal
-  --------------------------------------- */
-  function showModal() {
-    
-    var $btn   = $(".radbtn").find("a");
-    var parent = $("#all");
-    var target = $("#modal");
-    
-    $btn.on('click', show);
-    
-    function show() {
-      if($(this).hasClass("modal")) {
-        target.addClass("active");
-        parent.addClass("modal");
-        
-        $btn.filter(".close").on('click', hide);
-        
-        return false;
+
+  function changeFocus() {
+    var target = $('#data').find('input');
+
+    target.on({
+      'focus' : function() {
+        $(this).closest('.data').addClass('focus');
+      },
+      'blur' : function() {
+        $(this).closest('.data').removeClass('focus');
       }
-    }
-    
-    function hide() {
-      target.removeClass("active");
-      parent.removeClass("modal");
-      return false;
-    }
-    
+    });
+
     return false;
-    
   }
   
   return false;

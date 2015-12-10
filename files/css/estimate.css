@@ -7,41 +7,65 @@
   padding: 5px 0;
 }
 .name {
-  margin-bottom: 15px;
 }
   .name p {
     display: table-cell;
     width: 12.5%;
     text-align: center;
     color: #fff;
+    font-size: 13px;
   }
 
 #data {
-  padding: 0 0 10px;
+}
+#data .data:nth-child(odd) {
+  background-color: #f2fafe;
+}
+#data .data:nth-child(even) {
+  background-color: #fff;
 }
   #data ul {
     padding: 0 5px 0 3px;
     background:none;
-    margin-bottom: 10px;
+  }
+  #data .data {
+    padding:0px 0;
   }
     #data ul li {
       display: table-cell;
       width: 12.5%;
-      padding:0 5px;
+      padding:0px 0px;
       text-align: center;
+      cursor: default;
     }
 
 p.content, li.content {
-  width: 39.5% !important;
+  width: 47% !important;
 }
 .num {
   width: 8% !important;
 }
 
-#data input {
-  padding: 0px 0 3px;
+#all #data input {
+  padding: 8px 7px;
   border-top: none;
-  border-right: none;
+  border-bottom: none;
   border-left: none;
   border-radius: 0;
+  background: none;
+  margin-bottom: 0;
+  border-right-style: dotted;
+  border-right-color: #c9cfe0;
+}
+#all #data li:last-child input {
+  border: none;
+}
+.code {
+  width: 8% !important;
+}
+.unit {
+  width: 6% !important;
+}
+#data .unit input {
+  text-align: center;
 }
