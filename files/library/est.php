@@ -2,27 +2,47 @@
   require('../conf/config.php');
   require('connectDB.php');
 
-  $query = "SELECT * FROM unit WHERE code = :code";
-  $stmt = $pdo->prepare($query);
+  getUnit();
 
-  $stmt->bindValue(':code', $_POST['request'], PDO::PARAM_STR);
+  //データ呼び出し
+  function getUnit() {
+    
+    global $pdo;
 
-  $stmt->execute();
+    $mode = $_POST['mode'];
+    $id   = $_POST['id'];
+    $code = $_POST['code'];
+    $func = $_POST['func'];
 
-  $array = array();
+    $query = ($func == 'unit') ? "SELECT * FROM unit WHERE code = :code" : "SELECT * FROM detail WHERE post_id = :id";
+    $stmt = $pdo->prepare($query);
 
-  while($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
-    $array[] = array(
-      "id"     => $row["id"],
-      "code" => $row["code"],
-      "content"  => $row["content"],
-      "cost"  => $row["cost"],
-      "sales" => $row["sales"]
-    );
+    if( $func == 'unit' ) {
+      $stmt->bindValue(':code', $code, PDO::PARAM_STR);
+    } else {
+      $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    }
+
+    $stmt->execute();
+
+    $array = array();
+
+    while($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
+      $array[] = array(
+        "id"      => $row["id"],
+        "code"    => $row["code"],
+        "content" => $row["content"],
+        "cost"    => $row["cost"],
+        "sales"   => $row["sales"]
+      );
+    }
+    $pdo = null;
+    
+    header('Content-Type: application/json; charset=utf-8');
+    print(json_encode($array));
+    
+    return false;
   }
 
-  $pdo = null;
-
-  header('Content-Type: application/json; charset=utf-8');
-  print(json_encode($array));
   exit;
+?>

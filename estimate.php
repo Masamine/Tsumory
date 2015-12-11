@@ -9,6 +9,9 @@ if(!$_SESSION["username"] || !($_COOKIE["user"] == $_SESSION["username"])) {
 $key = hash("SHA256",time()."as54654sdf54dffg3ad98sd2f");
 $msg = "";
 
+//登録画面かどうか
+$isReg = ($_GET['mode'] == 'regist');
+
 // if($_POST["key"] == $_SESSION["key"]) {
 //   $postData = new postData();
 //   $postData->regUnit();
@@ -51,6 +54,21 @@ $user = $load->getUser($_SESSION["username"]);
       <?php if($msg): ?>
       <p class="msg"><?=$msg?></p>
       <?php endif; ?>
+      <div id="info">
+        <?php
+          $load   = new loadDB();
+          $work   = $load->getWorks();
+          $num    = count($work);
+          for($i  = $num - 1; $i >= 0; $i--) {
+            $works  = $work[$i];
+            $client = $load->getClient($works["client"] | 0);
+        ?>
+        <dl>
+          <dt></dt>
+          <dd></dd>
+        </dl>
+        <?php } ?>
+      </div>
       <div class="name table">
         <p class="code">作業コード</p>
         <p class="content">内容</p>
