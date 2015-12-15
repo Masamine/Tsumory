@@ -75,6 +75,7 @@ $user = $load->getUser($_SESSION["username"]);
         $load   = new loadDB();
         $cost = $load->getUnit();
         $num = count($cost);
+        setlocale( LC_MONETARY, "ja_JP.UTF8" );
         for($i = $num - 1; $i >= 0; $i--) {
       ?>
       <div class="list">
@@ -82,8 +83,8 @@ $user = $load->getUser($_SESSION["username"]);
           <p class="radbtn editbtn"><a href="/edit_client.php">編集</a></p>
           <p class="code"><?=$cost[$i]['code']?></p>
           <p class="content"><?=$cost[$i]['content']?></p>
-          <p class="cost"><?=$cost[$i]['cost']?></p>
-          <p class="sales"><?=$cost[$i]['sales']?></p>
+          <p class="cost">￥<?=number_format($cost[$i]['cost'])?></p>
+          <p class="sales">￥<?=number_format($cost[$i]['sales'])?></p>
         </div>
       </div>
       <?php } ?>

@@ -1,10 +1,67 @@
 @charset "UTF-8";
 
+#works {
+  margin:0 30px 20px;
+}
+  #works table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  #works th {
+    font-weight: bold;
+    background-color: #f1f1f1;
+    width: 110px;
+  }
+  #works th, #works td {
+    padding:3px 10px;
+    border-bottom: 3px solid #fff;
+  }
+  #works tr:last-child th, #works tr:last-child td {
+    border:none;
+  }
+.btnset {
+  padding: 15px;
+  border: 2px dashed #d7d9dc;
+  margin:0 30px 20px;
+}
+  .btnset h2 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  .btnset li {
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
+    #all .btnset li a {
+      letter-spacing: 0.1px;
+      padding:5px 15px;
+      cursor: pointer;
+      background-color: #76a0d9;
+      box-shadow: 0px 1px 0px #485fab;
+      text-shadow:1px 1px 0 #485fab;
+    }
+    #all .btnset li a:hover {
+      background-color:#5187d1;
+      box-shadow:1px 1px 1px #4864ab inset;
+    }
+
+    #all .btnset li.ttl a {
+      background-color: #0ca5cb;
+      box-shadow: 0px 1px 0px #066881;
+      text-shadow:1px 1px 0 #066881;
+    }
+    #all .btnset li.ttl a:hover {
+      background-color:#0994b7;
+      box-shadow:1px 1px 1px #0b7994 inset;
+    }
+
 .table {
   display: table;
   width: 100%;
   background-color: #a4aeb9;
   padding: 5px 0;
+  box-sizing:border-box;
 }
 .name {
 }
@@ -24,6 +81,18 @@
 #data .data:nth-child(even) {
   background-color: #fff;
 }
+#data .data.ttl {
+  background-color: #d3faf9;
+  border-top: 1px dotted #7fd2e6;
+  border-bottom: 1px dotted #7fd2e6;
+  border-radius: 0;
+}
+  #data .data.ttl input {
+    font-weight: bold;
+  }
+  #data form {
+    border-bottom: 1px solid #d7d9dc;
+  }
   #data ul {
     padding: 0 5px 0 3px;
     background:none;
@@ -37,14 +106,28 @@
       padding:0px 0px;
       text-align: center;
       cursor: default;
+      position: relative;
+    }
+    #data .data ul li.code {
+      cursor: move;
+    }
+    #data ul li.ttl {
+      width:auto;
+      display: block;
     }
 
 p.content, li.content {
-  width: 47% !important;
+  width: 45% !important;
 }
 .num {
-  width: 8% !important;
+  width: 9% !important;
 }
+.count {
+  width: 5% !important;
+}
+  .num input {
+    text-align: right;
+  }
 
 #all #data input {
   padding: 8px 7px;
@@ -61,11 +144,17 @@ p.content, li.content {
   border: none;
 }
 .code {
-  width: 8% !important;
+  width: 9% !important;
 }
+
 .unit {
   width: 6% !important;
 }
 #data .unit input {
   text-align: center;
+}
+
+#regbtn {
+  text-align: center;
+  padding: 20px 0;
 }

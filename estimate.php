@@ -54,20 +54,40 @@ $user = $load->getUser($_SESSION["username"]);
       <?php if($msg): ?>
       <p class="msg"><?=$msg?></p>
       <?php endif; ?>
-      <div id="info">
-        <?php
-          $load   = new loadDB();
-          $work   = $load->getWorks();
-          $num    = count($work);
-          for($i  = $num - 1; $i >= 0; $i--) {
-            $works  = $work[$i];
-            $client = $load->getClient($works["client"] | 0);
-        ?>
-        <dl>
-          <dt></dt>
-          <dd></dd>
-        </dl>
-        <?php } ?>
+      <div id="works">
+        <table>
+          <?php
+            $worksID = $_GET['pid'];
+            $load    = new loadDB();
+            $work    = $load->getWorks($worksID);
+            $num     = count($work);
+            for($i  = $num - 1; $i >= 0; $i--) {
+              $works  = $work[0];
+              $client = $load->getClient($works["client"] | 0);
+          ?>
+            <tr>
+              <th>クライアント</th>
+              <td><?=$client[0]['name']?></td>
+            </tr>
+            <tr>
+              <th>案件名</th>
+              <td><?=$works['title']?></td>
+            </tr>
+          <?php } ?>
+        </table>
+      </div>
+      <div class="btnset">
+        <h2>クイック見積り</h2>
+        <ul class="radbtn">
+          <li class="ttl"><a data-code="title">見出し</a></li>
+          <li><a data-code="1-M-A">進行管理A</a></li>
+          <li><a data-code="1-M-B">進行管理B</a></li>
+          <li><a data-code="3-PC-A">ページ制作A</a></li>
+          <li><a data-code="3-PC-B">ページ制作B</a></li>
+          <li><a data-code="4-C">テンプレコーディング</a></li>
+          <li><a data-code="4-S">Script</a></li>
+          <li><a data-code="4-O">パーツ制作</a></li>
+        </ul>
       </div>
       <div class="name table">
         <p class="code">作業コード</p>
@@ -82,7 +102,7 @@ $user = $load->getUser($_SESSION["username"]);
 
       <div id="data">
         <form action="" method="post" id="regist">
-          <?php for($i = 0; $i < 10; $i++){ ?>
+          <?php for($i = 0; $i < 0; $i++){ ?>
           <div class="data list">
             <ul class="table">
               <li class="code"><input type="text" /></li>
@@ -96,8 +116,8 @@ $user = $load->getUser($_SESSION["username"]);
             </ul>
           </div>
           <?php } ?>
-          <div class="btn"><input type="button" class="submit" value="登録"></div>
         </form>
+        <div class="radbtn" id="regbtn"><a href="">登録</a></div>
       </div>
     </div>
   </div>

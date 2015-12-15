@@ -33,7 +33,8 @@
         "code"    => $row["code"],
         "content" => $row["content"],
         "cost"    => $row["cost"],
-        "sales"   => $row["sales"]
+        "sales"   => $row["sales"],
+        "profit"  => num2per($row["cost"], $row["sales"], 1)
       );
     }
     $pdo = null;
@@ -44,5 +45,16 @@
     return false;
   }
 
+  //利益率計算
+  function num2per($cost, $sales, $precision = 0){
+    try {
+      $percent = (($sales - $cost) / $sales) * 100; 
+      return round($percent, $precision);
+    } catch (Exception $e) {
+      return 0;
+    }
+  }
+
   exit;
+
 ?>

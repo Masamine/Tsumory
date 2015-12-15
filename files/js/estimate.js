@@ -4,9 +4,14 @@ Estimate
 (function($) {
 
   $(document).on('ready', function(){
-    $(window).on('click', function(){
-      loadUnit(getParam());
-    });
+    var unitset = $('.btnset');
+    unitset.find('a').on('click', function(){ loadUnit(getParam(), $(this)); return false; });
+
+    //$('input').on('dblclick', function(){ confirm('この項目を削除しますか？'); return false; });
+
+    // $(window).on('beforeunload', function() {
+    //   return "え！？入力したデータ消えちゃうよ？";
+    // });
   });
 
   //パラメータ取得
@@ -23,16 +28,31 @@ Estimate
   }
 
   //見積りデータ読み込み（modeの値によって読み込む内容を変化）
-  function loadUnit(params) {
+  function loadUnit(params, btn) {
 
     var projectID = params['ID'];
     var mode      = params['mode'];
     var func      = (mode == 'regist') ? 'unit' : 'all';
+    var code      = btn.data('code');
+    var html      = "";
+
+    if(code == 'title') {
+      html += '<div class="data list ttl">';
+      html += '<ul class="table">';
+      html += '<li class="ttl"><input type="text" value="見出し" /></li>';
+      html += '</ul>';
+      html += '<input type="hidden" value="'+ projectID +'">';
+      html += '</div>';
+
+      setHTML(html, 'regist');
+
+      return false;
+    }
 
     var data = {
       'mode' : mode,
       'id'   : projectID,
-      'code' : 'D-A',
+      'code' : code,
       'func' : func
     };
 
@@ -42,26 +62,33 @@ Estimate
       dataType : "json",
       data     : data,
       success: function(data, dataType) {
-        //結果が0件の場合
-        if(data == null) alert('データが0件でした');
 
-        var html = "";
+        //結果が0件の場合
+        if(data.length == 0) {
+          alert('データがありませんでした。');
+          return false;
+        }
 
         //返ってきたデータの表示
         for (var i = 0; i < data.length; i++){
 
-          var d = data[i];
+          var d       = data[i];
+          var code    = d.code;
+          var content = d.content;
+          var cost    = d.cost | 0;
+          var sales   = d.sales | 0;
+          var profit  = d.profit | 0;
 
           html += '<div class="data list">';
           html += '<ul class="table">';
-          html += '<li class="code"><input type="text" value="'+ d.code +'" /></li>';
-          html += '<li class="content"><input type="text" value="'+ d.content +'" /></li>';
-          html += '<li class="count num"><input type="text" value="" /></li>';
+          html += '<li class="code"><input type="text" value="'+ code +'" /></li>';
+          html += '<li class="content"><input type="text" value="'+ content +'" /></li>';
+          html += '<li class="count num"><input type="text" value="1" /></li>';
           html += '<li class="unit num"><input type="text" value="人日" /></li>';
-          html += '<li class="org num"><input type="text" value="'+ d.cost +'" /></li>';
-          html += '<li class="sales num"><input type="text" value="'+ d.sales +'"  /></li>';
-          html += '<li class="profit num"><input type="text" value="'+ (d.sales | 0) / (d.cost | 0) +'%" /></li>';
-          html += '<li class="selling num"><input type="text" /></li>';
+          html += '<li class="org num"><input type="text" data-val="'+ cost +'" value="'+ separate(cost) +'" /></li>';
+          html += '<li class="sales num"><input type="text" data-val="'+ sales +'" value="'+ separate(sales) +'" /></li>';
+          html += '<li class="profit num"><input type="text" value="'+ profit +'%" /></li>';
+          html += '<li class="selling num"><input type="text" data-val="'+ sales +'" value="'+ separate(sales) +'" /></li>';
           html += '</ul>';
           html += '<input type="hidden" value="'+ projectID +'">';
           html += '</div>';
@@ -82,9 +109,14 @@ Estimate
   //HTMLをappend
   function setHTML(data, parentID) {
 
-    $('#' + parentID).prepend(data);
+    $('#' + parentID).append(data);
 
     return false;
+  }
+
+  // 正規表現でセパレート
+  function separate(num) {
+    return String(num).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
   }
 
   return false;

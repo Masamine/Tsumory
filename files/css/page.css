@@ -64,11 +64,19 @@ h1 {
   }
   .isCost #names.listname li {
     width: 20%;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
   .isCost #names.listname li.edit {
     width: 120px;
     padding-left: 2%;
     padding-right: 2%;
+  }
+  .isCost #names.listname li.code {
+    width: 10%;
+  }
+  .isCost #names.listname li.content {
+    width: 40%;
   }
 
 /* =========================================================
@@ -126,8 +134,18 @@ h1 {
       padding:10px 2%;
       width: 20%;
     }
+    .isCost #all .list .names p.code {
+      width: 10%;
+    }
     .isCost #all .list .names p.content {
       text-align: left;
+      width: 40%;
+    }
+    .isCost #all .list .names p.cost,
+    .isCost #all .list .names p.sales,
+    .isCost #names.listname li.cost,
+    .isCost #names.listname li.sales {
+      width: 15%;
     }
     .isCost #all .list .names .editbtn {
       vertical-align:middle;

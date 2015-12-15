@@ -46,11 +46,14 @@
 
     /*  案件一覧取得
     ----------------------------------- */
-    public function getWorks() {
+    public function getWorks($id) {
       require('connectDB.php');
       
-      $query = "SELECT * FROM works";
+      $query = (isset($id)) ? "SELECT * FROM works WHERE id = :id" : "SELECT * FROM works";
       $stmt = $pdo->prepare($query);
+
+      if(isset($id)) $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+
       $stmt->execute();
 
       $array = array();
@@ -91,6 +94,12 @@
         );
       }
       $pdo = null;
+
+      //作業コード順に並べ替え
+      foreach ($array as $key => $value){
+        $key_id[$key] = $value['code'];
+      }
+      array_multisort ( $key_id , SORT_DESC , $array);
 
       return $array;
     }
