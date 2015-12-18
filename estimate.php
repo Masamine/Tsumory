@@ -77,7 +77,7 @@ $user = $load->getUser($_SESSION["username"]);
         </table>
       </div>
       <div class="btnset">
-        <h2>クイック見積り</h2>
+        <!-- <h2>クイック見積り</h2> -->
         <ul class="radbtn">
           <li class="ttl"><a data-code="title">見出し</a></li>
           <li><a data-code="1-M-A">進行管理A</a></li>
@@ -101,7 +101,7 @@ $user = $load->getUser($_SESSION["username"]);
       </div>
 
       <div id="data">
-        <form action="" method="post" id="regist">
+        <form action="" method="post" id="regist" class="sortable">
           <?php for($i = 0; $i < 0; $i++){ ?>
           <div class="data list">
             <ul class="table">
@@ -117,7 +117,23 @@ $user = $load->getUser($_SESSION["username"]);
           </div>
           <?php } ?>
         </form>
+        <div id="totalArea">
+          <p id="total">売価金額合計：<span data-total='0'>￥0</span></p>
+        </div>
         <div class="radbtn" id="regbtn"><a href="">登録</a></div>
+      </div>
+
+      <div class="btnset">
+        <ul class="radbtn">
+          <li class="ttl"><a data-code="title">見出し</a></li>
+          <li><a data-code="1-M-A">進行管理A</a></li>
+          <li><a data-code="1-M-B">進行管理B</a></li>
+          <li><a data-code="3-PC-A">ページ制作A</a></li>
+          <li><a data-code="3-PC-B">ページ制作B</a></li>
+          <li><a data-code="4-C">テンプレコーディング</a></li>
+          <li><a data-code="4-S">Script</a></li>
+          <li><a data-code="4-O">パーツ制作</a></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -130,6 +146,7 @@ $user = $load->getUser($_SESSION["username"]);
 </div>
 <script type="text/javascript" src="files/js/jquery.js"></script>
 <script type="text/javascript" src="files/js/jsSet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
 <script type="text/javascript" src="files/js/estimate.js"></script>
 </body>
 </html>

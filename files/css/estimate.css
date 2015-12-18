@@ -20,7 +20,7 @@
     border:none;
   }
 .btnset {
-  padding: 15px;
+  padding: 15px 15px 10px;
   border: 2px dashed #d7d9dc;
   margin:0 30px 20px;
 }
@@ -74,6 +74,7 @@
   }
 
 #data {
+  overflow: hidden;
 }
 #data .data:nth-child(odd) {
   background-color: #f2fafe;
@@ -86,6 +87,14 @@
   border-top: 1px dotted #7fd2e6;
   border-bottom: 1px dotted #7fd2e6;
   border-radius: 0;
+  position: relative;
+  left:0;
+}
+#data .data.ttl:last-child {
+  margin-bottom: -1px;
+}
+#data .data.ttl + .ttl {
+  margin-top: -1px;
 }
   #data .data.ttl input {
     font-weight: bold;
@@ -99,6 +108,7 @@
   }
   #data .data {
     padding:0px 0;
+    position: relative;
   }
     #data ul li {
       display: table-cell;
@@ -120,7 +130,10 @@ p.content, li.content {
   width: 45% !important;
 }
 .num {
-  width: 9% !important;
+  width: 10% !important;
+}
+.num.profit {
+  width: 6% !important;
 }
 .count {
   width: 5% !important;
@@ -130,8 +143,10 @@ p.content, li.content {
   }
 
 #all #data input {
-  padding: 8px 7px;
+  font-size: 13px;
+  padding: 6px 5px;
   border-top: none;
+  letter-spacing: 0;
   border-bottom: none;
   border-left: none;
   border-radius: 0;
@@ -139,6 +154,9 @@ p.content, li.content {
   margin-bottom: 0;
   border-right-style: dotted;
   border-right-color: #c9cfe0;
+}
+#all #data .ttl input {
+  font-size: 14px;
 }
 #all #data li:last-child input {
   border: none;
@@ -158,3 +176,17 @@ p.content, li.content {
   text-align: center;
   padding: 20px 0;
 }
+
+#totalArea {
+  padding: 15px 30px;
+  border-bottom: 1px solid #d7d9dc;
+  background-color: #f5ffec;
+}
+  #totalArea p {
+    font-size: 16px;
+    text-align: right;
+  }
+    #totalArea p span {
+      font-size: 16px;
+      font-weight: bold;
+    }
