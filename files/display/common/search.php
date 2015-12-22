@@ -22,8 +22,8 @@
       <?php
         $load   = new loadDB();
         $team = $load->getTeam();
-        $num = count($team);
-        for($i = 0; $i < $num; $i++) {
+        $teamnum = count($team);
+        for($i = 0; $i < $teamnum; $i++) {
       ?>
         <li id="team-<?php echo $team[$i]["name"]; ?>"><?php echo $team[$i]["name"]; ?></li>
       <?php } ?>

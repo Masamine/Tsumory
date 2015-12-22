@@ -13,14 +13,29 @@
     width: 110px;
   }
   #works th, #works td {
-    padding:3px 10px;
-    border-bottom: 3px solid #fff;
+    font-size: 14px;
+    padding:3px 8px;
+    border:1px solid #d7d9dc;
   }
-  #works tr:last-child th, #works tr:last-child td {
-    border:none;
+    #works td input {
+      padding: 3px 10px;
+    }
+
+#teamlist {
+}
+  #teamlist li {
+    float: left;
+    width: auto;
+    margin-right: 20px;
   }
+    #teamlist li input {
+      display: inline;
+      width: auto;
+      vertical-align:text-top;
+      margin-right: 5px;
+    }
 .btnset {
-  padding: 15px 15px 10px;
+  padding: 10px 15px 6px;
   border: 2px dashed #d7d9dc;
   margin:0 30px 20px;
 }
@@ -96,8 +111,20 @@
 #data .data.ttl + .ttl {
   margin-top: -1px;
 }
+#data .move {
+  display: block;
+  width: 24px;
+  height: 100%;
+  position: absolute;;
+  top: 0px;
+  left:0px;
+  background:url(/files/img/icon_move.png?v=2) center center no-repeat #fff;
+  text-indent: -9999px;
+  border-right: 1px solid #d7d9dc;
+}
   #data .data.ttl input {
     font-weight: bold;
+    padding-left: 20px;
   }
   #data form {
     border-bottom: 1px solid #d7d9dc;
@@ -119,18 +146,41 @@
       position: relative;
     }
     #data .data ul li.code {
-      cursor: move;
+      padding-left: 10px;
     }
     #data ul li.ttl {
       width:auto;
       display: block;
+      padding-left: 23px;
     }
 
 p.content, li.content {
   width: 45% !important;
 }
+  .data a.delete {
+    border-radius: 30px;
+    border:1px solid #f096ab;
+    width: 18px;
+    height: 18px;
+    line-height: 16px;
+    font-size: 11px;
+    background-color: #fff;
+    font-weight: bold;
+    color: #f096ab;
+    text-align:center;
+    display: block;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+  }
+  .data a.delete:hover {
+    background-color: #e5335d;
+    border:1px solid #e5335d;
+    color: #fff;
+  }
 .num {
-  width: 10% !important;
+  width: 9% !important;
 }
 .num.profit {
   width: 6% !important;
@@ -164,6 +214,9 @@ p.content, li.content {
 .code {
   width: 9% !important;
 }
+li.code input {
+  text-indent: 1em;
+}
 
 .unit {
   width: 6% !important;
@@ -190,3 +243,23 @@ p.content, li.content {
       font-size: 16px;
       font-weight: bold;
     }
+
+
+#sound {
+  display: none;
+}
+
+#lightboxTotal {
+  background-color: rgba(0, 0, 0, 0.85);
+  border-radius: 4px;
+  padding: 15px;
+  position: fixed;
+  right: 50px;
+  top: 88px;
+  display: none;
+  z-index: 150;
+}
+  #lightboxTotal p, #lightboxTotal span {
+    color: #fff;
+  }
+

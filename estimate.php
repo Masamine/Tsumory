@@ -68,13 +68,26 @@ $user = $load->getUser($_SESSION["username"]);
             <tr>
               <th>クライアント</th>
               <td><?=$client[0]['name']?></td>
-            </tr>
-            <tr>
               <th>案件名</th>
               <td><?=$works['title']?></td>
             </tr>
           <?php } ?>
+            <tr>
+              <th>要件</th>
+              <td colspan="3"><input name="detail" value="" type="text" placeholder="Webサイトリニューアル etc" /></td>
+            </tr>
+            <tr>
+              <th>関連チーム</th>
+              <td colspan="3"><ul id="teamlist"><?php
+                for($i = 0; $i < $teamnum; $i++) {
+              ?>
+                <li id="team02-<?php echo $team[$i]["name"]; ?>"><label><input type="checkbox" value="<?php echo $team[$i]["name"]; ?>"><?php echo $team[$i]["name"]; ?></label></li>
+              <?php } ?></ul></td>
+            </tr>
         </table>
+        <div id="lightboxTotal">
+          <p>売価金額合計：<span>￥0</span></p>
+        </div>
       </div>
       <div class="btnset">
         <!-- <h2>クイック見積り</h2> -->
@@ -137,7 +150,11 @@ $user = $load->getUser($_SESSION["username"]);
       </div>
     </div>
   </div>
-  
+  <?php
+    if(isset($_GET['sound'])) {
+      echo '<audio src="files/sound/insert.mp3" id="sound"></audio>';
+    }
+  ?>
   <?php require_once(ABSPATH."files/display/common/side.php"); ?>
   
   <footer>

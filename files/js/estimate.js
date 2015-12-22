@@ -3,21 +3,27 @@ Estimate
 ========================================================================== */
 (function($) {
 
+  var _url, $LBTotal, _isSound, $unitset;
+
   $(document).on('ready', function(){
-    var unitset = $('.btnset');
-    unitset.find('a').on('mousedown', function(){ loadUnit(getParam(), $(this)); return false; });
+
+    $LBTotal    = $('#lightboxTotal');
+    $unitset = $('.btnset');
+    _url        = location.href;
+    _isSound    = _url.indexOf('sound=true') > 0;
+
+    $unitset.find('a').off('mousedown').on('mousedown', function(){ loadUnit(getParam(), $(this)); return false; });
     
-    $(window).on('beforeunload', function() {
-      return "え！？入力したデータ消えちゃうよ？";
-    });
+    // $(window).on('beforeunload', function() {
+    //   return "え！？入力したデータ消えちゃうよ？";
+    // });
 
   });
 
   //パラメータ取得
   function getParam() {
 
-    var url    = location.href;
-    var params = url.split("?");
+    var params = _url.split("?");
         params = params[1].split("&");
     var paramsArray = {
       'mode' : params[0].split('=')[1],
@@ -28,6 +34,12 @@ Estimate
 
   //見積りデータ読み込み（modeの値によって読み込む内容を変化）
   function loadUnit(params, btn) {
+
+    if($unitset.find('a').hasClass('stop')) return false;
+
+    $unitset.find('a').addClass('stop');
+
+    if(_isSound) LoadSound(btn);
 
     var projectID = params['ID'];
     var mode      = params['mode'];
@@ -42,6 +54,8 @@ Estimate
       html += '<li class="ttl"><input type="text" value="見出し" /></li>';
       html += '</ul>';
       html += '<input type="hidden" value="'+ projectID +'">';
+      html += '<a class="delete">×</a>';
+      html += '<span class="move">MOVE</span>';
       html += '</div>';
 
       setHTML(html, 'regist', 'title');
@@ -91,6 +105,8 @@ Estimate
           html += '<li class="selling num"><input type="text" data-key="selling" data-val="'+ sales +'" value="'+ separate(sales) +'" /></li>';
           html += '</ul>';
           html += '<input type="hidden" value="'+ projectID +'">';
+          html += '<a class="delete">×</a>';
+          html += '<span class="move">MOVE</span>';
           html += '</div>';
 
         }
@@ -106,18 +122,22 @@ Estimate
     return false;
   }
 
-  //HTMLをappend
+  /* =====================================================
+  HTMLをappend
+  ===================================================== */
   function setHTML(data, parentID, type) {
 
     if($('input:focus')[0]) {
       var parent = $('input:focus').closest('.data');
       $('#' + parentID).find(parent).after(data);
-      console.log('after')
     } else {
       $('#' + parentID).append(data);
-      console.log('append')
     }
-    TweenLite.to('.newdata', 0.65, { ease: Expo.easeOut, left: 0, onComplete : function(){ $('.newdata').removeClass('newdata') } });
+    TweenLite.to('.newdata', 0.40, { ease: Expo.easeOut, left: 0, onComplete : function(){
+      $('.newdata').removeClass('newdata');
+      getContentHeight();
+      $unitset.find('a').removeClass('stop');
+    }});
 
     $('.data').find('.count').find('input').off('keypress').keypress( function ( e ) {
       if ( e.which == 13 ) {
@@ -130,6 +150,44 @@ Estimate
 
     return false;
   }
+
+  /* =====================================================
+  合計金額表示（ミニ）
+  ===================================================== */
+  function getContentHeight() {
+    var h    = $('#contents').outerHeight(true);
+    var w    = $(window);
+    var wH   = w.height();
+    var flag = true;
+
+    w.on('scroll', function(){
+      var t = w.scrollTop();
+      flag  = (h + 20 - wH == 0) ? false : true
+    });
+    
+    if(h > wH * 1.2) {
+      $LBTotal.fadeIn(300);
+    } else {
+      $LBTotal.fadeOut(300);
+    }
+
+    $('.data').find('.delete').off().on('click', function(){
+      var target = $(this).closest('.data');
+      var cost   = target.find('.selling').find('input').data('val') | 0;
+      calTotal(-cost);
+
+      if(_isSound) LoadSound($(this));
+
+      TweenLite.to(target.closest('.data'), 0.35, { ease: Expo.easeOut, left: 100 + '%', onComplete : function(){
+        target.closest('.data').remove();
+        getContentHeight();
+      }});
+
+
+    });
+    return false;
+  }
+
 
   // 正規表現でセパレート
   function separate(num) {
@@ -153,6 +211,7 @@ Estimate
 
     $total.text('￥' + separate(totalcost));
     $total.data('total', totalcost);
+    $LBTotal.find('span').text('￥' + separate(totalcost));
 
     return false;
   }
@@ -183,6 +242,20 @@ Estimate
 
     //合計の再計算
     calTotal(diff);
+
+    return false;
+  }
+
+  /* =====================================================
+  おまけ機能：サウンドモード
+  ===================================================== */
+  function LoadSound(btn) {
+
+    var audio = $('#sound')[0];
+    var src   = (!btn.hasClass('delete')) ? 'insert' : 'cancel';
+    audio.src = 'files/sound/'+ src + '.mp3';
+    audio.load();
+    audio.play();
 
     return false;
   }
