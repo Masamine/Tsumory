@@ -11,8 +11,21 @@ Estimate
     $unitset = $('.btnset');
     _url        = location.href;
     _isSound    = _url.indexOf('sound=true') > 0;
+    $team       = $('#teamlist');
 
     $unitset.find('a').off('mousedown').on('mousedown', function(){ loadUnit(getParam(), $(this)); return false; });
+
+    $team.find('a').on('click', function(){
+      $(this).toggleClass('select');
+
+      return false;
+    });
+
+    $('#regbtn').find('a').on('click', function(){
+      postData(getParam());
+
+      return false;
+    });
     
     // $(window).on('beforeunload', function() {
     //   return "え！？入力したデータ消えちゃうよ？";
@@ -74,52 +87,125 @@ Estimate
       type     : "POST",
       url      : "files/library/est.php",
       dataType : "json",
-      data     : data,
-      success: function(data, dataType) {
+      data     : data
+    }).done(function(data, dataType) {
 
-        //結果が0件の場合
-        if(data.length == 0) {
-          alert('データがありませんでした。');
-          return false;
-        }
-
-        //返ってきたデータの表示
-        for (var i = 0; i < data.length; i++){
-
-          var d       = data[i];
-          var code    = d.code;
-          var content = d.content;
-          var cost    = d.cost | 0;
-          var sales   = d.sales | 0;
-          var profit  = d.profit | 0;
-
-          html += '<div class="data list newdata" style="left:100%;">';
-          html += '<ul class="table">';
-          html += '<li class="code"><input type="text" data-key="code" value="'+ code +'" /></li>';
-          html += '<li class="content"><input type="text" data-key="content" value="'+ content +'" /></li>';
-          html += '<li class="count num"><input type="text" data-key="count" value="1" /></li>';
-          html += '<li class="unit num"><input type="text" data-key="unit" value="人日" /></li>';
-          html += '<li class="org num"><input type="text" data-key="org" data-val="'+ cost +'" value="'+ separate(cost) +'" /></li>';
-          html += '<li class="sales num"><input type="text" data-key="sales" data-val="'+ sales +'" value="'+ separate(sales) +'" /></li>';
-          html += '<li class="profit num"><input type="text" data-key="profit" value="'+ profit +'%" /></li>';
-          html += '<li class="selling num"><input type="text" data-key="selling" data-val="'+ sales +'" value="'+ separate(sales) +'" /></li>';
-          html += '</ul>';
-          html += '<input type="hidden" value="'+ projectID +'">';
-          html += '<a class="delete">×</a>';
-          html += '<span class="move">MOVE</span>';
-          html += '</div>';
-
-        }
-
-        setHTML(html, 'regist', 'cost');
-
-      },
-      error: function(XMLHttpRequest, textStatus, errorThrown){
-        console.log('Error : ' + errorThrown);
+      //結果が0件の場合
+      if(data.length == 0) {
+        alert('データがありませんでした。');
+        return false;
       }
+
+      //返ってきたデータの表示
+      for (var i = 0; i < data.length; i++){
+
+        var d       = data[i];
+        var code    = d.code;
+        var content = d.content;
+        var cost    = d.cost | 0;
+        var sales   = d.sales | 0;
+        var profit  = d.profit | 0;
+
+        html += '<div class="data list newdata" style="left:100%;">';
+        html += '<ul class="table">';
+        html += '<li class="code"><input type="text" data-key="code" value="'+ code +'" /></li>';
+        html += '<li class="content"><input type="text" data-key="content" value="'+ content +'" /></li>';
+        html += '<li class="count num"><input type="text" data-key="count" value="1" /></li>';
+        html += '<li class="unit num"><input type="text" data-key="unit" value="人日" /></li>';
+        html += '<li class="org num"><input type="text" data-key="org" data-val="'+ cost +'" value="'+ separate(cost) +'" /></li>';
+        html += '<li class="sales num"><input type="text" data-key="sales" data-val="'+ sales +'" value="'+ separate(sales) +'" /></li>';
+        html += '<li class="profit num"><input type="text" data-key="profit" value="'+ profit +'%" /></li>';
+        html += '<li class="selling num"><input type="text" data-key="selling" data-val="'+ sales +'" value="'+ separate(sales) +'" /></li>';
+        html += '</ul>';
+        html += '<a class="delete">×</a>';
+        html += '<span class="move">MOVE</span>';
+        html += '</div>';
+
+      }
+
+      setHTML(html, 'regist', 'cost');
+
     });
 
     return false;
+  }
+
+  /* =====================================================
+  見積り登録
+  ===================================================== */
+  function postData(param) {
+
+    var txt = "";
+    var total = $('#total').find('span').data('total');
+    if(total < 100000) {
+      txt = "10万未満でも手を抜かずに頑張りましょう！";
+    } else if(total >= 100000 && total < 500000) {
+      txt = "まずまずの金額の案件のようですね。";
+    } else if(total >= 500000 && total < 1000000) {
+      txt = "この案件の戦闘力は50万以上です。";
+    } else if(total >= 1000000 && total < 5000000) {
+      txt = "100万超え！大きめの案件のようですね。\n頑張りましょう！";
+    } else if(total >= 5000000 && total < 10000000) {
+      txt = "ご、500万超えた！？長期戦を覚悟しましょう。";
+    } else if(total >= 10000000) {
+      txt = "え！？1,000万超え！？もしかして国が関わってます？";
+    } else if(total >= 1340000000) {
+      txt = "今期売上目標の13億4,000万円をこの案件だけで超えるんですか！？/nすげーーー！";
+    }
+
+    if(!confirm(txt + '\n登録しますか？')) return false;
+
+    $('#loading').fadeIn(300);
+
+    var data = collectData(param['ID']);
+
+    $.ajax({
+      type     : "POST",
+      url      : "files/library/status.php",
+      dataType : "json",
+      data     : data
+    }).done(function(data){
+      $('#loading').delay(2400).fadeOut(300);
+    }).fail(function(){
+      $('#loading').delay(2400).fadeOut(300);
+    });
+
+    return false;
+  }
+
+  function collectData(pid) {
+
+    var target = $('#data').find('.data');
+    var length = target.length;
+    var data   = [];
+
+    for(var i = 0; i < length; i++) {
+      var cost    = target.eq(i);
+      var judge   = cost.hasClass('ttl');
+
+      var code    = (judge) ? "0-ttl" : cost.find('.code').find('input').val();
+      var content = (judge) ? cost.find('.ttl').find('input').val() : cost.find('.content').find('input').val();
+      var count   = (judge) ? "0" : cost.find('.count').find('input').val();
+      var unit    = (judge) ? "" : cost.find('.unit').find('input').val();
+      var org     = (judge) ? "0" : cost.find('.org').find('input').data('val');
+      var sales   = (judge) ? "0" : cost.find('.sales').find('input').data('val');
+      var profit  = (judge) ? "0" : cost.find('.profit').find('input').val();
+      var selling = (judge) ? "0" : cost.find('.selling').find('input').data('val');
+
+      data[i] = {
+        'pid'     : pid,
+        'code'    : code,
+        'content' : content,
+        'count'   : count,
+        'unit'    : unit,
+        'org'     : org,
+        'sales'   : sales,
+        'profit'  : profit,
+        'selling' : selling
+      }
+    }
+
+    return data;
   }
 
   /* =====================================================

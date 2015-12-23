@@ -70,18 +70,20 @@ $user = $load->getUser($_SESSION["username"]);
               <td><?=$client[0]['name']?></td>
               <th>案件名</th>
               <td><?=$works['title']?></td>
+              <th>先方担当者</th>
+              <td><?=$works['staff']?></td>
             </tr>
           <?php } ?>
             <tr>
               <th>要件</th>
-              <td colspan="3"><input name="detail" value="" type="text" placeholder="Webサイトリニューアル etc" /></td>
+              <td colspan="5"><input name="detail" value="" type="text" placeholder="Webサイトリニューアル etc" /></td>
             </tr>
             <tr>
               <th>関連チーム</th>
-              <td colspan="3"><ul id="teamlist"><?php
+              <td colspan="5"><ul id="teamlist"><?php
                 for($i = 0; $i < $teamnum; $i++) {
               ?>
-                <li id="team02-<?php echo $team[$i]["name"]; ?>"><label><input type="checkbox" value="<?php echo $team[$i]["name"]; ?>"><?php echo $team[$i]["name"]; ?></label></li>
+                <li class="<?=$team[$i]["name"]?>" id="team02-<?=$team[$i]["name"]?>"><a href="#"><?=$team[$i]["name"]?></a></li>
               <?php } ?></ul></td>
             </tr>
         </table>
@@ -115,25 +117,11 @@ $user = $load->getUser($_SESSION["username"]);
 
       <div id="data">
         <form action="" method="post" id="regist" class="sortable">
-          <?php for($i = 0; $i < 0; $i++){ ?>
-          <div class="data list">
-            <ul class="table">
-              <li class="code"><input type="text" /></li>
-              <li class="content"><input type="text" /></li>
-              <li class="count num"><input type="text" /></li>
-              <li class="unit num"><input type="text" value="人日" /></li>
-              <li class="org num"><input type="text" /></li>
-              <li class="sales num"><input type="text" /></li>
-              <li class="profit num"><input type="text" /></li>
-              <li class="selling num"><input type="text" /></li>
-            </ul>
-          </div>
-          <?php } ?>
         </form>
         <div id="totalArea">
           <p id="total">売価金額合計：<span data-total='0'>￥0</span></p>
         </div>
-        <div class="radbtn" id="regbtn"><a href="">登録</a></div>
+        <div class="radbtn" id="regbtn"><a href="#">登録</a></div>
       </div>
 
       <div class="btnset">
@@ -161,6 +149,7 @@ $user = $load->getUser($_SESSION["username"]);
     <p><?php echo $_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']; ?></p>
   </footer>
 </div>
+<div id="loading"><div class="inner"></div></div>
 <script type="text/javascript" src="files/js/jquery.js"></script>
 <script type="text/javascript" src="files/js/jsSet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
