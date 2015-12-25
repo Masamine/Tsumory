@@ -1,10 +1,21 @@
 <?php
   require('../conf/config.php');
   require('connectDB.php');
+  require('load.php');
 
-  getUnit();
+  date_default_timezone_set('Asia/Tokyo');
 
-  //データ呼び出し
+  $type = $_POST['type'];
+
+  if($type == 'loadUnit') {
+    getUnit();
+  } else {
+    registMatters();
+  }
+
+  /* =========================================
+  見積りデータ呼び出し
+  ========================================= */
   function getUnit() {
     
     global $pdo;
@@ -48,11 +59,57 @@
   //利益率計算
   function num2per($cost, $sales, $precision = 0){
     try {
-      $percent = (($sales - $cost) / $sales) * 100; 
+      $percent = (($sales - $cost) / $sales) * 100;
       return round($percent, $precision);
     } catch (Exception $e) {
       return 0;
     }
+
+    return false;
+  }
+
+
+  /* =========================================
+  要件登録
+  ========================================= */
+  function registMatters() {
+
+    global $pdo;
+    $load   = new loadDB();
+    $user   = $load -> getUser($_COOKIE["user"], true);
+    $userID = $user['id'];
+
+    $pid     = $_POST['pid'];
+    $title   = $_POST['title'];
+    $total   = $_POST['total'];
+    $team    = serialize($_POST['team']);
+    $regTime = date("Y-m-d H:i:s");
+
+    $query  = "INSERT INTO posts(works_id,post_name,team, total, regist_date, author, modified) VALUES (:id,:name,:team,:total,:regTime,:author,:modified)";
+    $query2 = "UPDATE works SET updates = :updates WHERE id = :id";
+    $stmt   = $pdo->prepare($query);
+    $stmt2  = $pdo->prepare($query2);
+
+    $stmt->bindValue(':id', $pid, PDO::PARAM_INT);
+    $stmt->bindValue(':name', $title, PDO::PARAM_STR);
+    $stmt->bindValue(':team', $team, PDO::PARAM_STR);
+    $stmt->bindValue(':total', $total, PDO::PARAM_INT);
+    $stmt->bindValue(':regTime', $regTime, PDO::PARAM_STR);
+    $stmt->bindValue(':author', $userID, PDO::PARAM_INT);
+    $stmt->bindValue(':modified', $userID, PDO::PARAM_INT);
+
+    $stmt2->bindValue(':updates', $regTime, PDO::PARAM_STR);
+    $stmt2->bindValue(':id', $pid, PDO::PARAM_INT);
+
+    $stmt->execute();
+    $stmt2->execute();
+
+    header('Content-Type: application/json; charset=utf-8');
+    print(json_encode('OK!'));
+
+    $pdo = null;
+
+    return false;
   }
 
   exit;

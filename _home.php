@@ -21,7 +21,7 @@ if(isset($_POST["key"]) && isset($_SESSION["key"]) && $_POST["key"] !== $_SESSIO
 
 $_SESSION["key"] = $key;
 $load = new loadDB();
-$user = $load->getUser($_SESSION["username"], true);
+$user = $load->getUser($_SESSION["username"]);
 ?>
 <!doctype html>
 <html lang="ja">
@@ -100,69 +100,34 @@ $user = $load->getUser($_SESSION["username"], true);
         <div class="contents">
           <div class="inner">
             <div class="reg radbtn"><a href="estimate.php?mode=regist&pid=<?=$works["id"]?>">見積り登録</a></div>
-            <table class="listnames">
-              <colgroup>
-                <col style="width:12%;">
-                <col style="width:40%;">
-                <col style="width:13%;">
-                <col style="width:10%;">
-                <col style="width:15%;">
-                <col style="width:10%;">
-              </colgroup>
-              <tr>
-                <td class="icon">関連チーム</td>
-                <td class="detail">要件</td>
-                <td class="price">売価金額</td>
-                <td class="name">更新者</td>
-                <td class="update">更新日時</td>
-                <td class="btns">各種機能</td>
-              </tr>
-            </table>
             <?php
               $detail  = $load->getDetail($works["id"]);
               $dNum = count($detail);
-              $load = new loadDB();
-              if($dNum == 0) echo '<p class="none">見積りはありません。</p>';
-
+              echo $dNum;
+              
               for($j = $dNum - 1; $j >= 0; $j--) {
-                if($dNum == 0) {
-                  echo '<p>見積りはありません。</p>';
-                  break;
-                }
-                $details      = $detail[$j];
-                $postID       = $details['id'];
-                $postTitle    = $details['title'];
-                $postTotal    = '￥'.number_format($details['total']);
-                $update       = preg_replace('/(\s|　)/','<br>',$details['update']);
-                $postTeam     = unserialize($details['team']);
-                $postModified = $details['modified'];
-                $modUser = $load->getUser($postModified, false);
+                if($dNum == 0) break;
+                $details = $detail[$i];
+
+                $postID = $details['id'];
+                $postTitle = $details['title'];
+                $postTeam = unserialize($details['team']);
             ?>
             <div class="data">
               <table>
-                <colgroup>
-                  <col style="width:12%;">
-                  <col style="width:40%;">
-                  <col style="width:13%;">
-                  <col style="width:10%;">
-                  <col style="width:15%;">
-                  <col style="width:10%;">
-                </colgroup>
                 <tr>
                   <td class="icon">
                     <ul>
-                    <?php
-                      $teamNum = count($postTeam);
-                      for($k = 0; $k < $teamNum; $k++) {
-                        echo '<li class="'.strtolower($postTeam[$k]).'"><span>'.$postTeam[$k].'</span></li>';
-                      }
-                    ?>
+                      <li class="web"><span>Web</span></li>
+                      <li class="design"><span>Design</span></li>
+                      <li class="edit"><span>Edit</span></li>
+                      <li class="dtp"><span>DTP</span></li>
                     </ul>
                   </td>
-                  <td class="detail"><?=$postTitle?></td>
-                  <td class="price"><?=$postTotal?></td>
-                  <td class="name"><?=$modUser['name']?></td>
-                  <td class="update"><?=$update?></td>
+                  <td class="detail">レスポンシブ対応版</td>
+                  <td class="price">￥1,000,000</td>
+                  <td class="name">Doko</td>
+                  <td class="update">2014/02/14 15:07</td>
                   <td class="btns">
                     <ul>
                       <li class="radbtn pdf"><a href="#">PDF</a></li>

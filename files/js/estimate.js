@@ -77,6 +77,7 @@ Estimate
     }
 
     var data = {
+      'type' : 'loadUnit',
       'mode' : mode,
       'id'   : projectID,
       'code' : code,
@@ -87,6 +88,7 @@ Estimate
       type     : "POST",
       url      : "files/library/est.php",
       dataType : "json",
+      timeout  : 10000,
       data     : data
     }).done(function(data, dataType) {
 
@@ -153,26 +155,46 @@ Estimate
       txt = "今期売上目標の13億4,000万円をこの案件だけで超えるんですか！？/nすげーーー！";
     }
 
+    if(!chkRequire()) return false;
+
     if(!confirm(txt + '\n登録しますか？')) return false;
 
     $('#loading').fadeIn(300);
 
-    var data = collectData(param['ID']);
+    var matters = {
+      'type'  : 'matters',
+      'pid'   : param['ID'],
+      "title" : $("#works").find('input').val(),
+      "total" : total,
+      "team"  : getTeam()
+    }
 
-    $.ajax({
-      type     : "POST",
-      url      : "files/library/status.php",
-      dataType : "json",
-      data     : data
-    }).done(function(data){
-      $('#loading').delay(2400).fadeOut(300);
-    }).fail(function(){
-      $('#loading').delay(2400).fadeOut(300);
-    });
+    var data    = collectData(param['ID']);
+
+    useAjax(matters);
 
     return false;
   }
 
+  /* =====================================================
+  選択中のチームリスト取得
+  ===================================================== */
+  function getTeam() {
+
+    var array  = [];
+    var team   = $('#teamlist').find('.select');
+    var length = team.length;
+
+    for(var i = 0; i < length; i++) {
+      array[i] = team.eq(i).text();
+    }
+
+    return array;
+  }
+
+  /* =====================================================
+  見積り項目収集
+  ===================================================== */
   function collectData(pid) {
 
     var target = $('#data').find('.data');
@@ -238,7 +260,7 @@ Estimate
   }
 
   /* =====================================================
-  合計金額表示（ミニ）
+  合計金額表示（ミニ版）
   ===================================================== */
   function getContentHeight() {
     var h    = $('#contents').outerHeight(true);
@@ -269,13 +291,51 @@ Estimate
         getContentHeight();
       }});
 
-
     });
     return false;
   }
 
 
-  // 正規表現でセパレート
+  /* =====================================================
+  Ajax
+  ===================================================== */
+  function useAjax(m) {
+    $.ajax({
+      type     : "POST",
+      url      : "files/library/est.php",
+      dataType : "json",
+      timeout  : 10000,
+      data     : m
+    }).done(function(data){
+      effect('ok', data);
+    }).fail(function(data){
+      effect('failed');
+    });
+
+    function effect(txt, d) {
+      console.log(txt);
+
+      if(_isSound) {
+        setTimeout(sound, 3150);
+        function sound() {
+          $('#sound')[0].src = 'files/sound/ok.mp3';
+          var sound = LoadSound();
+          sound.load;
+          sound.play;
+        }
+      }
+      
+      $('#loading').delay(3000).fadeOut(300);
+      return false;
+    }
+
+    return false;
+  }
+
+
+  /* =====================================================
+  金額カンマ区切り
+  ===================================================== */
   function separate(num) {
     return String(num).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
   }
@@ -333,17 +393,57 @@ Estimate
   }
 
   /* =====================================================
+  バリデーション
+  ===================================================== */
+  function chkRequire() {
+
+    var txt = '以下の項目が入っていません。\n---------------------------\n';
+    var noneVal  = ($('#works').find('input').val() == "");
+    var noneTeam = ($('#teamlist').find('.select').length == 0);
+    var noneData = ($('#data').find('.data').length == 0);
+
+    if(noneVal || noneTeam || noneData) {
+
+      if(noneVal)  txt += '・要件\n';
+      if(noneTeam) txt += '・チーム選択\n';
+      if(noneData) txt += '・見積データ';
+
+      alert(txt);
+      return false;
+    } else {
+      return true;
+    }
+
+  }
+
+  /* =====================================================
   おまけ機能：サウンドモード
   ===================================================== */
   function LoadSound(btn) {
 
-    var audio = $('#sound')[0];
-    var src   = (!btn.hasClass('delete')) ? 'insert' : 'cancel';
-    audio.src = 'files/sound/'+ src + '.mp3';
-    audio.load();
-    audio.play();
+    var _this = {};
 
-    return false;
+    _this.load = load();
+    _this.play = play();
+
+    if(btn) {
+      var audio = $('#sound')[0];
+      var src   = (!btn.hasClass('delete')) ? 'insert' : 'cancel';
+      audio.src = 'files/sound/'+ src + '.mp3';
+
+      load();
+      play();
+    }
+
+    function load() {
+      $('#sound')[0].load();
+    }
+
+    function play() {
+      $('#sound')[0].play();
+    }
+
+    return _this;
   }
 
   return false;

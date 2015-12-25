@@ -36,14 +36,15 @@
       border-radius: 4px;
       padding: 2px 15px;
       display: block;
-      color: #d7d9dc;
+      color: #ccc;
       border-width: 1px;
-      border-style: solid;
-      border-color: #d7d9dc;
+      border-style: dashed;
+      border-color: #ccc;
     }
     #teamlist li a:hover,
     #teamlist li a.select {
       color: #fff;
+      border-style: solid;
     }
     #teamlist li.Web a:hover,
     #teamlist li.Web a.select {
@@ -68,8 +69,8 @@
 
 .btnset {
   padding: 10px 15px 6px;
-  border: 2px dashed #d7d9dc;
-  margin:0 30px 20px;
+  border: 1px dashed #ccc;
+  margin:0 30px 15px;
 }
   .btnset h2 {
     font-size: 16px;
@@ -310,7 +311,7 @@ li.code input {
   display: none;
 }
   #loading .inner {
-    background: url(../img/common/img_loading.gif?v=120) center center no-repeat #1f6cc7;
+    background: url(../img/common/img_loading.gif?v=10) center center no-repeat #1f6cc7;
     opacity: 0.75;
     position: absolute;
     top: 0;

@@ -57,7 +57,6 @@ h1 {
   }
   #all .update, .list .update {
     text-align:center;
-    padding:0 2%;
   }
   #names.listname li {
     width: 16.5%;
@@ -173,51 +172,69 @@ h1 {
     }
 
 .list .contents {
-  background-color:#fffff1;
+  background-color:#ffffff;
   padding:2px 0;
   display:none;
 }
   .list .contents .reg {
     text-align:center;
-    margin-bottom:7px;
+    margin-bottom:13px;
   }
   .list .contents .inner {
-    background-color:#fffff1;
+    background-color:#ffffff;
     padding:10px 30px 5px;
   }
   .list .contents .data {
     border-bottom:1px dotted #CCCCCC;
     display:table;
     width:100%;
+    padding: 1px 0;
   }
-  .list .contents .data table {
+  .list .contents table {
     width:100%;
   }
-  .list .contents .data td {
+  .list .contents table.listnames {
+    background-color: #f2f2f2;
+    padding: 3px 0;
+  }
+  .list .contents td {
     font-size:13px;
     vertical-align:middle;
-    padding:15px 5px;
+    padding:0px 5px;
+    border-right: 1px dotted #ccc;
+  }
+  .list .contents td:last-child {
+    
   }
   .list .contents .data:last-child {
-    margin-bottom:0;
-    padding-bottom:0;
-    border:none;
   }
-  .list .contents .data .icon {
-    width:120px;
+  .list .contents .icon {
   }
-  #all .list .contents .data .btns {
-    text-align:right;
-    width:130px;
+  .list .contents .name {
+    text-align: center;
   }
-  #all .list .contents .data .update {
-    width:140px;
+  .list .contents table.listnames td {
+    text-align: center;
+  }
+  .list .contents table td.btns {
+    border: none;
+  }
+  .list .contents .price {
+    text-align: right;
+    padding-right: 15px;
+  }
+  .list .contents p.none {
+    margin-top: 10px;
+    font-size: 16px;
+    text-align: center;
+  }
+  #all .list .contents .update {
   }
     .list .contents .data .icon li {
       float:left;
       border:1px solid #999;
       border-radius:4px;
-      margin:3px 5px 3px 0;
+      margin:1px 3px 1px 0;
     }
     .list .contents .data .icon .web {
       border-color:#6ac7f2;
@@ -244,15 +261,15 @@ h1 {
         color:#86d162;
       }
       .list .contents .data .icon li span {
-        font-size:12px;
+        font-size:11px;
         display:block;
-        padding:2px 7px;
+        padding:1px 3px;
         background-color:#FFF;
         border-radius:4px;
       }
     #all .list .contents .data .radbtn {
-      float:left;
-      margin:3px 5px 3px 0;
+      margin:3px 0px 3px 0;
+      text-align: center;
     }
     #all .list .contents .data .radbtn a {
       font-size:12px;

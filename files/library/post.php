@@ -41,14 +41,15 @@
       
       if (is_uploaded_file($thumb["tmp_name"])) {
         if (move_uploaded_file($thumb["tmp_name"], "files/uploads/" . $thumb["name"])) {
-          chmod("files/uploads/" . $thumb["name"], 0644);
+          rename("files/uploads/" . $thumb["name"], "files/uploads/".date("YmdHis").$thumb["name"]);
+          chmod("files/uploads/".date("YmdHis").$thumb["name"], 0644);
         }
       }
 
       $pass  = $func->passhash($_POST["regpass"]);
       $name  = $_POST["regname"];
       $mail  = $_POST["regmail"];
-      $thumb = ($thumb["name"]) ? $thumb["name"] : "img_noimg.jpg";
+      $thumb = ($thumb["name"]) ? date("YmdHis").$thumb["name"] : "img_noimg.jpg";
       
       $stmt->bindValue(':user', $id_name, PDO::PARAM_STR);
       $stmt->bindValue(':pass', $pass, PDO::PARAM_STR);

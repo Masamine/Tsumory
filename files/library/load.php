@@ -4,14 +4,14 @@
   ----------------------------- */
   class loadDB {
     
-    public function getUser($id) {
+    public function getUser($id, $judge) {
 
       /* -----------------------------
       値を取得
       ----------------------------- */
       require('connectDB.php');
       
-      $query = "SELECT user_id,id_name,name,mail,thumb FROM users WHERE id_name = :user";
+      $query = ($judge) ? "SELECT user_id,id_name,name,mail,thumb FROM users WHERE id_name = :user" : "SELECT user_id,id_name,name,mail,thumb FROM users WHERE user_id = :id";
       $stmt = $pdo -> prepare($query);
 			
       $userID = "user_id";
@@ -20,7 +20,11 @@
       $mail   = "mail";
       $thumb  = "thumb";
 
-      $stmt->bindValue(':user', $author, PDO::PARAM_STR);
+      if($judge) {
+        $stmt->bindValue(':user', $author, PDO::PARAM_STR);
+      } else {
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+      }
       
       // 実行
       $stmt->execute();
@@ -66,6 +70,37 @@
           "staff"  => $row['staff'],
           "regist" => $row['regist'],
           "update" => $row['updates']
+        );
+      }
+      $pdo = null;
+
+      return $array;
+    }
+
+    /*  見積り一覧取得
+    ----------------------------------- */
+    public function getDetail($id) {
+      require('connectDB.php');
+      
+      $query = "SELECT * FROM posts WHERE works_id = :id";
+      $stmt = $pdo->prepare($query);
+
+      $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+
+      $stmt->execute();
+
+      $array = array();
+
+      while($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
+        $array[] = array(
+          "id"       => $row['id'],
+          "title"    => $row['post_name'],
+          "total"    => $row['total'],
+          "team"     => $row['team'],
+          "regDate"  => $row['regist_date'],
+          "update"   => $row['recent_date'],
+          "author"   => $row['author'],
+          "modified" => $row['modified']
         );
       }
       $pdo = null;
