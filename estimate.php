@@ -24,7 +24,7 @@ $isReg = ($_GET['mode'] == 'regist');
 
 $_SESSION["key"] = $key;
 $load = new loadDB();
-$user = $load->getUser($_SESSION["username"]);
+$user = $load->getUser($_SESSION["username"], true);
 ?>
 <!doctype html>
 <html lang="ja">
@@ -40,7 +40,6 @@ $user = $load->getUser($_SESSION["username"]);
 <link href="files/css/common/exvalidation.css" media="all" rel="stylesheet" />
 </head>
 
-<?php $id = $_GET["p"]; ?>
 <body class="noAcc isForm" id="page">
 <div id="all">
   <?php require_once(ABSPATH."files/display/common/header.php"); ?>

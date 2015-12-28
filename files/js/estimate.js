@@ -171,7 +171,7 @@ Estimate
 
     var data    = collectData(param['ID']);
 
-    useAjax(matters);
+    useAjax(matters, data);
 
     return false;
   }
@@ -371,15 +371,15 @@ Estimate
     var parent = target.closest('ul');
 
     //人日数
-    var count = target.val();
+    var count       = target.val();
     //列の売原価
-    var sales = parent.find('.sales').find('input').data('val') | 0;
+    var sales       = parent.find('.sales').find('input').data('val') | 0;
     //現在の列合計
     var oldSubtotal = parent.find('.selling').find('input').data('val') | 0;
     //個数変更後の新しい列合計
     var newSubtotal = count * sales | 0;
     //列合計の差額
-    var diff = newSubtotal - oldSubtotal;
+    var diff        = newSubtotal - oldSubtotal;
 
     if(diff == 0) return false;
 

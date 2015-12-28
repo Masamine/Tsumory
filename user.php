@@ -57,7 +57,7 @@ $user = $load->getUser($_SESSION["username"], true);
             <li><span class="name">ニックネーム</span><input type="text" value="<?=$user['name']?>" name="regname" class="chkrequired" id="regname" placeholder="Name"></li>
             <li><span class="name">メールアドレス</span><input type="text" value="<?=$user['mail']?>" name="regmail" class="chkrequired chkemail" id="regmail" placeholder="Mail"></li>
           </ul>
-          <p class="submit radbtn"><input type="submit" value="登録"></p>
+          <p class="submit radbtn"><input type="submit" value="更新"></p>
           <input type="hidden" name="key" value="<?php echo $key ?>">
         </form>
       </div>

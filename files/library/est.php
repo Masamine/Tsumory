@@ -9,8 +9,10 @@
 
   if($type == 'loadUnit') {
     getUnit();
-  } else {
+  } else if($type == 'matters') {
     registMatters();
+  } else {
+    registEst();
   }
 
   /* =========================================
@@ -103,6 +105,44 @@
 
     $stmt->execute();
     $stmt2->execute();
+
+    header('Content-Type: application/json; charset=utf-8');
+    print(json_encode('OK!'));
+
+    $pdo = null;
+
+    return false;
+  }
+
+  /* =========================================
+  見積り登録
+  ========================================= */
+  function registEst() {
+
+    global $pdo;
+    $load   = new loadDB();
+    $user   = $load -> getUser($_COOKIE["user"], true);
+    $userID = $user['id'];
+
+    $contents    = '';
+    
+    //insert into goods(id, name) values(5, '本棚'), (6, 'ゴミ箱'); で一括登録
+
+    $sql         = 'INSERT INTO detail (post0_id, code, content, count, unit, cost, sales) values';
+    $insertQuery = array();
+    $insertData  = array();
+    for($i = 0; $i < count($contents -> statuses); $i++) {
+      $insertQuery[] = '(:name' . $i . ', :screen_name' . $i . ')';
+      $insertData['name' . $i] = $contents->statuses[$i]->name;
+      $insertData['screen_name' . $i] = $contents->statuses[$i]->screen_name;
+    }
+    if(!empty($insertQuery)) {
+      $sql .= implode(', ', $insertQuery);
+      $stmt = $dbh->prepare($sql);
+      $stmt -> execute($insertData);
+    } else {
+      return false;
+    }
 
     header('Content-Type: application/json; charset=utf-8');
     print(json_encode('OK!'));
