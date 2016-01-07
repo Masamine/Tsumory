@@ -165,6 +165,8 @@
   }
   #data form {
     border-bottom: 1px solid #d7d9dc;
+    position: relative;
+    display: block;
   }
   #data ul {
     padding: 0 5px 0 3px;
@@ -173,6 +175,14 @@
   #data .data {
     padding:0px 0;
     position: relative;
+  }
+  #data .data.noPointer {
+    pointer-events: none;
+  }
+  #data .data.abs {
+    position: absolute;
+    z-index: 2000;
+    left: 0;
   }
     #data ul li {
       display: table-cell;

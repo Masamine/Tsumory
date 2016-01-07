@@ -139,6 +139,8 @@ Estimate
 
     var txt = "";
     var total = $('#total').find('span').data('total');
+    var title = $("#works").find('input').val();
+
     if(total < 100000) {
       txt = "10万未満でも手を抜かずに頑張りましょう！";
     } else if(total >= 100000 && total < 500000) {
@@ -166,12 +168,11 @@ Estimate
       'pid'   : param['ID'],
       "title" : $("#works").find('input').val(),
       "total" : total,
-      "team"  : getTeam()
+      "team"  : getTeam(),
+      "detail" : collectData(param['ID'])
     }
 
-    var data    = collectData(param['ID']);
-
-    useAjax(matters, data);
+    useAjax(matters);
 
     return false;
   }
@@ -214,17 +215,7 @@ Estimate
       var profit  = (judge) ? "0" : cost.find('.profit').find('input').val();
       var selling = (judge) ? "0" : cost.find('.selling').find('input').data('val');
 
-      data[i] = {
-        'pid'     : pid,
-        'code'    : code,
-        'content' : content,
-        'count'   : count,
-        'unit'    : unit,
-        'org'     : org,
-        'sales'   : sales,
-        'profit'  : profit,
-        'selling' : selling
-      }
+      data[i] = [code, content, count, unit, org, sales, selling];
     }
 
     return data;
@@ -244,6 +235,7 @@ Estimate
     TweenLite.to('.newdata', 0.40, { ease: Expo.easeOut, left: 0, onComplete : function(){
       $('.newdata').removeClass('newdata');
       getContentHeight();
+      //moveData();
       $unitset.find('a').removeClass('stop');
     }});
 
@@ -292,6 +284,39 @@ Estimate
       }});
 
     });
+
+    return false;
+  }
+
+  function moveData() {
+
+    $('.data').find('.move').off().on({
+      'mousedown' : function(){
+
+        console.log('down');
+        var target = $(this).closest('.data');
+        target.addClass('abs');
+
+        $('#regist').on({
+          'mousemove' : function(e){
+            var h = $(this).height();
+            var mouseY = e.offsetY - 16;
+            var y = (mouseY < 0) ? 0 : (mouseY + 32 > h) ? h - 33 : mouseY;
+            target.stop().animate({'top' : y}, 10);
+          },
+          'mouseleave' : function(){
+            $('.data').removeClass('noPointer abs');
+          }
+        });
+      },
+      'mouseup' : function(){
+        console.log('up');
+        $('#regist').off('mousemove');
+        $('.data').removeClass('noPointer abs');
+      }
+
+    });
+
     return false;
   }
 
@@ -313,7 +338,7 @@ Estimate
     });
 
     function effect(txt, d) {
-      console.log(txt);
+      console.log(d);
 
       if(_isSound) {
         setTimeout(sound, 3150);
@@ -445,7 +470,6 @@ Estimate
 
     return _this;
   }
-
   return false;
   
 })(jQuery);

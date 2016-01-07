@@ -85,9 +85,10 @@
     $title   = $_POST['title'];
     $total   = $_POST['total'];
     $team    = serialize($_POST['team']);
+    $detail  = $_POST['detail'];
     $regTime = date("Y-m-d H:i:s");
 
-    $query  = "INSERT INTO posts(works_id,post_name,team, total, regist_date, author, modified) VALUES (:id,:name,:team,:total,:regTime,:author,:modified)";
+    $query  = "INSERT INTO posts(works_id,post_name,team, total, regist_date, author, modified, details) VALUES (:id,:name,:team,:total,:regTime,:author,:modified,:details)";
     $query2 = "UPDATE works SET updates = :updates WHERE id = :id";
     $stmt   = $pdo->prepare($query);
     $stmt2  = $pdo->prepare($query2);
@@ -100,14 +101,25 @@
     $stmt->bindValue(':author', $userID, PDO::PARAM_INT);
     $stmt->bindValue(':modified', $userID, PDO::PARAM_INT);
 
+    $num = count($detail);
+    $arr = array();
+
+    for($i = 0; $i < $num; $i++) {
+      array_unshift($detail[$i], $lastID);
+    }
+
+    $stmt->bindValue(':details', serialize($detail), PDO::PARAM_STR);
+
     $stmt2->bindValue(':updates', $regTime, PDO::PARAM_STR);
     $stmt2->bindValue(':id', $pid, PDO::PARAM_INT);
 
     $stmt->execute();
-    $stmt2->execute();
+    $lastID = $pdo->lastInsertId('id');
+
+    //registEst($lastID, $detail);
 
     header('Content-Type: application/json; charset=utf-8');
-    print(json_encode('OK!'));
+    print(json_encode( $detail ));
 
     $pdo = null;
 
@@ -117,39 +129,25 @@
   /* =========================================
   見積り登録
   ========================================= */
-  function registEst() {
+  function registEst($id, $data) {
 
     global $pdo;
-    $load   = new loadDB();
-    $user   = $load -> getUser($_COOKIE["user"], true);
-    $userID = $user['id'];
 
     $contents    = '';
     
     //insert into goods(id, name) values(5, '本棚'), (6, 'ゴミ箱'); で一括登録
 
-    $sql         = 'INSERT INTO detail (post0_id, code, content, count, unit, cost, sales) values';
-    $insertQuery = array();
-    $insertData  = array();
-    for($i = 0; $i < count($contents -> statuses); $i++) {
-      $insertQuery[] = '(:name' . $i . ', :screen_name' . $i . ')';
-      $insertData['name' . $i] = $contents->statuses[$i]->name;
-      $insertData['screen_name' . $i] = $contents->statuses[$i]->screen_name;
-    }
-    if(!empty($insertQuery)) {
-      $sql .= implode(', ', $insertQuery);
-      $stmt = $dbh->prepare($sql);
-      $stmt -> execute($insertData);
-    } else {
-      return false;
-    }
+    $sql  = 'INSERT INTO detail (post_id, code, content, count, unit, cost, sales, price) values';
+    $sql .= implode(",", $data);
+    $stmt   = $pdo->prepare($sql);
+    $stmt->execute();
 
-    header('Content-Type: application/json; charset=utf-8');
-    print(json_encode('OK!'));
+    // header('Content-Type: application/json; charset=utf-8');
+    // print(json_encode('OK!'));
 
     $pdo = null;
 
-    return false;
+    return true;
   }
 
   exit;

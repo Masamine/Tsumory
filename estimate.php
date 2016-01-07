@@ -11,6 +11,7 @@ $msg = "";
 
 //登録画面かどうか
 $isReg = ($_GET['mode'] == 'regist');
+$btntxt = ($isReg) ? '登録' : '更新';
 
 // if($_POST["key"] == $_SESSION["key"]) {
 //   $postData = new postData();
@@ -120,7 +121,7 @@ $user = $load->getUser($_SESSION["username"], true);
         <div id="totalArea">
           <p id="total">売価金額合計：<span data-total='0'>￥0</span></p>
         </div>
-        <div class="radbtn" id="regbtn"><a href="#">登録</a></div>
+        <div class="radbtn" id="regbtn"><a href="#"><?=$btntxt?></a></div>
       </div>
 
       <div class="btnset">
