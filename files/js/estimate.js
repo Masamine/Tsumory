@@ -3,14 +3,14 @@ Estimate
 ========================================================================== */
 (function($) {
 
-  var _url, $LBTotal, _isSound, $unitset;
+  var _url, $LBTotal, _isSecret, $unitset;
 
   $(document).on('ready', function(){
 
     $LBTotal    = $('#lightboxTotal');
     $unitset = $('.btnset');
     _url        = location.href;
-    _isSound    = _url.indexOf('sound=true') > 0;
+    _isSecret    = String(_url).split('secret=')[1];
     $team       = $('#teamlist');
 
     $unitset.find('a').off('mousedown').on('mousedown', function(){ loadUnit(getParam(), $(this)); return false; });
@@ -52,7 +52,7 @@ Estimate
 
     $unitset.find('a').addClass('stop');
 
-    if(_isSound) LoadSound(btn);
+    if(_isSecret == 1) LoadSound(btn);
 
     var projectID = params['ID'];
     var mode      = params['mode'];
@@ -276,7 +276,7 @@ Estimate
       var cost   = target.find('.selling').find('input').data('val') | 0;
       calTotal(-cost);
 
-      if(_isSound) LoadSound($(this));
+      if(_isSecret == 1) LoadSound($(this));
 
       TweenLite.to(target.closest('.data'), 0.35, { ease: Expo.easeOut, left: 100 + '%', onComplete : function(){
         target.closest('.data').remove();
@@ -340,7 +340,7 @@ Estimate
     function effect(txt, d) {
       console.log(d);
 
-      if(_isSound) {
+      if(_isSecret == 1) {
         setTimeout(sound, 3150);
         function sound() {
           $('#sound')[0].src = 'files/sound/ok.mp3';

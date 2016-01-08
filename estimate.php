@@ -139,7 +139,7 @@ $user = $load->getUser($_SESSION["username"], true);
     </div>
   </div>
   <?php
-    if(isset($_GET['sound'])) {
+    if(isset($_GET['secret']) && ($_GET['secret'] == 1)) {
       echo '<audio src="files/sound/insert.mp3" id="sound"></audio>';
     }
   ?>
