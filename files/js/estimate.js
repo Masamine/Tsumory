@@ -15,6 +15,15 @@ Estimate
 
     $unitset.find('a').off('mousedown').on('mousedown', function(){ loadUnit(getParam(), $(this)); return false; });
 
+    //編集モードの時のみ見積りデータを呼び出し
+    if(getParam()['mode'] == 'edit' && getParam()['postID']) {
+      var edit = {
+        'type'   : 'edit',
+        'postID' : getParam()['postID']
+      }
+      useAjax(edit, 'load');
+    }
+
     $team.find('a').on('click', function(){
       $(this).toggleClass('select');
 
@@ -38,9 +47,11 @@ Estimate
 
     var params = _url.split("?");
         params = params[1].split("&");
+
     var paramsArray = {
-      'mode' : params[0].split('=')[1],
-      'ID'   : params[1].split('=')[1]
+      'mode'   : params[0].split('=')[1],
+      'ID'     : params[1].split('=')[1],
+      'postID' : (params[2]) ? params[2].split('=')[1] : ""
     };
     return paramsArray;
   }
@@ -324,7 +335,8 @@ Estimate
   /* =====================================================
   Ajax
   ===================================================== */
-  function useAjax(m) {
+  function useAjax(m, mode) {
+    console.log(m)
     $.ajax({
       type     : "POST",
       url      : "files/library/est.php",
@@ -332,13 +344,19 @@ Estimate
       timeout  : 10000,
       data     : m
     }).done(function(data){
-      effect('ok', data);
+      
+      if(mode == "load"){
+        loadEST(data);
+      } else {
+        effect('ok', data);
+      }
+
     }).fail(function(data){
       effect('failed');
     });
 
     function effect(txt, d) {
-      console.log(d);
+      console.log(txt,d);
 
       if(_isSecret == 1) {
         setTimeout(sound, 3150);
@@ -353,6 +371,16 @@ Estimate
       $('#loading').delay(3000).fadeOut(300);
       return false;
     }
+
+    return false;
+  }
+
+  /* =====================================================
+  見積り一覧生成
+  ===================================================== */
+  function loadEST(d) {
+    
+    console.log(d);
 
     return false;
   }

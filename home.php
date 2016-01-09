@@ -159,7 +159,7 @@ $user = $load->getUser($_SESSION["username"], true);
                     ?>
                     </ul>
                   </td>
-                  <td class="detail"><?=$postTitle?></td>
+                  <td class="detail"><a href="estimate.php?mode=edit&pid=<?=$works["id"]?>&post=<?=$postID?>"><?=$postTitle?></a></td>
                   <td class="price"><?=$postTotal?></td>
                   <td class="name"><?=$modUser['name']?></td>
                   <td class="update"><?=$update?></td>

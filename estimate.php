@@ -11,6 +11,7 @@ $msg = "";
 
 //登録画面かどうか
 $isReg = ($_GET['mode'] == 'regist');
+$title  = ($isReg) ? '作成' : '編集';
 $btntxt = ($isReg) ? '登録' : '更新';
 
 // if($_POST["key"] == $_SESSION["key"]) {
@@ -31,7 +32,7 @@ $user = $load->getUser($_SESSION["username"], true);
 <html lang="ja">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>見積作成 | 見積りライブラリー</title>
+<title>見積<?=$title?> | 見積りライブラリー</title>
 <meta name="robots" content="all" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
@@ -49,7 +50,7 @@ $user = $load->getUser($_SESSION["username"], true);
     <?php require_once(ABSPATH."files/display/common/search.php"); ?>
     <div class="box">
       <div class="title">
-        <h1>見積作成</h1>
+        <h1>見積<?=$title?></h1>
       </div>
       <?php if($msg): ?>
       <p class="msg"><?=$msg?></p>

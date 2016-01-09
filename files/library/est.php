@@ -11,8 +11,8 @@
     getUnit();
   } else if($type == 'matters') {
     registMatters();
-  } else {
-    registEst();
+  } else if($type == 'edit'){
+    getEst();
   }
 
   /* =========================================
@@ -90,6 +90,7 @@
 
     $query  = "INSERT INTO posts(works_id,post_name,team, total, regist_date, author, modified, details) VALUES (:id,:name,:team,:total,:regTime,:author,:modified,:details)";
     $query2 = "UPDATE works SET updates = :updates WHERE id = :id";
+
     $stmt   = $pdo->prepare($query);
     $stmt2  = $pdo->prepare($query2);
 
@@ -116,7 +117,7 @@
     $stmt->execute();
     $lastID = $pdo->lastInsertId('id');
 
-    //registEst($lastID, $detail);
+    $stmt2->execute();
 
     header('Content-Type: application/json; charset=utf-8');
     print(json_encode( $detail ));
@@ -148,6 +149,35 @@
     $pdo = null;
 
     return true;
+  }
+
+  /* =========================================
+  見積り呼び出し
+  ========================================= */
+  function getEst() {
+
+    global $pdo;
+
+    $query = "SELECT * FROM posts WHERE id = :id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindValue(':id', $_POST['postID'], PDO::PARAM_INT);
+    $stmt->execute();
+
+    $array = array();
+
+    while($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
+      $array[] = array(
+        "total" => $row["total"],
+        "detail" => unserialize($row["details"])
+      );
+    }
+    
+    header('Content-Type: application/json; charset=utf-8');
+    print(json_encode($array));
+
+    $pdo = null;
+
+    return false;
   }
 
   exit;
