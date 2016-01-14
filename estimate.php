@@ -84,7 +84,7 @@ $user = $load->getUser($_SESSION["username"], true);
               <td colspan="5"><ul id="teamlist"><?php
                 for($i = 0; $i < $teamnum; $i++) {
               ?>
-                <li class="<?=$team[$i]["name"]?>" data-ID="<?=$team[$i]["id"]?>" id="team02-<?=$team[$i]["name"]?>"><a href="#"><?=$team[$i]["name"]?></a></li>
+                <li class="<?=$team[$i]["name"]?>" data-id="<?=$team[$i]["id"]?>" id="team02-<?=$team[$i]["name"]?>"><a href="#" data-id="<?=$team[$i]["id"]?>"><?=$team[$i]["name"]?></a></li>
               <?php } ?></ul></td>
             </tr>
         </table>

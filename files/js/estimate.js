@@ -3,7 +3,7 @@ Estimate
 ========================================================================== */
 (function($) {
 
-  var _url, $LBTotal, _isSecret, $unitset;
+  var _url, $LBTotal, _isSecret, $unitset, $team;
 
   $(document).on('ready', function(){
 
@@ -67,7 +67,7 @@ Estimate
 
     var projectID = params['ID'];
     var mode      = params['mode'];
-    var func      = (mode == 'regist') ? 'unit' : 'all';
+    var func      = 'unit';
     var code      = btn.data('code');
     var html      = "";
 
@@ -175,7 +175,7 @@ Estimate
     $('#loading').fadeIn(300);
 
     var matters = {
-      'type'  : 'matters',
+      'type'  : (param['mode'] == 'regist') ? 'matters' : 'update',
       'pid'   : param['ID'],
       "title" : $("#works").find('input').val(),
       "total" : total,
@@ -198,7 +198,7 @@ Estimate
     var length = team.length;
 
     for(var i = 0; i < length; i++) {
-      array[i] = team.eq(i).text();
+      array[i] = team.eq(i).data('id');
     }
 
     return array;
@@ -243,12 +243,7 @@ Estimate
     } else {
       $('#' + parentID).append(data);
     }
-    TweenLite.to('.newdata', 0.40, { ease: Expo.easeOut, left: 0, onComplete : function(){
-      $('.newdata').removeClass('newdata');
-      getContentHeight();
-      //moveData();
-      $unitset.find('a').removeClass('stop');
-    }});
+    showAnimData();
 
     $('.data').find('.count').find('input').off('keypress').keypress( function ( e ) {
       if ( e.which == 13 ) {
@@ -289,12 +284,29 @@ Estimate
 
       if(_isSecret == 1) LoadSound($(this));
 
-      TweenLite.to(target.closest('.data'), 0.35, { ease: Expo.easeOut, left: 100 + '%', onComplete : function(){
-        target.closest('.data').remove();
-        getContentHeight();
-      }});
+      animRemoveData(target);
 
     });
+
+    return false;
+  }
+  function showAnimData() {
+
+    TweenLite.to('.newdata', 0.40, { ease: Expo.easeOut, left: 0, onComplete : function(){
+      $('.newdata').removeClass('newdata');
+      getContentHeight();
+      //moveData();
+      $unitset.find('a').removeClass('stop');
+    }});
+
+    return false;
+  }
+
+  function animRemoveData(target) {
+    TweenLite.to(target.closest('.data'), 0.35, { ease: Expo.easeOut, left: 100 + '%', onComplete : function(){
+      target.closest('.data').remove();
+      getContentHeight();
+    }});
 
     return false;
   }
@@ -336,7 +348,6 @@ Estimate
   Ajax
   ===================================================== */
   function useAjax(m, mode) {
-    console.log(m)
     $.ajax({
       type     : "POST",
       url      : "files/library/est.php",
@@ -378,9 +389,67 @@ Estimate
   /* =====================================================
   見積り一覧生成
   ===================================================== */
-  function loadEST(d) {
+  function loadEST(data) {
+
+    var d = data[0];
     
-    console.log(d);
+    var total = separate(d.total);
+    var team  = separate(d.team);
+    var teamNum = $team.find('li').length;
+
+    for(var i = 0; i < teamNum; i++) {
+      var teamID = $team.find('li').eq(i).find('a').data('id');
+      if(team.indexOf(teamID) >= 0) {
+        $team.find('li').eq(i).find('a').addClass('select');
+      }
+    }
+
+    $('#total').find('span').text('￥' + total);
+    $('#total').find('span').data('total', d.total);
+
+    var num  = d.detail.length;
+    var html = '';
+
+    for(var i = 0; i < num; i++) {
+      var detail  = d.detail[i];
+      var code    = detail[1];
+      var content = detail[2];
+      var count   = detail[3] | 0;
+      var unit    = detail[4];
+      var org     = detail[5] | 0;
+      var sales   = detail[6] | 0;
+      var profit  = num2per(org, sales, 1);
+      var selling = detail[7] | 0;
+
+      if(code.indexOf('ttl') > 0) {
+        html += '<div class="data list ttl">';
+        html += '<ul class="table">';
+        html += '<li class="ttl"><input type="text" value="'+ content +'" /></li>';
+        html += '</ul>';
+        html += '<a class="delete">×</a>';
+        html += '<span class="move">MOVE</span>';
+        html += '</div>';
+      } else {
+        html += '<div class="data list">';
+        html += '<ul class="table">';
+        html += '<li class="code"><input type="text" data-key="code" value="'+ code +'" /></li>';
+        html += '<li class="content"><input type="text" data-key="content" value="'+ content +'" /></li>';
+        html += '<li class="count num"><input type="text" data-key="count" value="1" /></li>';
+        html += '<li class="unit num"><input type="text" data-key="unit" value="人日" /></li>';
+        html += '<li class="org num"><input type="text" data-key="org" data-val="'+ org +'" value="'+ separate(org) +'" /></li>';
+        html += '<li class="sales num"><input type="text" data-key="sales" data-val="'+ sales +'" value="'+ separate(sales) +'" /></li>';
+        html += '<li class="profit num"><input type="text" data-key="profit" value="'+ profit +'%" /></li>';
+        html += '<li class="selling num"><input type="text" data-key="selling" data-val="'+ selling +'" value="'+ separate(selling) +'" /></li>';
+        html += '</ul>';
+        html += '<a class="delete">×</a>';
+        html += '<span class="move">MOVE</span>';
+        html += '</div>';
+      }
+    }
+
+    $('#regist').append(html);
+
+    showAnimData();
 
     return false;
   }
@@ -467,6 +536,14 @@ Estimate
       return true;
     }
 
+  }
+
+  //利益率計算
+  function num2per($cost, $sales, $precision){
+    $precision = 0;
+    $percent   = (($sales - $cost) / $sales) * 100;
+
+    return Math.round($percent, $precision);
   }
 
   /* =====================================================

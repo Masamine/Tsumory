@@ -9,8 +9,8 @@
 
   if($type == 'loadUnit') {
     getUnit();
-  } else if($type == 'matters') {
-    registMatters();
+  } else if($type == 'matters' || $type == 'update') {
+    registMatters($type);
   } else if($type == 'edit'){
     getEst();
   }
@@ -74,7 +74,7 @@
   /* =========================================
   要件登録
   ========================================= */
-  function registMatters() {
+  function registMatters($type) {
 
     global $pdo;
     $load   = new loadDB();
@@ -88,6 +88,7 @@
     $detail  = $_POST['detail'];
     $regTime = date("Y-m-d H:i:s");
 
+    //$typeが「matters」か「update」かでQueryを分岐させる
     $query  = "INSERT INTO posts(works_id,post_name,team, total, regist_date, author, modified, details) VALUES (:id,:name,:team,:total,:regTime,:author,:modified,:details)";
     $query2 = "UPDATE works SET updates = :updates WHERE id = :id";
 
@@ -167,7 +168,9 @@
 
     while($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
       $array[] = array(
-        "total" => $row["total"],
+        "title"  => $row["post_name"],
+        "team"   => unserialize($row["team"]),
+        "total"  => $row["total"],
         "detail" => unserialize($row["details"])
       );
     }
