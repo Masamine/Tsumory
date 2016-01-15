@@ -77,11 +77,12 @@
   function registMatters($type) {
 
     global $pdo;
+    $isRegist = ($type == 'matter');
     $load   = new loadDB();
     $user   = $load -> getUser($_COOKIE["user"], true);
     $userID = $user['id'];
 
-    $pid     = $_POST['pid'];
+    $pid     = $isRegist ? $_POST['pid'] : $_POST['pid'];
     $title   = $_POST['title'];
     $total   = $_POST['total'];
     $team    = serialize($_POST['team']);
@@ -89,7 +90,8 @@
     $regTime = date("Y-m-d H:i:s");
 
     //$typeが「matters」か「update」かでQueryを分岐させる
-    $query  = "INSERT INTO posts(works_id,post_name,team, total, regist_date, author, modified, details) VALUES (:id,:name,:team,:total,:regTime,:author,:modified,:details)";
+    $query  = $isRegist ? "INSERT INTO posts(works_id,post_name,team, total, regist_date, author, modified, details) VALUES (:id,:name,:team,:total,:regTime,:author,:modified,:details)" : "UPDATE posts(post_name,team, total, regist_date, author, modified, details) SET (:id,:name,:team,:total,:regTime,:author,:modified,:details) WHERE id = :id";
+
     $query2 = "UPDATE works SET updates = :updates WHERE id = :id";
 
     $stmt   = $pdo->prepare($query);

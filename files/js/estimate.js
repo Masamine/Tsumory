@@ -17,6 +17,7 @@ Estimate
 
     //編集モードの時のみ見積りデータを呼び出し
     if(getParam()['mode'] == 'edit' && getParam()['postID']) {
+
       var edit = {
         'type'   : 'edit',
         'postID' : getParam()['postID']
@@ -244,16 +245,20 @@ Estimate
       $('#' + parentID).append(data);
     }
     showAnimData();
+    pressCount();
 
+    if(type !== 'title') calTotal();
+
+    return false;
+  }
+
+  function pressCount() {
     $('.data').find('.count').find('input').off('keypress').keypress( function ( e ) {
       if ( e.which == 13 ) {
         pressReturn();
         return false;
       }
     } );
-
-    if(type !== 'title') calTotal();
-
     return false;
   }
 
@@ -392,7 +397,9 @@ Estimate
   function loadEST(data) {
 
     var d = data[0];
-    
+
+    console.log(d)
+    var title = d.title;
     var total = separate(d.total);
     var team  = separate(d.team);
     var teamNum = $team.find('li').length;
@@ -404,6 +411,7 @@ Estimate
       }
     }
 
+    $('#works').find('input').val(title);
     $('#total').find('span').text('￥' + total);
     $('#total').find('span').data('total', d.total);
 
@@ -434,7 +442,7 @@ Estimate
         html += '<ul class="table">';
         html += '<li class="code"><input type="text" data-key="code" value="'+ code +'" /></li>';
         html += '<li class="content"><input type="text" data-key="content" value="'+ content +'" /></li>';
-        html += '<li class="count num"><input type="text" data-key="count" value="1" /></li>';
+        html += '<li class="count num"><input type="text" data-key="count" value="'+ count +'" /></li>';
         html += '<li class="unit num"><input type="text" data-key="unit" value="人日" /></li>';
         html += '<li class="org num"><input type="text" data-key="org" data-val="'+ org +'" value="'+ separate(org) +'" /></li>';
         html += '<li class="sales num"><input type="text" data-key="sales" data-val="'+ sales +'" value="'+ separate(sales) +'" /></li>';
@@ -450,6 +458,7 @@ Estimate
     $('#regist').append(html);
 
     showAnimData();
+    pressCount();
 
     return false;
   }

@@ -154,7 +154,8 @@ $user = $load->getUser($_SESSION["username"], true);
                     <?php
                       $teamNum = count($postTeam);
                       for($k = 0; $k < $teamNum; $k++) {
-                        echo '<li class="'.strtolower($postTeam[$k]).'"><span>'.$postTeam[$k].'</span></li>';
+                        $teamID = $postTeam[$k] - 1;
+                        echo '<li class="'.strtolower($team[$teamID]['name']).'"><span>'.$team[$teamID]['name'].'</span></li>';
                       }
                     ?>
                     </ul>
