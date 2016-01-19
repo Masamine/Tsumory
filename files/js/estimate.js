@@ -7,11 +7,11 @@ Estimate
 
   $(document).on('ready', function(){
 
-    $LBTotal    = $('#lightboxTotal');
-    $unitset = $('.btnset');
-    _url        = location.href;
-    _isSecret    = String(_url).split('secret=')[1];
-    $team       = $('#teamlist');
+    $LBTotal  = $('#lightboxTotal');
+    $unitset  = $('.btnset');
+    _url      = location.href;
+    _isSecret = String(_url).split('secret=')[1];
+    $team     = $('#teamlist');
 
     $unitset.find('a').off('mousedown').on('mousedown', function(){ loadUnit(getParam(), $(this)); return false; });
 
@@ -176,11 +176,12 @@ Estimate
     $('#loading').fadeIn(300);
 
     var matters = {
-      'type'  : (param['mode'] == 'regist') ? 'matters' : 'update',
-      'pid'   : param['ID'],
-      "title" : $("#works").find('input').val(),
-      "total" : total,
-      "team"  : getTeam(),
+      'type'   : (param['mode'] == 'regist') ? 'matters' : 'updates',
+      'pid'    : param['ID'],
+      'postID' : (param['postID']) ? param['postID'] : "",
+      "title"  : $("#works").find('input').val(),
+      "total"  : total,
+      "team"   : getTeam(),
       "detail" : collectData(param['ID'])
     }
 
@@ -372,10 +373,9 @@ Estimate
     });
 
     function effect(txt, d) {
-      console.log(txt,d);
 
       if(_isSecret == 1) {
-        setTimeout(sound, 3150);
+        setTimeout(sound, 500);
         function sound() {
           $('#sound')[0].src = 'files/sound/ok.mp3';
           var sound = LoadSound();
@@ -384,7 +384,17 @@ Estimate
         }
       }
       
-      $('#loading').delay(3000).fadeOut(300);
+      $('#loading').delay(900).fadeOut(300, function(){
+
+        if(m.type == 'matters') {
+          alert('登録完了しました。編集ページヘ移動します。');
+          location.href = "/estimate.php?mode=edit&pid="+ getParam()['ID'] +"&post=" + d;
+        } else if(m.type == 'updates') {
+          alert('更新完了！お疲れ様でした！');
+        }
+
+      });
+
       return false;
     }
 
@@ -397,7 +407,6 @@ Estimate
   function loadEST(data) {
 
     var d = data[0];
-
     console.log(d)
     var title = d.title;
     var total = separate(d.total);

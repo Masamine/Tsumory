@@ -109,8 +109,8 @@
     position: absolute;
     opacity: 0;
     z-index: 7;
-    top: 10px;
-    right: 10px;
+    top: 20px;
+    right: 40px;
     background: none;
     border: 2px solid #FFF;
     text-transform: uppercase;
@@ -193,7 +193,7 @@
                 transform: translate(0, -40%);
         -webkit-backface-visibility: hidden;
                 backface-visibility: hidden;
-        width: 100%;
+        width: 100px;
         padding: 0 20px;
         -webkit-transition: all 0.2s ease;
                 transition: all 0.2s ease; }
@@ -201,13 +201,11 @@
           padding: 0;
           margin: 0;
           position: relative;
-          width: 100%;
           white-space: nowrap;
           overflow: hidden;
-          text-overflow: ellipsis;
           color: #FFF;
           text-align: center;
-          line-height: 25px;
+          line-height: 1.4;
           font-weight: bold; }
           .dropify-wrapper .dropify-preview .dropify-infos .dropify-infos-inner p.dropify-filename span.file-icon {
             margin-right: 2px; }
@@ -322,3 +320,10 @@
 
   to {
     background-position: 60px 30px; } }
+
+.dropify-filename, .file-icon {
+  display: none;
+}
+.dropify-infos-message {
+  overflow:inherit;
+}

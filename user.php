@@ -51,7 +51,7 @@ $user = $load->getUser($_SESSION["username"], true);
         <form action="" method="post" enctype="multipart/form-data" id="regist">
           <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
           <ul>
-            <li><input type="file" id="input-file-now" name="thumb" class="dropify" data-default-file="files/uploads/<?=$user['thumb']?>" /></li>
+            <li><input type="file" id="input-file-now" name="thumb" class="dropify" data-default-file="/files/uploads/<?=$user['thumb']?>" /></li>
             <li><span class="name">ユーザーID</span><span><?=$user['author']?></span></li>
             <li><span class="name">パスワード</span><input type="password" value="" name="regpass" id="regpass" class="chkrequired" placeholder="Password"></li>
             <li><span class="name">ニックネーム</span><input type="text" value="<?=$user['name']?>" name="regname" class="chkrequired" id="regname" placeholder="Name"></li>

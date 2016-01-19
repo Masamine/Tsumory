@@ -9,7 +9,7 @@
 
   if($type == 'loadUnit') {
     getUnit();
-  } else if($type == 'matters' || $type == 'update') {
+  } else if($type == 'matters' || $type == 'updates') {
     registMatters($type);
   } else if($type == 'edit'){
     getEst();
@@ -77,27 +77,32 @@
   function registMatters($type) {
 
     global $pdo;
-    $isRegist = ($type == 'matter');
     $load   = new loadDB();
     $user   = $load -> getUser($_COOKIE["user"], true);
     $userID = $user['id'];
 
-    $pid     = $isRegist ? $_POST['pid'] : $_POST['pid'];
+    $pid     = $_POST['pid'];
+    $postID  = $_POST['postID'];
     $title   = $_POST['title'];
     $total   = $_POST['total'];
     $team    = serialize($_POST['team']);
     $detail  = $_POST['detail'];
     $regTime = date("Y-m-d H:i:s");
 
-    //$typeが「matters」か「update」かでQueryを分岐させる
-    $query  = $isRegist ? "INSERT INTO posts(works_id,post_name,team, total, regist_date, author, modified, details) VALUES (:id,:name,:team,:total,:regTime,:author,:modified,:details)" : "UPDATE posts(post_name,team, total, regist_date, author, modified, details) SET (:id,:name,:team,:total,:regTime,:author,:modified,:details) WHERE id = :id";
+    //$query  = "INSERT INTO posts(works_id,post_name,team, total, regist_date, author, modified, details) VALUES (:id,:name,:team,:total,:regTime,:author,:modified,:details)";
 
-    $query2 = "UPDATE works SET updates = :updates WHERE id = :id";
+    $INS  = "INSERT INTO posts(works_id,post_name,team, total, regist_date, author, modified, details) VALUES (:pid,:name,:team,:total,:regTime,:author,:modified,:details)";
+    $UPD  = "UPDATE posts SET post_name=:name, team=:team, total=:total, recent_date=:regTime, author=:author, modified=:modified, details=:details WHERE id = :postID";
+
+    $query  = ($type == 'matters') ? $INS : $UPD;
+    $query2 = "UPDATE works SET updates = :updates WHERE id = :pid";
 
     $stmt   = $pdo->prepare($query);
     $stmt2  = $pdo->prepare($query2);
 
-    $stmt->bindValue(':id', $pid, PDO::PARAM_INT);
+    if(($type == 'updates')) $stmt->bindValue(':postID', $postID, PDO::PARAM_INT);
+
+    $stmt->bindValue(':pid', $pid, PDO::PARAM_INT);
     $stmt->bindValue(':name', $title, PDO::PARAM_STR);
     $stmt->bindValue(':team', $team, PDO::PARAM_STR);
     $stmt->bindValue(':total', $total, PDO::PARAM_INT);
@@ -115,15 +120,14 @@
     $stmt->bindValue(':details', serialize($detail), PDO::PARAM_STR);
 
     $stmt2->bindValue(':updates', $regTime, PDO::PARAM_STR);
-    $stmt2->bindValue(':id', $pid, PDO::PARAM_INT);
+    $stmt2->bindValue(':pid', $pid, PDO::PARAM_INT);
 
     $stmt->execute();
     $lastID = $pdo->lastInsertId('id');
-
     $stmt2->execute();
 
     header('Content-Type: application/json; charset=utf-8');
-    print(json_encode( $detail ));
+    print(json_encode( $lastID ));
 
     $pdo = null;
 

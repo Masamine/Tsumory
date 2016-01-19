@@ -80,6 +80,61 @@ UI
         'opacity' : 1
       }, 300, 'easeOutCubic');
     }
+    $('.delete').find('a').on('click', deleteData);
+
+    return false;
+  }
+
+  /* ---------------------------------------
+  Delete Data
+  --------------------------------------- */
+  function deleteData() {
+    var $this  = $(this);
+    var id     = String($this.attr('href')).split('#')[1];
+    var parent = $this.closest('.data');
+    var title  = parent.find('.detail').text();
+
+    if(confirm('「'+ title +'」を削除しますか？')) {
+      animDelete(parent);
+      
+      var data = {
+        'table' : 'posts',
+        'id'    : id
+      };
+      useAjax(data, 'delete');
+    }
+
+    return false;
+  }
+
+  /* ---------------------------------------
+  削除アニメーション
+  --------------------------------------- */
+  function animDelete(p) {
+
+    TweenLite.to(p, 0.35, { ease: Expo.easeOut, left: 100 + '%', onComplete : function(){
+      p.remove();
+    }});
+
+    return false;
+  }
+
+  /* ---------------------------------------
+  Ajax
+  --------------------------------------- */
+  function useAjax(d, file) {
+    $.ajax({
+      type     : 'POST',
+      url      : 'files/library/'+ file +'.php',
+      dataType : 'json',
+      timeout  : 10000,
+      data     : d
+    }).done(function(data){
+      console.log(data);
+    }).fail(function(data){
+      alert('失敗しました。');
+    });
+
     return false;
   }
   
@@ -99,7 +154,7 @@ UI
       var $this  = $(this);
       var target = $this.closest(".list");
   
-      if(!target.hasClass("active")) {
+      if(!target.hasClass("active") && !target.find(".contents").is(':animated')) {
         target.addClass("active").find(".contents").slideDown(SPEED, "easeOutExpo");
       } else {
         target.removeClass("active").find(".contents").slideUp(SPEED, "easeOutExpo");

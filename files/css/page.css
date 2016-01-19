@@ -190,6 +190,7 @@ h1 {
     display:table;
     width:100%;
     padding: 1px 0;
+    position: relative;
   }
   .list .contents table {
     width:100%;

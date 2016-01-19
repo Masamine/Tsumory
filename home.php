@@ -167,7 +167,7 @@ $user = $load->getUser($_SESSION["username"], true);
                   <td class="btns">
                     <ul>
                       <li class="radbtn pdf"><a href="#">PDF</a></li>
-                      <li class="radbtn delete"><a href="#">削除</a></li>
+                      <li class="radbtn delete"><a href="#<?=$postID?>">削除</a></li>
                     </ul>
                   </td>
                 </tr>
@@ -188,6 +188,7 @@ $user = $load->getUser($_SESSION["username"], true);
   </footer>
 </div>
 <script type="text/javascript" src="files/js/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
 <script type="text/javascript" src="files/js/jsSet.js"></script>
 </body>
 </html>
