@@ -116,9 +116,9 @@ Estimate
         var d       = data[i];
         var code    = d.code;
         var content = d.content;
-        var cost    = d.cost | 0;
-        var sales   = d.sales | 0;
-        var profit  = d.profit | 0;
+        var cost    = d.cost;
+        var sales   = d.sales;
+        var profit  = d.profit;
 
         html += '<div class="data list newdata" style="left:100%;">';
         html += '<ul class="table">';
@@ -227,6 +227,8 @@ Estimate
       var sales   = (judge) ? "0" : cost.find('.sales').find('input').data('val');
       var profit  = (judge) ? "0" : cost.find('.profit').find('input').val();
       var selling = (judge) ? "0" : cost.find('.selling').find('input').data('val');
+
+      console.log(count)
 
       data[i] = [code, content, count, unit, org, sales, selling];
     }
@@ -407,7 +409,6 @@ Estimate
   function loadEST(data) {
 
     var d = data[0];
-    console.log(d)
     var title = d.title;
     var total = separate(d.total);
     var team  = separate(d.team);
@@ -431,12 +432,12 @@ Estimate
       var detail  = d.detail[i];
       var code    = detail[1];
       var content = detail[2];
-      var count   = detail[3] | 0;
+      var count   = detail[3];
       var unit    = detail[4];
-      var org     = detail[5] | 0;
-      var sales   = detail[6] | 0;
+      var org     = detail[5];
+      var sales   = detail[6];
       var profit  = num2per(org, sales, 1);
-      var selling = detail[7] | 0;
+      var selling = detail[7];
 
       if(code.indexOf('ttl') > 0) {
         html += '<div class="data list ttl">';

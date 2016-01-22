@@ -142,6 +142,9 @@ UI
   Accordion
   --------------------------------------- */
   function accordion() {
+
+    var _a = _this = {};
+    _a.openList = openList;
     
     if($("body").hasClass("noAcc")) return false;
     
@@ -163,7 +166,7 @@ UI
       return false;
     }
     
-    return false;
+    return _a;
   }
   
   /* ---------------------------------------
@@ -193,12 +196,14 @@ UI
     }
 
     function selectNames() {
-      var $this = $(this);
+      var $this  = $(this);
       var txt    = $this.text();
+      var id     = $this.data('id');
 
       $this.closest(".active").find("li").removeClass("selc");
       $this.addClass("selc");
       $this.closest(".active").find("input").val(txt);
+      $this.closest(".active").find(".id").val(id);
       parent.removeClass("active").find("ul").slideUp(SPEED, "easeOutExpo");
 
       return false;
@@ -254,6 +259,6 @@ UI
     return false;
   }
   
-  return false;
+  return _this;
   
 })(jQuery,Manager);

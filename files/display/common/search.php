@@ -2,7 +2,7 @@
   <div class="box">
   <form action="/search.php">
     <div class="select">
-      <input type="text" name="sClient" placeholder="クライアント選択" value="" readonly="readonly" class="input">
+      <input type="text" name="" placeholder="クライアント選択" value="" readonly="readonly" class="input">
       <span class="input">▼</span>
       <ul>
       <?php
@@ -11,23 +11,24 @@
         $num = count($client);
         for($i = $num - 1; $i >= 0; $i--) {
       ?>
-      <li><?=$client[$i]['name']?></li>
+      <li data-id="<?=$client[$i]["id"]?>"><?=$client[$i]['name']?></li>
       <?php } ?>
       </ul>
+      <input type="hidden" name="sClient" value="" class="id">
     </div>
     <div class="select">
-      <input type="text" name="sTeam" placeholder="チーム選択" value="" readonly="readonly" class="input">
+      <input type="text" name="" placeholder="チーム選択" value="" readonly="readonly" class="input">
       <span class="input">▼</span>
       <ul>
       <?php
-        $load   = new loadDB();
         $team = $load->getTeam();
         $teamnum = count($team);
         for($i = 0; $i < $teamnum; $i++) {
       ?>
-        <li id="team-<?php echo $team[$i]["name"]; ?>"><?php echo $team[$i]["name"]; ?></li>
+        <li data-id="<?=$team[$i]["id"]?>" id="team-<?php echo $team[$i]["name"]; ?>"><?php echo $team[$i]["name"]; ?></li>
       <?php } ?>
       </ul>
+      <input type="hidden" name="sTeam" value="" class="id">
     </div>
     <div class="select keyword">
       <input type="text" name="sKeyword" placeholder="キーワード" value="">

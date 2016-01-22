@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+@import "common/base.css";
+
+/*-------------------------------------------------------------------------
+  Index
+/*-----------------------------------------------------------------------*/
+body, html, #all, .box {
+  height: 100%;
+}
+#all {
+  position: relative;
+}
+.box {
+  background-color: #fff;
+  position: relative;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.box:nth-child(even) {
+  background-color: #f5f5f5;
+}
+.btn {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  text-align: center;
+  width: 100%;
+}
+.btn.demo {
+  bottom: 130px;
+}
+.box img {
+  width: 100%;
+  max-width: 960px;
+  height: auto;
+}
+.box .btn img {
+  width:auto;
+}
+#all .top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+  #all .top a {
+    font-size: 10px;
+    display: block;
+    background-color: #999eae;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+  }
